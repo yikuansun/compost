@@ -1,0 +1,12 @@
+{
+  "name": "compost-app",
+  "displayName": "compost-app",
+  "expo": {
+    "name": "compost-app",
+    "slug": "compost-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

@@ -1,34 +1,37 @@
 {
-  "name": "compost-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "web": "expo start --web",
+    "start": "react-native start",
+    "test": "jest"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "expo": "~38.0.9",
+    "expo-activity-feed": "^0.9.1",
+    "expo-splash-screen": "^0.5.0",
+    "expo-status-bar": "^1.0.0",
+    "expo-updates": "~0.2.10",
+    "react": "~16.11.0",
+    "react-dom": "~16.11.0",
+    "react-native": "~0.62.2",
+    "react-native-gesture-handler": "~1.6.1",
+    "react-native-reanimated": "~1.9.0",
+    "react-native-safe-area-context": "~3.0.7",
+    "react-native-safe-area-view": "^1.1.1",
+    "react-native-screens": "~2.9.0",
+    "react-native-unimodules": "~0.10.1",
+    "react-native-web": "~0.11.7"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "devDependencies": {
+    "@babel/core": "~7.9.0",
+    "babel-jest": "~25.2.6",
+    "jest": "~25.2.6",
+    "react-test-renderer": "~16.11.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "private": true
 }

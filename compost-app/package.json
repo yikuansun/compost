@@ -1,37 +1,30 @@
 {
-  "main": "index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
     "web": "expo start --web",
-    "start": "react-native start",
-    "test": "jest"
+    "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~38.0.9",
-    "expo-activity-feed": "^0.9.1",
-    "expo-splash-screen": "^0.5.0",
-    "expo-status-bar": "^1.0.0",
-    "expo-updates": "~0.2.10",
+    "csv": "^5.3.2",
+    "csv-parser": "^2.3.3",
+    "csvtojson": "^2.0.10",
+    "d3": "^6.1.1",
+    "d3-fetch": "^2.0.0",
+    "expo": "~38.0.8",
+    "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
+    "react-csv-reader": "^3.1.1",
     "react-dom": "~16.11.0",
-    "react-native": "~0.62.2",
-    "react-native-gesture-handler": "~1.6.1",
-    "react-native-reanimated": "~1.9.0",
-    "react-native-safe-area-context": "~3.0.7",
-    "react-native-safe-area-view": "^1.1.1",
-    "react-native-screens": "~2.9.0",
-    "react-native-unimodules": "~0.10.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+    "react-native-fs": "^2.16.6",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
-    "babel-jest": "~25.2.6",
-    "jest": "~25.2.6",
-    "react-test-renderer": "~16.11.0"
-  },
-  "jest": {
-    "preset": "react-native"
+    "@babel/core": "^7.8.6",
+    "babel-preset-expo": "~8.1.0"
   },
   "private": true
 }

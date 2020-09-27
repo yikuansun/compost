@@ -6,38 +6,12 @@ import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'reac
 import * as announcements from '../../Database.json';
 let n = Object.keys(announcements.Title).length;
 
-//Components
-/* class Community extends React.Component {
-  static navigationOptions = {
-    headerTitle: "Community"
-  };
-  constructor(props) {
-    this.state = {
-      search: '',
-    };
-  }
-  
-  updateSearch = (search) => {
-    this.setState({ search });
-  };
-  
-  render() {
-    return (
-      <Container style={{backgroundColor: "#cca2de"}}>
-        <Content>
-          <SearchBar placeholder="Search" onChangeText={this.updateSearch} value={search}/>
-        </Content>
-      </Container>
-    );
-  }
-} */
-
 const Community = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -47,7 +21,12 @@ const Community = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, []);*/
+  
+  useEffect(() => {
+    setFilteredDataSource(announcements);
+    setMasterDataSource(announcements);
+  })
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank

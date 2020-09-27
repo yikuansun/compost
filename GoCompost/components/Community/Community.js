@@ -92,7 +92,7 @@ const Community = () => {
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="Search Posts"
+          placeholder="Search posts by title"
           value={search}
         />
         <FlatList

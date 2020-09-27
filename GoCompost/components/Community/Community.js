@@ -4,7 +4,7 @@ import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
 
 import * as announcements from '../../Database.json';
-let n = Object.keys(announcements).length;
+//let n = Object.keys(announcements).length;
 
 const Community = () => {
   const [search, setSearch] = useState('');
@@ -12,7 +12,7 @@ const Community = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch('https://raw.githubusercontent.com/Tigersteve123/TigersteveTech/master/hosted_content/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -56,7 +56,7 @@ const Community = () => {
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
         {item.id}
-        {'.'}
+        {'. '}
         {item.title.toUpperCase()}
       </Text>
     );
@@ -83,12 +83,13 @@ const Community = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <Text>Community Events</Text>
         <SearchBar
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="Type Here..."
+          placeholder="Search Posts"
           value={search}
         />
         <FlatList

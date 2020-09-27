@@ -3,9 +3,6 @@ import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
 
-import * as announcements from '../../Database.json';
-//let n = Object.keys(announcements).length;
-
 const Community = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -22,11 +19,6 @@ const Community = () => {
         console.error(error);
       });
   }, []);
-  
-  /*useEffect(() => {
-    setFilteredDataSource(announcements);
-    setMasterDataSource(announcements);
-  })*/
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
@@ -54,11 +46,12 @@ const Community = () => {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
+      <>
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.id}
-        {'. '}
         {item.title.toUpperCase()}
       </Text>
+      <Text style={styles.itemStyle}>{item.date}</Text>
+      </>
     );
   };
 

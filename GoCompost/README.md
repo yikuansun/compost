@@ -1,11 +1,10 @@
 
 # GoCompost Projecct
 
-
 ## Build from source with Expo
 
 
-- Install expo: https://expo.io/tools
+- Install Expo
 
     - `npm install expo-cli --global`
 
@@ -20,8 +19,11 @@
 
 - `expo start`
 
-# References:
+## Build dependencies
 
+- [npm](https://github.com/npm/cli)
+
+## References:
 
 - expo tools: https://expo.io/tools
 

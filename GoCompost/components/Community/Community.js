@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image } from 'react-native';
 
 const Community = () => {
   const [search, setSearch] = useState('');
@@ -9,7 +9,7 @@ const Community = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/Tigersteve123/TigersteveTech/master/hosted_content/database.json')
+    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -46,12 +46,13 @@ const Community = () => {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
-      <>
+      <View style={{padding: 10,}}>
+      <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 100, height: 100}} onPress={() => getItem(item)}/>
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
         {item.title.toUpperCase()}
       </Text>
       <Text style={styles.itemStyle}>{item.date}</Text>
-      </>
+      </View>
     );
   };
 
@@ -60,7 +61,7 @@ const Community = () => {
       // Flat List Item Separator
       <View
         style={{
-          height: 0.5,
+          height: 1,
           width: '100%',
           backgroundColor: '#C8C8C8',
         }}
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#cca2de',
   },
   itemStyle: {
-    padding: 10,
+    //padding: 10,
+    alignSelf: 'center',
   },
 });
 

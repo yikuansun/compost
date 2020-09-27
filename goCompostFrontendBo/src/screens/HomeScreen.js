@@ -5,7 +5,8 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const HomeScreen = props => {
   return (
-  <View style={{flex: 1}}>
+  <View style={{flex: 1,backgroundColor:'white'}}>
+    <Text style = {styles.tagline}>Diverting Compostable Waste from landfills & giving it back to the Earth</Text>
     <Image
         style={{width: '100%', height: '45%'}}
         source={require('./header.jpg')
@@ -19,51 +20,10 @@ const HomeScreen = props => {
     </View>
  
     <Text style={{textAlign: 'center', fontSize: 20}}></Text>
-    <View style={{flex: 1, flexDirection: 'row'}}>
-      
-      <View style={styles.contentBlock}>
-      <Image
-        style={{width: '100%', height: '45%'}}
-        source={require('./header.jpg')
-          
-    }
-      />
-      <Text style={styles.contentText}>COMPOSTABLES</Text>
-      </View>
-      <View style={styles.contentBlock}>
-      <Image
-        style={{width: '100%', height: '45%'}}
-        source={require('./header.jpg')
-          
-    }
-      />
-      <Text style={styles.contentText}>DROP OFF</Text>
-      </View>
-    </View>
-    <View style={{flex: 1, flexDirection: 'row'}}>
-    <View style={styles.contentBlock}>
-    <Image
-        style={{width: '100%', height: '45%'}}
-        source={require('./header.jpg')
-          
-    }
-      />
-        <Text style={styles.contentText}>COMMUNITY</Text>
-      </View>
-      <View style={styles.contentBlock}>
-      <Image
-        style={{width: '100%', height: '45%'}}
-        source={require('./header.jpg')
-          
-    }
-      />
-      <Button 
-      onPress={() => props.navigation.navigate('Input')}
-      title = "IMPACT"
-    />
     
-      </View>
 
+    <View style={{flex: 1}}>
+      
     </View>
     
 
@@ -75,6 +35,14 @@ const HomeScreen = props => {
 };
 
 const styles = StyleSheet.create({
+  tagline: {
+    fontSize: 15,
+    fontStyle: 'italic',
+    color: 'orange',
+    textAlign: "center",
+    backgroundColor: 'white',
+    margin: 5
+  },
   text: {
     fontSize: 25,
     margin: 20

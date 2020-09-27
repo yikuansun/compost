@@ -1,0 +1,46 @@
+[
+  {
+    "id": 0,
+    "cat": "Education",
+    "title": "Composting 101",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 1,
+    "cat": "Education",
+    "title": "Composting 102",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 2,
+    "cat": "Education",
+    "title": "Composting 103",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 3,
+    "cat": "Education",
+    "title": "Composting 104",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+]

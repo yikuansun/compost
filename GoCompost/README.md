@@ -1,22 +1,29 @@
 
 # GoCompost Projecct
 
+## Build from source with Expo
 
-## Instructions:
 
+- Install Expo
 
-- Install expo: https://expo.io/tools
+    - `npm install expo-cli --global`
 
-    - npm install expo-cli --global
+- Install dependencies
 
-- npm install
+    - `npm install`
 
 - Install/start Android Studio and emulator or Xcode/iPhone Simulator
 
-- expo start
+    - [Expo Android Studio documentation](https://docs.expo.io/workflow/android-studio-emulator/)
+    - [Expo iOS simulator documentation](https://docs.expo.io/workflow/ios-simulator/)
 
-# References:
+- `expo start`
 
+## Build dependencies
+
+- [npm](https://github.com/npm/cli)
+
+## References:
 
 - expo tools: https://expo.io/tools
 

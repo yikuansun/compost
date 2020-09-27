@@ -125,7 +125,7 @@ const Community = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#cca2de',
   },
   itemStyle: {
     padding: 10,

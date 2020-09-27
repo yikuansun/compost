@@ -1,1 +1,46 @@
-{"Number":{"0":1,"1":2,"2":3,"3":4,"4":5},"Title":{"0":"New Compost Event 1","1":"New Compost Event 2","2":"New Compost Event 3","3":"New Compost Event 4","4":"New Compost Event 5"},"Description":{"0":"There will be an event at my place tomorrow. Be sure to come!","1":"Placeholder text","2":"None","3":"CSV","4":"?????"},"Link":{"0":"https:\\/\\/docs.expo.io\\/versions\\/latest\\/sdk\\/sqlite\\/","1":"https:\\/\\/docs.expo.io\\/versions\\/latest\\/sdk\\/sqlite\\/","2":"https:\\/\\/docs.expo.io\\/versions\\/latest\\/sdk\\/sqlite\\/","3":"https:\\/\\/docs.expo.io\\/versions\\/latest\\/sdk\\/sqlite\\/","4":"https:\\/\\/docs.expo.io\\/versions\\/latest\\/sdk\\/sqlite\\/"},"ImageLink":{"0":null,"1":null,"2":null,"3":null,"4":null}}
+[
+  {
+    "id": 0,
+    "cat": "Education",
+    "name": "Composting 101",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 1,
+    "cat": "Education",
+    "name": "Composting 102",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 2,
+    "cat": "Education",
+    "name": "Composting 103",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+  {
+    "id": 3,
+    "cat": "Education",
+    "name": "Composting 104",
+    "host": "Orange County SWM",
+    "date": "10-24-2020",
+    "time": "2-4pm",
+    "location": "Orange County SWM Administrative Office",
+    "registration": true,
+    "link": null,
+  }
+]

@@ -1,10 +1,11 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 
 const Community = () => {
   const [search, setSearch] = useState('');
+  const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
@@ -47,11 +48,18 @@ const Community = () => {
     return (
       // Flat List Item
       <View style={{padding: 10,}}>
-      <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 100, height: 100}} onPress={() => getItem(item)}/>
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.title.toUpperCase()}
-      </Text>
-      <Text style={styles.itemStyle}>{item.date}</Text>
+        {/* <Modal visibile={modalVisible}>
+          <View style={{padding: 10,}}>
+            <Text>{item.title}</Text>
+            <Text onPress={() => setModalVisibility(false)}>Back</Text>
+          </View>
+        </Modal> */}
+        <TouchableOpacity onPress={() => getItem(item)}>
+          <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 300, height: 300}} />
+        </TouchableOpacity>
+        <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+          {item.title.toUpperCase()}
+        </Text>
       </View>
     );
   };
@@ -72,6 +80,7 @@ const Community = () => {
   const getItem = (item) => {
     // Function for click on an item
     alert(item.title);
+    setModalVisibility(true);
   };
 
   return (

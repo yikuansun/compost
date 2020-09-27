@@ -31,8 +31,11 @@ const Community = () => {
         const itemData = item.title
           ? item.title.toUpperCase()
           : ''.toUpperCase();
+        const catData = item.cat
+          ? item.cat.toUpperCase()
+          : ''.toUpperCase();
         const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
+        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
       setSearch(text);
@@ -92,7 +95,7 @@ const Community = () => {
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="Search posts by title"
+          placeholder="Search posts by title or category"
           value={search}
         />
         <FlatList

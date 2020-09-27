@@ -4,7 +4,7 @@ import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
 
 import * as announcements from '../../Database.json';
-let n = Object.keys(announcements.Title).length;
+let n = Object.keys(announcements).length;
 
 const Community = () => {
   const [search, setSearch] = useState('');

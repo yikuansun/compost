@@ -1,15 +1,16 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 
 const Community = () => {
   const [search, setSearch] = useState('');
+  const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/Tigersteve123/TigersteveTech/master/hosted_content/database.json')
+    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -30,8 +31,11 @@ const Community = () => {
         const itemData = item.title
           ? item.title.toUpperCase()
           : ''.toUpperCase();
+        const catData = item.cat
+          ? item.cat.toUpperCase()
+          : ''.toUpperCase();
         const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
+        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
       setSearch(text);
@@ -46,12 +50,20 @@ const Community = () => {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
-      <>
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.title.toUpperCase()}
-      </Text>
-      <Text style={styles.itemStyle}>{item.date}</Text>
-      </>
+      <View style={{padding: 10,}}>
+        {/* <Modal visibile={modalVisible}>
+          <View style={{padding: 10,}}>
+            <Text>{item.title}</Text>
+            <Text onPress={() => setModalVisibility(false)}>Back</Text>
+          </View>
+        </Modal> */}
+        <TouchableOpacity onPress={() => getItem(item)}>
+          <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 300, height: 300}} />
+        </TouchableOpacity>
+        <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+          {item.title.toUpperCase()}
+        </Text>
+      </View>
     );
   };
 
@@ -60,7 +72,7 @@ const Community = () => {
       // Flat List Item Separator
       <View
         style={{
-          height: 0.5,
+          height: 1,
           width: '100%',
           backgroundColor: '#C8C8C8',
         }}
@@ -70,7 +82,8 @@ const Community = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    alert('Id : ' + item.id + ' Title : ' + item.title);
+    alert(item.title);
+    setModalVisibility(true);
   };
 
   return (
@@ -82,7 +95,7 @@ const Community = () => {
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="Search Posts"
+          placeholder="Search posts by title or category"
           value={search}
         />
         <FlatList
@@ -101,7 +114,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#cca2de',
   },
   itemStyle: {
-    padding: 10,
+    //padding: 10,
+    alignSelf: 'center',
   },
 });
 

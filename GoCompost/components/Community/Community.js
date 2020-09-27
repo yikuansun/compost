@@ -11,7 +11,7 @@ const Community = () => {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -21,12 +21,12 @@ const Community = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);*/
+  }, []);
   
-  useEffect(() => {
+  /*useEffect(() => {
     setFilteredDataSource(announcements);
     setMasterDataSource(announcements);
-  })
+  })*/
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank

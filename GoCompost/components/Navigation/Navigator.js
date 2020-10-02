@@ -10,10 +10,11 @@ import CommunityScreen from "../../components/Community/Community";
 import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
 import FootprintScreen from "../../components/Footprint/Footprint"
+import Footprint from "../../components/Footprint/Footprint";
 
 //Screen in the Home tab
 const iconFocusedColor = 'blue';
-const iconDefaultColor = '#575757';
+const iconDefaultColor = '#575757'
 
 //Main Tab
 //Icon search: https://icons.expo.fyi/
@@ -35,7 +36,7 @@ const bottomTab = createBottomTabNavigator(
         }
     },
     Checker: {
-        screen: CheckerScreen,
+      screen: CheckerScreen,
         navigationOptions: {
           tabBarLabel: "Check",
           tabBarIcon: ({ focused }) => (
@@ -60,9 +61,7 @@ const bottomTab = createBottomTabNavigator(
               color={`${focused ? iconFocusedColor: iconDefaultColor}`}
             />
           ),
-          style: {
-            backgroundColor: "blue"
-          }
+
         }
     },
     Footprint: {
@@ -108,8 +107,12 @@ const bottomTab = createBottomTabNavigator(
         }
       }
     }
+  },
+  {
+    lazy: false
   }
 );
+
 //Getting the tab header title
 bottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
@@ -119,14 +122,23 @@ bottomTab.navigationOptions = ({ navigation }) => {
   };
 };
 
+bottomTab.lazy = false;
+
 //Root navigator
 const AppNavigator = createStackNavigator(
   {
     Home: bottomTab
   },
   {
+    // Refer to: https://reactnavigation.org/docs/stack-navigator/
     initialRouteName: "Home",
-    headerMode: "none"
+    // mode to screen as Android style
+    headerMode: "screen",   // header mode
+    headerTitleAlign: "center",
+    headerStyle: {
+      backgroundColor: "blue",
+    },
   }
 );
+
 export default createAppContainer(AppNavigator);

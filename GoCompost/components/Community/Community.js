@@ -21,6 +21,8 @@ const Community = () => {
       });
   }, []);
 
+
+
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
     if (text) {
@@ -48,15 +50,11 @@ const Community = () => {
   };
 
   const ItemView = ({ item }) => {
+    
     return (
+      
       // Flat List Item
       <View style={{padding: 10,}}>
-        {/* <Modal visibile={modalVisible}>
-          <View style={{padding: 10,}}>
-            <Text>{item.title}</Text>
-            <Text onPress={() => setModalVisibility(false)}>Back</Text>
-          </View>
-        </Modal> */}
         <TouchableOpacity onPress={() => getItem(item)}>
           <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 300, height: 300}} />
         </TouchableOpacity>
@@ -64,6 +62,7 @@ const Community = () => {
           {item.title.toUpperCase()}
         </Text>
       </View>
+      
     );
   };
 
@@ -82,8 +81,17 @@ const Community = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    alert(item.title);
-    setModalVisibility(true);
+    //alert(item.title);
+    
+    return (
+      <Modal visible={modalVisible}>
+        <View style={{padding: 10,}}>
+          <Text>{item.title}</Text>
+          <Text>{item.date}{' '}{item.time}</Text>
+          <Text onPress={() => setModalVisibility(false)}>Back</Text>
+        </View>
+      </Modal>
+    );
   };
 
   return (

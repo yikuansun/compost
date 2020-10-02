@@ -9,18 +9,20 @@ class Checker extends Component {
   };
   render() {
     return (
-      <Container style={{backgroundColor: "lightblue"}}>
-        <Content>
+      /*<Container style={{backgroundColor: "lightblue"}}>
+        <Content>*/
           <WebView
-            javaScriptEnabled
             source={{
               html: `
               <iframe src="https://compostsearchbar.netlify.app" style="border: none; width: 100%; height: 100%;"></iframe>
               `,
             }}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            startInLoadingState={true}
           />
-        </Content>
-      </Container>
+        /*</Content>
+      </Container>*/
     );
   }
 }

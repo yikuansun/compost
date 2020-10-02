@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Community = () => {
   const [search, setSearch] = useState('');
@@ -54,13 +55,35 @@ const Community = () => {
     return (
       
       // Flat List Item
-      <View style={{padding: 10,}}>
-        <TouchableOpacity onPress={() => getItem(item)}>
-          <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 300, height: 300}} />
-        </TouchableOpacity>
-        <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-          {item.title.toUpperCase()}
-        </Text>
+      <View style={{flexDirection: 'row',}}>
+        <View style = {{padding: 10,}}>
+          <TouchableOpacity onPress={() => getItem(item)}>
+            <Image source={{uri:item.imglink}} style={styles.imgColumn} />
+          </TouchableOpacity>
+        </View>
+        <View style={{flexShrink: 1,}}>
+          <Text style={{fontWeight: 'bold', padding: 5, paddingTop: 10, fontSize: 14,}}>
+            {item.title.toUpperCase()}
+          </Text>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="microphone" />
+            <Text style={styles.itemStyle}>
+              {item.host}
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="times" />
+            <Text style={styles.itemStyle}>
+              {item.date} {item.time}
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="map-pin" />
+            <Text style={styles.itemStyle}>
+              {item.location}
+            </Text>
+          </View>
+        </View>
       </View>
       
     );
@@ -122,8 +145,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#cca2de',
   },
   itemStyle: {
-    //padding: 10,
+    padding: 5,
+    fontSize: 11,
+  },
+  imgColumn: {
     alignSelf: 'center',
+    width: 120,
+    height: 120,
   },
 });
 

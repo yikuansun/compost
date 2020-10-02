@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Community = () => {
   const [search, setSearch] = useState('');
@@ -62,23 +62,23 @@ const Community = () => {
           </TouchableOpacity>
         </View>
         <View style={{flexShrink: 1,}}>
-          <Text style={{fontWeight: 'bold', padding: 5, paddingTop: 10, fontSize: 14,}}>
+          <Text style={{fontWeight: 'bold', padding: 5, paddingTop: 10, fontSize: 14, color: '#666'}}>
             {item.title.toUpperCase()}
           </Text>
           <View style={{flexDirection: 'row',}}>
-            <Icon name="microphone" />
+            <Icon name="microphone" style={styles.itemStyle}/>
             <Text style={styles.itemStyle}>
               {item.host}
             </Text>
           </View>
           <View style={{flexDirection: 'row',}}>
-            <Icon name="times" />
+            <Icon name="clock" style={styles.itemStyle}/>
             <Text style={styles.itemStyle}>
               {item.date} {item.time}
             </Text>
           </View>
           <View style={{flexDirection: 'row',}}>
-            <Icon name="map-pin" />
+            <Icon name="map-pin" style={styles.itemStyle}/>
             <Text style={styles.itemStyle}>
               {item.location}
             </Text>

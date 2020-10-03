@@ -28,7 +28,7 @@ const Community = () => {
     // Check if searched text is not blank
     if (text) {
       // Inserted text is not blank
-      // Filter the masterDataSource
+      // Filter the masterDataS101010ource
       // Update FilteredDataSource
       const newData = masterDataSource.filter(function (item) {
         const itemData = item.title

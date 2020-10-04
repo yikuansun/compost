@@ -15,13 +15,16 @@ const Community = () => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
-        setFilteredDataSource(responseJson);
         setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
+        setFilteredDataSource(masterDataSource);
       })
       .catch((error) => {
         console.error(error);
       });
+    
   }, []);
+  
+  useEffect(() => { filterExpired(hideExpired); }, [hideExpired]);
 
 
 
@@ -106,15 +109,14 @@ const Community = () => {
     );
   };
   
-  //const filterExpired = (hideExpired) => {
-  //  if hideExpired {
-  //    const newData = masterDataSource.filter(function (item) {
-  //      const today = Date();
-  //      return Date.parse(item.date) > today;
-  //    });
-  //    setFilteredDataSource(newData);
-  //  } else {setFiltereDataSource(masterDataSource);}
-  //};
+  const filterExpired = (hideExpired) => {
+    if (hideExpired) {
+      const newData = masterDataSource.filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      });
+      setFilteredDataSource(newData);
+    } else {setFilteredDataSource(masterDataSource);}
+  };
 
   const getItem = (item) => {
     // Function for click on an item

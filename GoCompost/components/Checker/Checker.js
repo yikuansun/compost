@@ -61,7 +61,7 @@ class Checker extends Component {
         document.body.appendChild(div);
 
         div.onclick = function() {
-            alert("Compostable at home: " + (parseFloat(imgobj.homecompostable)?"yes":"no") + "\nCompostable via Orange Country drop off: " + (parseFloat(imgobj.orange)?"yes":"no"));
+            alert("Compostable at home: " + (parseFloat(imgobj.homecompostable)?"yes":"no") + "\\nCompostable via Orange Country drop off: " + (parseFloat(imgobj.orange)?"yes":"no"));
         }
     }
 </script>

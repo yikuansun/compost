@@ -1,15 +1,16 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, CheckBox } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import CheckBox from '@react-native-community/checkbox';
 
 const Community = () => {
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-  const [hideExpired, setHideExpired] = useState(true);
+  const [hideExpired, setHideExpired] = useState(false);
 
   useEffect(() => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
@@ -21,11 +22,18 @@ const Community = () => {
       .catch((error) => {
         console.error(error);
       });
-    
   }, []);
   
-  useEffect(() => { filterExpired(hideExpired); }, [hideExpired]);
-
+  useEffect(() => {
+    if (hideExpired) {
+      const newData = masterDataSource.filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      });
+      setFilteredDataSource(newData);
+    } else {
+      setFilteredDataSource(masterDataSource);
+    }
+  }, [hideExpired]);
 
 
   const searchFilterFunction = (text) => {
@@ -108,15 +116,6 @@ const Community = () => {
       />
     );
   };
-  
-  const filterExpired = (hideExpired) => {
-    if (hideExpired) {
-      const newData = masterDataSource.filter(function (item) {
-        return Date.parse(item.date) > Date.now();
-      });
-      setFilteredDataSource(newData);
-    } else {setFilteredDataSource(masterDataSource);}
-  };
 
   const getItem = (item) => {
     // Function for click on an item
@@ -142,11 +141,11 @@ const Community = () => {
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="Search posts by title or category"
+          placeholder="Search by title, category, or month"
           value={search}
         />
         <View style={{flexDirection: 'row',}}>
-          <CheckBox value={hideExpired} onValueChange={setHideExpired}/>
+          <CheckBox value={hideExpired} onValueChange={setHideExpired} />
           <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
         </View>
         <FlatList

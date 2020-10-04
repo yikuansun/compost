@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, CheckBox } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Community = () => {
@@ -9,6 +9,7 @@ const Community = () => {
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [hideExpired, setHideExpired] = useState(true);
 
   useEffect(() => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
@@ -104,6 +105,16 @@ const Community = () => {
       />
     );
   };
+  
+  //const filterExpired = (hideExpired) => {
+  //  if hideExpired {
+  //    const newData = masterDataSource.filter(function (item) {
+  //      const today = Date();
+  //      return Date.parse(item.date) > today;
+  //    });
+  //    setFilteredDataSource(newData);
+  //  } else {setFiltereDataSource(masterDataSource);}
+  //};
 
   const getItem = (item) => {
     // Function for click on an item
@@ -132,6 +143,10 @@ const Community = () => {
           placeholder="Search posts by title or category"
           value={search}
         />
+        <View style={{flexDirection: 'row',}}>
+          <CheckBox value={hideExpired} onValueChange={setHideExpired}/>
+          <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
+        </View>
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}

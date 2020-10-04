@@ -24,55 +24,46 @@ class Checker extends Component {
         source={{
           html: `
 <style>
-div {
-    background-size: contain;
-    float: left;
-}
-body {
-    margin: 0;
-}@media screen and (orientation:portrait) {
     div {
-        width: 50vw;
-        height: 50vw;
+        background-size: contain;
+        float: left;
     }
-}
-@media screen and (orientation:landscape) {
-    div {
-        width: 25vw;
-        height: 25vw;
+    body {
+        margin: 0;
+    }@media screen and (orientation:portrait) {
+        div {
+            width: 50vw;
+            height: 50vw;
+        }
     }
-}
+    @media screen and (orientation:landscape) {
+        div {
+            width: 25vw;
+            height: 25vw;
+        }
+    }
 </style>
 
 <body></body>
 
 <script>
-request = new XMLHttpRequest();
-request.open('GET', "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/image_urls.txt", false);
-request.send();
-if (request.status != 200) {
-    document.write("Error in fetching data");
-    throw "ball";
-}
+    request = new XMLHttpRequest();
+    request.open('GET', "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/image_urls.json", false);
+    request.send();
+    if (request.status != 200) {
+        document.write("Error in fetching data");
+        throw "ball";
+    }
 
-for (imgurl of request.responseText.split("\\n")) {
-    div = document.createElement("div");
-    div.style.backgroundImage = "url('" + imgurl + "')";
-    document.body.appendChild(div);
-}
+    for (imgobj of JSON.parse(request.responseText).images) {
+        div = document.createElement("div");
+        div.style.backgroundImage = "url('" + imgobj.url + "')";
+        document.body.appendChild(div);
 
-for (div of document.getElementsByTagName("div")) {
-    if (div.style.backgroundImage.includes("NOT Compostables")) {
         div.onclick = function() {
-            alert("Not Compostable");
+            alert("Compostable at home: " + (parseFloat(imgobj.homecompostable)?"yes":"no") + "\nCompostable via Orange Country drop off: " + (parseFloat(imgobj.orange)?"yes":"no"));
         }
     }
-    else {
-        div.onclick = function() {
-            alert("Compostable");
-        }
-    }
-}
 </script>
           `
         }}

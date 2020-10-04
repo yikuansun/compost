@@ -60,8 +60,11 @@ class Checker extends Component {
         div.style.backgroundImage = "url('" + imgobj.url + "')";
         document.body.appendChild(div);
 
+        div.dataset.home = (parseFloat(imgobj.homecompostable)?"yes":"no");
+        div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
+
         div.onclick = function() {
-            alert("Compostable at home: " + (parseFloat(imgobj.homecompostable)?"yes":"no") + "\\nCompostable via Orange Country drop off: " + (parseFloat(imgobj.orange)?"yes":"no"));
+            alert("Compostable at home: " + this.dataset.home + "\\nCompostable via Orange Country drop off: " + this.dataset.orange);
         }
     }
 </script>

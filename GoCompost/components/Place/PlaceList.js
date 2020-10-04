@@ -9,6 +9,7 @@ import { ListItem, Text, Avatar } from "react-native-elements";
 import { Container, Content } from "native-base";
 import {GOOGLE_API_KEY} from "../../api_key";
 import styles from "./styles";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 /* display the list of places */
 class PlaceList extends Component {
@@ -33,9 +34,11 @@ class PlaceList extends Component {
 
 /*
 */
+//Directions: {<a href={"https://www.google.com/maps/search/?api=1&query=35.9607647,-79.02922269999999&query_place_id=ChIJ9z4yAmbdrIkRxqxYN5pFqw8"}>Directions</a>}
+
 
   render() {
-    const { places } = this.props;
+    const { places, type } = this.props;
     console.log("try to render place list");
     return (
       <Container style={styles.container2}>
@@ -59,23 +62,43 @@ class PlaceList extends Component {
                       <Avatar
                         title={item.name}
                         rounded={false}
-                        size={"large"}
+                        //Use extra large picture as avatar for events
+                        size= { type==='events' ? (
+                                "xlarge"):("large")
+                              }
                         source={
-                          item.photo && 
+                          item.photo && type==="places" &&
                           // call google API to get the photo
                           {uri: 
                             `https://maps.googleapis.com/maps/api/place/photo?photoreference=${item.photo.photo_reference}&sensor=false&maxheight=${item.photo.height}&maxwidth=${item.photo.width}&key=${GOOGLE_API_KEY}`
+                          } ||
+                          item.photo && type==="events" &&
+                          // use direct URL for event picture
+                          {uri: 
+                            `${item.photo.url}`
                           }
                       }/>
                       <ListItem.Content>
                           <ListItem.Title style={styles.placeTitleFont}>{item.name}</ListItem.Title>
                           <ListItem.Subtitle>
-                                <Text style={styles.placeDetailFont}>
-                                  Address: {item.address}{"\n"}
-                                  Type: {item.type}{"\n"}
-                                  Hours: {item.hours}{"\n"}
-                                  Contact: {item.contact}{"\n"}
-                                </Text>
+                            {type==='events' ? (
+                              <Text style={styles.placeDetailFont}>
+                                Category: {item.category}{"\n"}
+                                Where: {item.address}{"\n"}
+                                When: {item.date}{"\n"}
+                                Hosted by: {item.host}{"\n"}
+                                Contact: {item.contact}{"\n"}
+                                Registration: {item.registration}{"\n"}
+                              </Text>
+                            ) :  (
+                              <Text style={styles.placeDetailFont}>
+                                Address: {item.address}{"\n"}
+                                Type: {item.type}{"\n"}
+                                Hours: {item.hours}{"\n"}
+                                Contact: {item.contact}{"\n"}
+                            </Text>
+                            )
+                            }                            
                           </ListItem.Subtitle>
                       </ListItem.Content>
                     </ListItem>

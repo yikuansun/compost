@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import { View, StyleSheet, Dimensions} from "react-native";
+import { View, StyleSheet, Dimensions, Linking, Button } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab"
-import GOOGLE_API_KEY_FIREBASE from "../../api_key";
+import { Container, Content, Text } from "native-base";
+import eventIcon from '../../assets/event.png';
 
 //Components
 import PlaceList from "../Place/PlaceList";
@@ -14,23 +15,31 @@ import styles from "./styles";
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
-// Initialize Firebase
-const firebaseConfig = {
-    apiKey: GOOGLE_API_KEY_FIREBASE,
-    authDomain: "compostable-290100.firebaseapp.com",
-    databaseURL: "https://compostable-290100.firebaseio.com",
-    projectId: "compostable-290100",
-    storageBucket: "compostable-290100.appspot.com",
-    messagingSenderId: "1030026048519",
-    appId: "1:1030026048519:android:95d798444b97843e2f66a2",
-};  
+/*
+ *  For MapView, refer to:  https://github.com/react-native-community/react-native-maps
+ *  For Firebase, refer to: https://docs.expo.io/guides/using-firebase/
+ */
+
 
 class MapScreen extends Component {
+
+  static navigationOptions = { 
+      title: "Map123",
+      headerRight: (
+        <Button
+          title="test"
+          color="#fff"
+        />
+      ),
+      headerMode: "screen",
+    };
+
   constructor(props) {
     super(props);
     //Initial State
     this.state = {
         places: [],
+        events: [],
         selectedIndex: 0
     };
   }
@@ -45,24 +54,34 @@ class MapScreen extends Component {
   }
 
   async getPlaces() {
-    const markers = [];
-
+    const placeMarkers = [];
+    const eventMarkers = [];
 
     // Get data from firestore
-    firebase.initializeApp(firebaseConfig);
     const firestore = firebase.firestore();
 
-    // Loop through the data and generate markers array
+    // Loop through the compost centers data and generate placeMarkers array
     await firestore.collection("compost_centers").get().then(querySnapshot => {
         console.log("Total compost centers: ", querySnapshot.size);
         querySnapshot.forEach(documentSnapshot => {
             console.log("data: ", documentSnapshot.data());
-            markers.push(documentSnapshot.data());
+            placeMarkers.push(documentSnapshot.data());
         });
+    });
+    
+    // Loop through the events data and generate eventMarkers array
+    // default order by id ascedent
+    await firestore.collection("events").orderBy("id").get().then(querySnapshot => {
+      console.log("Total events: ", querySnapshot.size);
+      querySnapshot.forEach(documentSnapshot => {
+          console.log("data: ", documentSnapshot.data());
+          eventMarkers.push(documentSnapshot.data());
+      });
     });
 
     //Update our places array
-    this.setState({ places: markers });
+    this.setState({ places: placeMarkers });
+    this.setState({ events: eventMarkers });
     console.log("updated markers data.");
     //console.log("places to display: " +  JSON.stringify(markers,null,4));
 
@@ -89,7 +108,8 @@ class MapScreen extends Component {
       longitudeDelta: 0.0421
     };
   
-    const { places } = this.state;
+
+    const { places, events } = this.state;
     // Followed the solution from https://stackoverflow.com/questions/58564916/react-native-maps-show-marker-callout
     if (places.length>0) {
       console.log("data is ready.");
@@ -116,7 +136,44 @@ class MapScreen extends Component {
                   longitude: marker.location.longitude
                 }}
                 title={marker.name}
-              />
+                onCalloutPress={
+                  () => {
+                    // Launch google map
+                    const url = "https://www.google.com/maps/search/?api=1&query="+marker.location.longitude+","+marker.location.latitude+"&query_place_id="+marker.place_id;
+                    Linking.openURL(url);
+                  }
+                }>
+                  <MapView.Callout>
+                      <View>
+                        <Text>{marker.name}</Text>
+                      </View>
+                  </MapView.Callout>
+                </MapView.Marker>
+            ))}
+          {events.map((marker, i) => (
+              <MapView.Marker
+                key={i}
+                coordinate={{
+                  latitude: marker.location.latitude,
+                  longitude: marker.location.longitude
+                }}
+                image={eventIcon}
+                title={marker.name}
+                onCalloutPress={
+                  () => {
+                    // Launch google map
+                    const url = "https://www.google.com/maps/search/?api=1&query="+marker.location.longitude+","+marker.location.latitude+"&query_place_id="+marker.place_id;
+                    Linking.openURL(url);
+                  }
+                }>
+                  <MapView.Callout>
+                      <View>
+                        <Text>{marker.name}</Text>
+                        <Text>Hosted by {marker.host}</Text>
+                        <Text>{marker.date}</Text>
+                      </View>
+                  </MapView.Callout>
+                </MapView.Marker>
             ))}
           </MapView>
 
@@ -128,9 +185,18 @@ class MapScreen extends Component {
               onTabPress={this.handleIndexChange}
               />
         </View>
-        <View style={styles.placeList}>
-          <PlaceList places={places} map={this.map} />
-        </View>
+        { this.state.selectedIndex===0 ? (
+          <View style={styles.placeList}>
+          <PlaceList type='places' places={places} map={this.map} />
+          </View>
+        ) : null }
+
+        { this.state.selectedIndex===1 ? (
+          <View style={styles.placeList}>
+          <PlaceList type='events' places={events} map={this.map} />
+          </View>
+        ) : null }
+
       </View>
     ) }
     else {

@@ -1,5 +1,6 @@
 import React from "react";
-import { createAppContainer } from "react-navigation";
+import { View, Image, Text } from 'react-native';
+import { createAppContainer, createSwitchNavigator} from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -10,14 +11,113 @@ import CommunityScreen from "../../components/Community/Community";
 import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
 import FootprintScreen from "../../components/Footprint/Footprint"
-import Footprint from "../../components/Footprint/Footprint";
+
+import SignInScreen from "./SignIn"
+import AboutScreen from "./About"
 
 //Screen in the Home tab
 const iconFocusedColor = 'blue';
 const iconDefaultColor = '#575757'
 
+const Map = createStackNavigator (
+  {MapScreen}, 
+  {
+        //defaultNavigationOptions: (navigationOptions),
+        navigationOptions: {
+          tabBarLabel: "Map",
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+            name="map-search"
+            size={27}
+            color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
+          ),
+          style: {
+            backgroundColor: "blue"
+          },
+          headerMode: "screen",
+          headerRight: (
+            <View>
+              <Text>Logged in user</Text>
+            </View>
+          )
+        }
+});
+
+const Checker = createStackNavigator (
+  {CheckerScreen},
+  {
+        navigationOptions: {
+          tabBarLabel: "Check",
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+            name="checkcircle"
+            size={24}
+            color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
+          ),
+          style: {
+            backgroundColor: "blue"
+          }
+        }
+});
+
+const Dashboard = createStackNavigator (
+  {DashboardScreen},
+  {navigationOptions: {
+    tabBarLabel: "Home",
+    tabBarIcon: ({ focused }) => (
+      <Ionicons
+        name="ios-home"
+        size={30}
+        color={`${focused ? iconFocusedColor: iconDefaultColor}`}
+      />
+    ),
+  }
+});
+
+const Footprint = createStackNavigator (
+  {FootprintScreen},
+  {navigationOptions: {
+    tabBarLabel: "Footprint",
+    tabBarIcon: ({ focused }) => (
+      <MaterialCommunityIcons
+      name="foot-print" 
+      size={28}
+      color={`${focused ? iconFocusedColor: iconDefaultColor}`} />          
+    ),
+    style: {
+      backgroundColor: "blue"
+    }
+  }}
+);
+
+const Community = createStackNavigator (
+  {CommunityScreen},
+  {navigationOptions: {
+    tabBarLabel: "Community",
+    tabBarIcon: ({ focused }) => (
+      <Ionicons
+      name="md-people"
+      size={35}
+      color={`${focused ? iconFocusedColor: iconDefaultColor}`}         
+      />
+    ),
+    style: {
+      backgroundColor: "blue"
+    }
+  }}
+);
+
+const bottomTab = createBottomTabNavigator({
+  Map: Map,
+  Checker: Checker,
+  Home: Dashboard,
+  Footprint: Footprint,
+  Community: Community,
+});
+
 //Main Tab
 //Icon search: https://icons.expo.fyi/
+/*
 const bottomTab = createBottomTabNavigator(
   {
     Map: {
@@ -112,8 +212,10 @@ const bottomTab = createBottomTabNavigator(
     lazy: false
   }
 );
+*/
 
 //Getting the tab header title
+
 bottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
   const headerTitle = routeName;
@@ -134,11 +236,32 @@ const AppNavigator = createStackNavigator(
     initialRouteName: "Home",
     // mode to screen as Android style
     headerMode: "screen",   // header mode
-    headerTitleAlign: "center",
-    headerStyle: {
+    //headerTitleAlign: "center",
+    /*headerStyle: {
       backgroundColor: "blue",
-    },
+    },*/
+    /*
+    headerRight: (
+      <View>
+        <Text>Ben Li</Text>
+      </View>
+    )*/
   }
 );
 
-export default createAppContainer(AppNavigator);
+
+const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const AboutStack = createStackNavigator({ About: AboutScreen });
+
+// create a global app context
+export const AppContext = React.createContext({userInfo:{name:"foo"}});
+
+// Create a switch navigator for login->home flow
+export default createAppContainer(createSwitchNavigator(
+    {Auth: AuthStack,
+     App: AppNavigator,
+     About: AboutStack,
+    }, {
+      initialRouteName: 'Auth'
+    }  
+));

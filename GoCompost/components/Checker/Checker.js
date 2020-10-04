@@ -55,7 +55,7 @@ if (request.status != 200) {
     throw "ball";
 }
 
-for (imgurl of request.responseText.split("\n")) {
+for (imgurl of request.responseText.split("\\n")) {
     div = document.createElement("div");
     div.style.backgroundImage = "url('" + imgurl + "')";
     document.body.appendChild(div);

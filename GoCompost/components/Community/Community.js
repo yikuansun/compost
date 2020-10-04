@@ -1,25 +1,32 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, CheckBox } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Community = () => {
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [hideExpired, setHideExpired] = useState(true);
 
   useEffect(() => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
-        setFilteredDataSource(responseJson);
-        setMasterDataSource(responseJson);
+        setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
+        setFilteredDataSource(masterDataSource);
       })
       .catch((error) => {
         console.error(error);
       });
+    
   }, []);
+  
+  useEffect(() => { filterExpired(hideExpired); }, [hideExpired]);
+
+
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
@@ -34,8 +41,11 @@ const Community = () => {
         const catData = item.cat
           ? item.cat.toUpperCase()
           : ''.toUpperCase();
+        const date = item.date
+          ? item.date.toUpperCase()
+          : ''.toUpperCase();
         const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1;
+        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1 || date.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
       setSearch(text);
@@ -48,22 +58,41 @@ const Community = () => {
   };
 
   const ItemView = ({ item }) => {
+    
     return (
+      
       // Flat List Item
-      <View style={{padding: 10,}}>
-        {/* <Modal visibile={modalVisible}>
-          <View style={{padding: 10,}}>
-            <Text>{item.title}</Text>
-            <Text onPress={() => setModalVisibility(false)}>Back</Text>
+      <View style={{flexDirection: 'row',}}>
+        <View style = {{padding: 10,}}>
+          <TouchableOpacity onPress={() => getItem(item)}>
+            <Image source={{uri:item.imglink}} style={styles.imgColumn} />
+          </TouchableOpacity>
+        </View>
+        <View style={{flexShrink: 1,}}>
+          <Text style={{fontWeight: 'bold', padding: 5, paddingTop: 10, fontSize: 14, color: '#666'}}>
+            {item.title.toUpperCase()}
+          </Text>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="microphone" style={styles.itemStyle}/>
+            <Text style={styles.itemStyle}>
+              {item.host}
+            </Text>
           </View>
-        </Modal> */}
-        <TouchableOpacity onPress={() => getItem(item)}>
-          <Image source={{uri:item.imglink}} style={{alignSelf: 'center', width: 300, height: 300}} />
-        </TouchableOpacity>
-        <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-          {item.title.toUpperCase()}
-        </Text>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="clock" style={styles.itemStyle}/>
+            <Text style={styles.itemStyle}>
+              {item.date} {item.time}
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row',}}>
+            <Icon name="map-pin" style={styles.itemStyle}/>
+            <Text style={styles.itemStyle}>
+              {item.location}
+            </Text>
+          </View>
+        </View>
       </View>
+      
     );
   };
 
@@ -79,11 +108,29 @@ const Community = () => {
       />
     );
   };
+  
+  const filterExpired = (hideExpired) => {
+    if (hideExpired) {
+      const newData = masterDataSource.filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      });
+      setFilteredDataSource(newData);
+    } else {setFilteredDataSource(masterDataSource);}
+  };
 
   const getItem = (item) => {
     // Function for click on an item
-    alert(item.title);
-    setModalVisibility(true);
+    //alert(item.title);
+    
+    return (
+      <Modal visible={modalVisible}>
+        <View style={{padding: 10,}}>
+          <Text>{item.title}</Text>
+          <Text>{item.date}{' '}{item.time}</Text>
+          <Text onPress={() => setModalVisibility(false)}>Back</Text>
+        </View>
+      </Modal>
+    );
   };
 
   return (
@@ -98,6 +145,10 @@ const Community = () => {
           placeholder="Search posts by title or category"
           value={search}
         />
+        <View style={{flexDirection: 'row',}}>
+          <CheckBox value={hideExpired} onValueChange={setHideExpired}/>
+          <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
+        </View>
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -114,8 +165,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#cca2de',
   },
   itemStyle: {
-    //padding: 10,
+    padding: 5,
+    fontSize: 11,
+  },
+  imgColumn: {
     alignSelf: 'center',
+    width: 120,
+    height: 120,
   },
 });
 

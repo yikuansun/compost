@@ -23,14 +23,33 @@ class Checker extends Component {
       <WebView
         source={{
           html: `
-<style>
+    <style>
     div {
         background-size: contain;
         float: left;
     }
     body {
         margin: 0;
-    }@media screen and (orientation:portrait) {
+    }
+    input {
+        position: fixed;
+        z-index: 5;
+        top: 105px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 95vw;
+        padding: 15px 30px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+        box-sizing: border-box;
+        font-size: 30px;
+        background-image: url("https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/search_icon.svg");
+        background-position: 20px 15px;
+        background-repeat: no-repeat;
+        padding-left: 60px;
+    }
+    @media screen and (orientation:portrait) {
         div {
             width: 50vw;
             height: 50vw;
@@ -65,6 +84,22 @@ class Checker extends Component {
 
         div.onclick = function() {
             alert("Compostable at home: " + this.dataset.home + "\\nCompostable via Orange Country drop off: " + this.dataset.orange);
+        }
+    }
+
+    searchbar = document.createElement("input");
+    searchbar.type = "text";
+    searchbar.placeholder = "find an item";
+    document.body.appendChild(searchbar);
+
+    document.getElementsByTagName("input")[0].onkeyup = function() {
+        for (div of document.getElementsByTagName("div")) {
+            if (div.style.backgroundImage.toUpperCase().includes(this.value.toUpperCase())) {
+                div.style.display = "";
+            }
+            else {
+                div.style.display = "none";
+            }
         }
     }
 </script>

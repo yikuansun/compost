@@ -15,7 +15,7 @@ const Community = () => {
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
-        setMasterDataSource(responseJson);
+        setMasterDataSource(responseJson.sort( (a,b) => Date(b.date) - Date(a.date) ));
       })
       .catch((error) => {
         console.error(error);
@@ -104,6 +104,11 @@ const Community = () => {
       />
     );
   };
+  
+  const sortArray = () => {
+    sorted_data = filteredDataSource.sort();
+    setMasterDataSource(sorted_data);
+  }
 
   const getItem = (item) => {
     // Function for click on an item
@@ -124,6 +129,7 @@ const Community = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text>Community Events</Text>
+        <Text>{Date(masterDataSource[0].date)}</Text>
         <SearchBar
           round
           searchIcon={{ size: 24 }}
@@ -133,6 +139,7 @@ const Community = () => {
           value={search}
         />
         <FlatList
+          //let sortedData = 
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}

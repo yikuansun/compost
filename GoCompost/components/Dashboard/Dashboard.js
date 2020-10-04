@@ -15,7 +15,7 @@ class Dashboard extends Component {
         </View>
         <View>
         <Image style={{height:580, width:400,resizeMode:'stretch'}} source={compostable}/>
-        <Text onPress={() => Linking.openURL('https://forms.gle/KcrzWaYDGGUJSLAD7')}>Give Feedback</Text>
+        <Text onPress={() => Linking.openURL('https://forms.gle/KcrzWaYDGGUJSLAD7')} style={{textAlign: 'center', padding: 10, fontSize: 20, color: 'darkblue',}}>Give Feedback</Text>
 
         </View>
       </Container>

@@ -124,7 +124,6 @@ const Community = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text>Community Events</Text>
-        <Text>{Date.parse(masterDataSource[0].date)}</Text>
         <SearchBar
           round
           searchIcon={{ size: 24 }}

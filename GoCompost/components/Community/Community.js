@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { SearchBar } from 'react-native-elements';
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, CheckBox } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Community = () => {
@@ -9,18 +9,22 @@ const Community = () => {
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [hideExpired, setHideExpired] = useState(true);
 
   useEffect(() => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
       .then((response) => response.json())
       .then((responseJson) => {
-        setFilteredDataSource(responseJson);
-        setMasterDataSource(responseJson);
+        setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
+        setFilteredDataSource(masterDataSource);
       })
       .catch((error) => {
         console.error(error);
       });
+    
   }, []);
+  
+  useEffect(() => { filterExpired(hideExpired); }, [hideExpired]);
 
 
 
@@ -37,8 +41,11 @@ const Community = () => {
         const catData = item.cat
           ? item.cat.toUpperCase()
           : ''.toUpperCase();
+        const date = item.date
+          ? item.date.toUpperCase()
+          : ''.toUpperCase();
         const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1;
+        return itemData.indexOf(textData) > -1 || catData.indexOf(textData) > -1 || date.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
       setSearch(text);
@@ -101,6 +108,15 @@ const Community = () => {
       />
     );
   };
+  
+  const filterExpired = (hideExpired) => {
+    if (hideExpired) {
+      const newData = masterDataSource.filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      });
+      setFilteredDataSource(newData);
+    } else {setFilteredDataSource(masterDataSource);}
+  };
 
   const getItem = (item) => {
     // Function for click on an item
@@ -129,6 +145,10 @@ const Community = () => {
           placeholder="Search posts by title or category"
           value={search}
         />
+        <View style={{flexDirection: 'row',}}>
+          <CheckBox value={hideExpired} onValueChange={setHideExpired}/>
+          <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
+        </View>
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}

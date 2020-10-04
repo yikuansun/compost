@@ -79,6 +79,7 @@ for (div of document.getElementsByTagName("div")) {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         startInLoadingState={true}
+        style={{backgroundColor: "lightblue"}}
       />
       /*<Container style={{backgroundColor: "lightblue"}}>
         <Content>

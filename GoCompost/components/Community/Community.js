@@ -135,7 +135,6 @@ const Community = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text>Community Events</Text>
         <SearchBar
           round
           searchIcon={{ size: 24 }}

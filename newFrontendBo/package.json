@@ -1,0 +1,35 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "^3.0.3",
+    "@react-native-community/masked-view": "^0.1.5",
+    "@react-native-firebase/app": "^8.4.5",
+    "expo": "~36.0.0",
+    "firebase": "^7.22.0",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-date-picker": "^3.2.3",
+    "react-native-dropdown-picker": "^3.7.0",
+    "react-native-gesture-handler": "~1.5.0",
+    "react-native-numeric-input": "^1.8.3",
+    "react-native-reanimated": "~1.4.0",
+    "react-native-safe-area-context": "0.6.0",
+    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-vector-icons": "^7.1.0",
+    "react-navigation": "^4.1.0",
+    "react-navigation-stack": "^2.0.16"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "~8.0.0",
+    "@babel/core": "^7.0.0"
+  },
+  "private": true
+}

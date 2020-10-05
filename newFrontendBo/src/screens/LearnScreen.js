@@ -1,14 +1,61 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
-
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, Image } from "react-native";
+import DropDownPicker from 'react-native-dropdown-picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Fontisto, FontAwesome5 } from '@expo/vector-icons';
 
 const HomeScreen = (props) => {
   const imageLink = require('./homeBackground.jpg');
+
+  this.state = {
+    country: 'od'
+  }
   return (
       <View style={{flex: 1}}>
-        <View style={{flex: 6}}>
-          <View style={{flex: 0.8}}>
 
+        <View style={{flex: 6}}>
+          <DropDownPicker
+              items={[
+                {label: 'Today', value: 'od' },
+                {label: '7 Days', value: 'sd'},
+                {label: '30 Days', value: 'td' },
+                {label: 'All Time', value: 'at'}
+              ]}
+              defaultValue={this.state.country}
+              containerStyle={{height: 40}}
+              style={{backgroundColor: '#fafafa'}}
+              itemStyle={{
+                justifyContent: 'flex-start'
+              }}
+              dropDownStyle={{backgroundColor: '#fafafa'}}
+              onChangeItem={item => this.setState({
+                country: item.value
+              })}
+          />
+          <View style={{flex: 0.5, flexDirection: 'row', margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
+            <View style={{flex: 3}}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <FontAwesome5 name="recycle" size={40} color="black" />
+              </View>
+            </View>
+            <View style={{flex: 4}}>
+              <Text>22</Text>
+              <Text>lbs</Text>
+              <Text>Combined total diverted from landfills</Text>
+            </View>
+          </View>
+          <View style={{flex: 0.5, flexDirection: 'row', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>
+            <View style={{flex: 3}}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Fontisto name="dollar" size={25} color="black" style={{margin: 10}}/>
+              </View>
+            </View>
+            <View style={{flex: 4}}>
+              <Text>0.61</Text>
+              <Text>USD</Text>
+              <Text>Landfill tip fee savings based on a national average of $55/ton</Text>
+
+            </View>
           </View>
           <View style={{flex: 0.4, backgroundColor: '#cae0ce'}}>
             <View style={{flex: 1, flexDirection: "row"}}>
@@ -17,34 +64,53 @@ const HomeScreen = (props) => {
             </View>
             <Text style={{textAlign: 'center', fontSize: 13}}>(only food waste logged is included in this calculation)</Text>
           </View>
-          <View style={{flex: 1.1}}>
+          <View style={{flex: 0.8}}>
 
-            <View style={{flex: 5}}>
-              <Text>Outlining</Text>
+            <View style={{flex: 4, flexDirection: 'column', margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 3}}>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Fontisto name="cloudy" size={36} color="black" style={{margin: 10}} />
+                </View>
+              </View>
+              <View style={{flex: 4}}>
+                <Text>-17.6</Text>
+                <Text>lbs CO2e</Text>
+
+              </View>
+
+              </View>
+              <View style={{flex:1}}>
+                <Text style={{fontSize: 10, margin: 3}}>Net Greenhouse Gas emission benefits from landfilling to composting food waste, based on the EPA Waste Reduction Model (WARM) and related assumptions and limitations.</Text>
+              </View>
             </View>
-            <View style={{flex: 4}}>
-              <Text style={{fontSize: 10, margin: 3}}>Net Greenhouse Gas emission benefits from landfilling to composting food waste, based on the EPA Waste Reduction Model (WARM) and related assumptions and limitations.</Text>
-            </View>
+
           </View>
-          <View style={{flex: 1.1}}>
-            <View style={{flex: 1.2}}>
-              <Text style={{fontSize: 15, margin: 3}}>For Comparison, it's equivalent to Greenhouse Gas emissions from: </Text>
-            </View>
-            <View style={{flex: 1.4}}>
+          <View style={{flex: 0.8}}>
+
+            <View style={{flex: 1.4, flexDirection: 'column', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>
+              <View style={{flex: 0.8}}>
+                <Text style={{fontSize: 15, margin: 3}}>For Comparison, it's equivalent to Greenhouse Gas emissions from: </Text>
+              </View>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 3}}>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <MaterialCommunityIcons name='car-side' size={45} color="block" style={{margin: 10}} />
+                </View>
+              </View>
+              <View style={{flex: 4}}>
+                <Text>19.8</Text>
+                <Text>miles</Text>
+                <Text>driven by an average passenger vehicle</Text>
+              </View>
+              </View>
 
             </View>
 
           </View>
         </View>
-        <View style={{flex: 4.3, backgroundColor: '#e0e0e0'}}>
 
 
-          <Text style={{margin: 2}}>Additional Notes</Text>
-          <Text style={{margin: 2, fontSize: 12}}>1. Food waste is the largest component of the landfilled waste according to EPA. Diverting food waste from landfills is the project priority. First reduce, reuse or recycle when possible.</Text>
-          <Text style={{margin: 2, fontSize: 12}}>2. This model assumes landfills meeting national practice. Landfill methane emissions may be three times higher in case of landfills without landfill gas (LFG) recovery, so diverting food waste from such landfill facility/practice may result in more than double the GHG impact.</Text>
-          <Text style={{margin: 2, fontSize: 12}}>3. The EPA WARM model assumes composting at a composting facility and includes a “transportation to landfill” factor. This GHG factor can be reduced if composting at your own yard.</Text>
-          <Text style={{margin: 2, fontSize: 12}}>4. It’s based on EPA Greenhouse Gas Equivalencies Calculator. To explore more, visit: https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator</Text>
-        </View>
       </View>
   )
 };

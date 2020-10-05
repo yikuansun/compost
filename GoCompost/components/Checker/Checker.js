@@ -34,7 +34,7 @@ class Checker extends Component {
     input {
         position: fixed;
         z-index: 5;
-        top: 105px;
+        top: 45px;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 95vw;

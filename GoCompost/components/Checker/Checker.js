@@ -10,16 +10,6 @@ class Checker extends Component {
   };
   render() {
     return (
-      /*<WebView
-        source={{
-          html: `
-          <iframe src="https://compostsearchbar.netlify.app" style="border: none; width: 100%; height: 100%;">Please connect to the internet.</iframe>
-          `,
-        }}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        startInLoadingState={true}
-      />*/
       <WebView
         source={{
           html: `

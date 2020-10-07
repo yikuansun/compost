@@ -67,7 +67,33 @@ class Checker extends Component {
         div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
 
         div.onclick = function() {
-            alert("Compostable at home: " + this.dataset.home + "\nCompostable via Orange Country drop off: " + this.dataset.orange);
+            alertbox = new Image();
+            alertbox.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".PNG";
+            alertbox.style.position = "fixed";
+            alertbox.style.zIndex = "20";
+            alertbox.style.top = "50vh";
+            alertbox.style.left = "50vw";
+            alertbox.style.transform = "translate(-50%, -50%)";
+            alertbox.style.width = "75vmin";
+            alertbox.style.height = "auto";
+
+            greywall = document.createElement("greywall");
+            greywall.style.backgroundColor = "grey";
+            greywall.style.zIndex = "10";
+            greywall.style.width = "100vw";
+            greywall.style.height = "100vh";
+            greywall.style.position = "fixed";
+            greywall.style.top = "0";
+            greywall.style.left = "0";
+            greywall.style.opacity = "0.75";
+
+            document.body.appendChild(greywall);
+            document.body.appendChild(alertbox);
+
+            greywall.onclick = function() {
+                alertbox.remove();
+                greywall.remove();
+            }
         }
     }
 

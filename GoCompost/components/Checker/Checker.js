@@ -76,6 +76,7 @@ class Checker extends Component {
             alertbox.style.transform = "translate(-50%, -50%)";
             alertbox.style.width = "75vmin";
             alertbox.style.height = "auto";
+            alertbox.style.filter = "drop-shadow(0px 3px 3px #333333)";
 
             greywall = document.createElement("greywall");
             greywall.style.backgroundColor = "grey";

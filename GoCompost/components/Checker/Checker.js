@@ -47,6 +47,8 @@ class Checker extends Component {
     }
 </style>
 
+<meta name='viewport' content='user-scalable=0'>
+
 <body></body>
 
 <script>
@@ -77,6 +79,7 @@ class Checker extends Component {
             alertbox.style.width = "75vmin";
             alertbox.style.height = "auto";
             alertbox.style.filter = "drop-shadow(0px 3px 3px #333333)";
+            alertbox.style.borderRadius = "25px";
 
             greywall = document.createElement("greywall");
             greywall.style.backgroundColor = "grey";

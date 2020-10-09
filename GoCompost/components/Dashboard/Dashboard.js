@@ -16,9 +16,6 @@ class Dashboard extends Component {
   };
 
 
-
-
-
   render() {
 
 
@@ -192,5 +189,3 @@ const styles = StyleSheet.create({
   });
 
 export default Dashboard;
-
-

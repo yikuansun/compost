@@ -10,16 +10,6 @@ class Checker extends Component {
   };
   render() {
     return (
-      /*<WebView
-        source={{
-          html: `
-          <iframe src="https://compostsearchbar.netlify.app" style="border: none; width: 100%; height: 100%;">Please connect to the internet.</iframe>
-          `,
-        }}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        startInLoadingState={true}
-      />*/
       <WebView
         source={{
           html: `
@@ -27,6 +17,10 @@ class Checker extends Component {
     div {
         background-size: contain;
         float: left;
+        width: 33.33vw;
+        width: calc(100vw / 3);
+        height: 33.33vw;
+        height: calc(100vw / 3);
     }
     body {
         margin: 0;
@@ -34,7 +28,7 @@ class Checker extends Component {
     input {
         position: fixed;
         z-index: 5;
-        top: 105px;
+        top: 45px;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 95vw;
@@ -48,20 +42,12 @@ class Checker extends Component {
         background-position: 20px 15px;
         background-repeat: no-repeat;
         padding-left: 60px;
-    }
-    @media screen and (orientation:portrait) {
-        div {
-            width: 50vw;
-            height: 50vw;
-        }
-    }
-    @media screen and (orientation:landscape) {
-        div {
-            width: 25vw;
-            height: 25vw;
-        }
+        filter: drop-shadow(0px 3px 3px #333333);
+        -webkit-filter: drop-shadow(0px 3px 3px #333333);
     }
 </style>
+
+<meta name='viewport' content='user-scalable=0'>
 
 <body></body>
 
@@ -83,7 +69,35 @@ class Checker extends Component {
         div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
 
         div.onclick = function() {
-            alert("Compostable at home: " + this.dataset.home + "\\nCompostable via Orange Country drop off: " + this.dataset.orange);
+            alertbox = new Image();
+            alertbox.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".PNG";
+            alertbox.style.position = "fixed";
+            alertbox.style.zIndex = "20";
+            alertbox.style.top = "50vh";
+            alertbox.style.left = "50vw";
+            alertbox.style.transform = "translate(-50%, -50%)";
+            alertbox.style.width = "75vmin";
+            alertbox.style.height = "auto";
+            alertbox.style.filter = "drop-shadow(0px 3px 3px #333333)";
+            alertbox.style.borderRadius = "25px";
+
+            greywall = document.createElement("greywall");
+            greywall.style.backgroundColor = "grey";
+            greywall.style.zIndex = "10";
+            greywall.style.width = "100vw";
+            greywall.style.height = "100vh";
+            greywall.style.position = "fixed";
+            greywall.style.top = "0";
+            greywall.style.left = "0";
+            greywall.style.opacity = "0.75";
+
+            document.body.appendChild(greywall);
+            document.body.appendChild(alertbox);
+
+            greywall.onclick = function() {
+                alertbox.remove();
+                greywall.remove();
+            }
         }
     }
 
@@ -92,7 +106,7 @@ class Checker extends Component {
     searchbar.placeholder = "find an item";
     document.body.appendChild(searchbar);
 
-    document.getElementsByTagName("input")[0].onkeyup = function() {
+    document.getElementsByTagName("input")[0].onkeyup = function(event) {
         for (div of document.getElementsByTagName("div")) {
             if (div.style.backgroundImage.toUpperCase().includes(this.value.toUpperCase())) {
                 div.style.display = "";
@@ -100,6 +114,12 @@ class Checker extends Component {
             else {
                 div.style.display = "none";
             }
+        }
+
+        if (event.keyCode == 13) {
+            //decoy = document.createElement("a");
+            //decoy.focus();
+            this.blur();
         }
     }
 </script>

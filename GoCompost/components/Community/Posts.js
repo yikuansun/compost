@@ -11,7 +11,7 @@ const Community = () => {
       .then((response) => response.json())
       .then((responseJson) => {
         setMasterDataSource(responseJson);
-        setFilteredDataSource(masterDataSource);
+        setFilteredDataSource(responseJson);
       })
       .catch((error) => {
         console.error(error);
@@ -52,6 +52,7 @@ const Community = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <Text>filteredDataSource</Text>
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}

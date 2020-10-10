@@ -6,6 +6,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import EventView from './EventView.js';
 import Feed from './Feed.js';
 import Posts from './Posts.js';
+import Feedback from './Feedback.js';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
@@ -15,9 +16,10 @@ const Community = () => {
     {key: 'first', title: 'Feed'},
     {key: 'second', title: 'Events'},
     {key: 'third', title: 'Posts'},
+    {key: 'fourth', title: 'Feedback'},
   ]);
   
-  const renderScene = SceneMap({ first: Feed, second: EventView, third: Posts });
+  const renderScene = SceneMap({ first: Feed, second: EventView, third: Posts, fourth: Feedback });
 
   return (
     <TabView navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={initialLayout} />

@@ -14,7 +14,7 @@ const Community = () => {
           <Image source={props.imgLink} style={styles.imgPost} />
         </View>
         <View>
-          <Text>{props.text}</Text>
+          <Text style={{padding: 10,}}>{props.text}</Text>
         </View>
       </View>
   )};

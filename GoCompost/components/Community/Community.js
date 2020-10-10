@@ -4,13 +4,9 @@ import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Touc
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 import EventView from './EventView.js';
-
-const view2 = () => {
-  return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
-)};
+import Feed from './Feed.js';
+import Posts from './Posts.js';
+import Feedback from './Feedback.js';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
@@ -19,9 +15,11 @@ const Community = () => {
   const [routes] = useState([
     {key: 'first', title: 'Feed'},
     {key: 'second', title: 'Events'},
+    {key: 'third', title: 'Posts'},
+    {key: 'fourth', title: 'Feedback'},
   ]);
   
-  const renderScene = SceneMap({ first: EventView, second: view2 });
+  const renderScene = SceneMap({ first: Feed, second: EventView, third: Posts, fourth: Feedback });
 
   return (
     <TabView navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={initialLayout} />

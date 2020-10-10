@@ -17,7 +17,7 @@ const Community = () => {
       .then((response) => response.json())
       .then((responseJson) => {
         setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
-        setFilteredDataSource(masterDataSource);
+        setFilteredDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
       })
       .catch((error) => {
         console.error(error);

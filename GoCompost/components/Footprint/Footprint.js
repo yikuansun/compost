@@ -11,13 +11,13 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const dbh = firebase.firestore();
 
 const Footprint = props => {
-    const [chosenDate, setChosenDate] = useState(new Date());
+    const [chosenDate, setChosenDate] = useState(new Date(Date.now()));
     const [value,onChangeText] = useState();
     const [weight,setWeight] = useState(0);
     const [value2,onChangeText2] = React.useState();
     const [value4,onChangeText4] = React.useState();
     const [selectedValue, setSelectedValue] = useState("java");
-    const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState(new Date(Date.now()-604800000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [wasteType, setWasteType] = useState("fw");

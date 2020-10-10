@@ -7,6 +7,19 @@ const headerURL = 'https://tigersteve123.github.io/TigersteveTech/hosted_content
 
 
 const Community = () => {
+  const [postsDB, setDB] = useState([]);
+  
+  useEffect(() => {
+    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/posts_db.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setDB(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const PostView = (props) => {
     return (
       <View style={{flexDirection: 'row',}}>

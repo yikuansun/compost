@@ -31,11 +31,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c92dec7-cbdc-4b3b-93bc-83c8c20eb291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Footprint/Footprint.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Footprint/Footprint.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602300030755</updated>
       <workItem from="1602300031936" duration="1037000" />
-      <workItem from="1602301207337" duration="2245000" />
+      <workItem from="1602301207337" duration="3646000" />
     </task>
     <servers />
   </component>
@@ -94,22 +91,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1379" height="200" key="GridCell.Tab.0.bottom" timestamp="1602301198220">
+    <state width="1379" height="200" key="GridCell.Tab.0.bottom" timestamp="1602303615085">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1379" height="200" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1602301198220" />
-    <state width="1379" height="200" key="GridCell.Tab.0.center" timestamp="1602301198219">
+    <state width="1379" height="200" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1602303615085" />
+    <state width="1379" height="200" key="GridCell.Tab.0.center" timestamp="1602303615085">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1379" height="200" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1602301198219" />
-    <state width="1379" height="200" key="GridCell.Tab.0.left" timestamp="1602301198204">
+    <state width="1379" height="200" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1602303615085" />
+    <state width="1379" height="200" key="GridCell.Tab.0.left" timestamp="1602303615084">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1379" height="200" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1602301198204" />
-    <state width="1379" height="200" key="GridCell.Tab.0.right" timestamp="1602301198219">
+    <state width="1379" height="200" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1602303615084" />
+    <state width="1379" height="200" key="GridCell.Tab.0.right" timestamp="1602303615085">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1379" height="200" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1602301198219" />
+    <state width="1379" height="200" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1602303615085" />
     <state x="423" y="164" key="RollbackChangesDialog" timestamp="1602302816383">
       <screen x="0" y="23" width="1440" height="830" />
     </state>

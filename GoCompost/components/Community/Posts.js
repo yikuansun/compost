@@ -18,6 +18,12 @@ const Community = () => {
       });
   }, []);
   
+  const getItem = (item) => {    
+    return (
+      null
+    );
+  };
+  
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
@@ -52,7 +58,6 @@ const Community = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text>filteredDataSource</Text>
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -64,6 +69,9 @@ const Community = () => {
 )};
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#a2c0de',
+  },
   imgPost: {
     alignSelf: 'center',
     width: 100,

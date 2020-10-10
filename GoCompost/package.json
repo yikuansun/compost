@@ -23,6 +23,7 @@
     "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-maps": "0.27.1",
+    "react-native-numeric-input": "^1.8.3",
     "react-native-reanimated": "~1.9.0",
     "react-native-screens": "~2.9.0",
     "react-native-segmented-control-tab": "^3.4.1",
@@ -37,7 +38,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "@react-native-community/datetimepicker": "^3.0.3",
+    "babel-preset-expo": "~8.1.0",
+    "react-native-dropdown-picker": "^3.7.0"
   },
   "private": true
 }

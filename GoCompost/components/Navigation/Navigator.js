@@ -9,7 +9,7 @@ import DashboardScreen from "../../components/Dashboard/Dashboard";
 import CommunityScreen from "../../components/Community/Community";
 import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
-import FootprintScreen from "../../components/Footprint/Footprint"
+import FootprintScreen from "../../components/Footprint/FetchScreen"
 
 //Screen in the Home tab
 const iconFocusedColor = 'blue';

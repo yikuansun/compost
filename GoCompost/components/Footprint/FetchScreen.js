@@ -7,7 +7,6 @@ import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolic
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from "react-native-vector-icons/Feather";
-import DatePicker from 'react-native-date-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 

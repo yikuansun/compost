@@ -3,7 +3,7 @@ import { Container, Content } from "native-base";
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Dimensions } from 'react-native';
 
 const imageWidth = Dimensions.get('window').width;
-import headerImage from '../../assets/event1_small.jpg'
+const headerURL = 'https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/assets/Feed%20page.PNG';
 
 
 const Community = () => {
@@ -21,9 +21,12 @@ const Community = () => {
 
   return (
     <View>
-      <Image source={headerImage} style={styles.imgColumn} />
-      <PostView imgLink={headerImage} text={'Hello'} />
+      <Image source={{uri:headerURL}} style={styles.imgColumn} />
+      <View style={{padding: 10,}}>
+        <PostView imgLink={{uri:headerURL}} text={'Hello'} />
+      </View>
     </View>
+    
 )};
 
 const styles = StyleSheet.create({

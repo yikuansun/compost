@@ -7,13 +7,6 @@ import EventView from './EventView.js';
 import Feed from './Feed.js';
 import Posts from './Posts.js';
 
-const view2 = () => {
-  return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
-)};
-
 const initialLayout = { width: Dimensions.get('window').width };
 
 const Community = () => {

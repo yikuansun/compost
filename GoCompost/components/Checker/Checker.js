@@ -68,6 +68,8 @@ class Checker extends Component {
         div.dataset.home = (parseFloat(imgobj.homecompostable)?"yes":"no");
         div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
 
+        div.name = (imgobj.name);
+
         div.onclick = function() {
             alertbox = new Image();
             alertbox.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".PNG";
@@ -108,7 +110,7 @@ class Checker extends Component {
 
     document.getElementsByTagName("input")[0].onkeyup = function(event) {
         for (div of document.getElementsByTagName("div")) {
-            if (div.style.backgroundImage.toUpperCase().includes(this.value.toUpperCase())) {
+            if (div.name.toUpperCase().includes(this.value.toUpperCase())) {
                 div.style.display = "";
             }
             else {

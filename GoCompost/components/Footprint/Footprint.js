@@ -1,19 +1,23 @@
 import React, { Component } from "react";
-import { Container, Content, View, Text } from "native-base";
+import {ImageBackground, TouchableOpacity} from "react-native";
+import { Text, StyleSheet, View, Button, Image, TextInput, ScrollView } from "react-native";
+import NumericInput from 'react-native-numeric-input';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import DateTimePicker from "@react-native-community/datetimepicker";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 //Components
-class Footprint extends Component {
-  static navigationOptions = {
-    headerTitle: "Footprint"
-  };
-  render() {
-    return (
-      <Container style={{backgroundColor: "lightgreen"}}>
-        <Content>
-        </Content>
-      </Container>
-    );
-  }
-}
+const Footprint = props => {
+
+  return (
+      <View>
+          <ScrollView>
+
+          </ScrollView>
+      </View>
+
+  );
+};
 
 export default Footprint;

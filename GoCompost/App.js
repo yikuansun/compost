@@ -9,7 +9,6 @@ import { firebaseConfig } from './config'
 import { AppContext, AppContextProvider } from './AppContextProvider'
 import { faSmileBeam } from "@fortawesome/free-solid-svg-icons";
 
-
 class App extends React.Component {
 
   render() {
@@ -34,3 +33,4 @@ class App extends React.Component {
 }
 
 export default App;
+

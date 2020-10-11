@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppContext } from '../Navigation/Navigator';
 import {
     AsyncStorage,
     Button,
@@ -13,6 +12,8 @@ import * as Google from 'expo-google-app-auth';
 //Firebase
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+
+import { AppContext } from '../../AppContextProvider'
 
 import landing_bg from '../../assets/landing_bg.jpg';
 
@@ -28,6 +29,12 @@ class SignInScreen extends React.Component {
       title: 'GoCompost',
     };
   
+
+    // Set the context to be used
+    // Refer to React Context API: https://reactjs.org/docs/context.html#contextprovider
+    // use the experimental public class fields syntax
+    static contextType = AppContext;
+
     render() {
       return (
 
@@ -39,7 +46,7 @@ class SignInScreen extends React.Component {
             <View style={{flex:1}}>
             <TouchableOpacity 
                 style={styles.signInButton}
-                onPress= {() => {this.signInWithGoogleAsync();}}
+                onPress= {() => {this.signInWithGoogleAsync(this.context);}}
             >
               <Text style={styles.signInButton}>  GOOGLE SIGN IN  </Text>
             </TouchableOpacity>
@@ -72,7 +79,7 @@ class SignInScreen extends React.Component {
       console.log('switch to About screen...');
       this.props.navigation.navigate('About');
     }
-    signInWithGoogleAsync = async () => {
+    signInWithGoogleAsync = async (context) => {
         try {
           const result = await Google.logInAsync({
             // behavior: "web",
@@ -83,7 +90,7 @@ class SignInScreen extends React.Component {
       
           if (result.type === 'success') {
             console.log('user:' + JSON.stringify(result, null, 4));
-            this.onSignIn(result);
+            this.onSignIn(result, context);
             this.props.navigation.navigate('App');
             return result.accessToken;
           } else {
@@ -99,11 +106,12 @@ class SignInScreen extends React.Component {
       //await AsyncStorage.setItem('userToken', 'abc');
     };
 
-     onSignIn = googleUser => {
+     onSignIn = (googleUser, context) => {
         console.log('Google Auth Response', googleUser);
         // We need to register an Observer on Firebase Auth to make sure auth is initialized.
         var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
           unsubscribe();
+
           // Check if we are already signed-in Firebase with the correct user.
           if (!this.isUserEqual(googleUser, firebaseUser)) {
             // Build Firebase credential with the Google ID token.
@@ -116,7 +124,6 @@ class SignInScreen extends React.Component {
                 .auth()
                 .signInWithCredential(credential)
                 .then(function(result) {
-                    console.log('user signed in:' + JSON.stringify(result,null, 4));
                     if (result.additionalUserInfo.isNewUser) {
                         const userInfo = {
                             email: result.user.email,
@@ -139,9 +146,10 @@ class SignInScreen extends React.Component {
                             console.log("write error:" + JSON.stringify(e, null, 4))
 
                         });*/
-                        console.log('added new user.');
                         console.log('added user:' + JSON.stringify(userInfo, null, 4))
-
+                        const { user, setUser } = context;
+                        // Set context with logged ininfo
+                        setUser({loggedIn: true, userInfo: userInfo});
                     } else {
                         // update user last login time
                         firebase.firestore()
@@ -160,6 +168,10 @@ class SignInScreen extends React.Component {
                         }
                         console.log('updated user last_logged_in:' + JSON.stringify(userInfo, null, 4))
                         
+                        // Set context with logged ininfo
+                        const { user, setUser } = context;
+                        setUser({loggedIn: true, userInfo: userInfo});
+
                     }
                 })
                 .catch(function(error) {

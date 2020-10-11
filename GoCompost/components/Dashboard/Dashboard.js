@@ -9,17 +9,27 @@ import wasteImg from '../../assets/triangle_small.png';
 import moneyImg from '../../assets/money_small.png';
 import carbonImg from '../../assets/carbon_small.png';
 
+import { AppContext } from '../../AppContextProvider'
+
 //Components
 class Dashboard extends Component {
   static navigationOptions = {
     headerTitle: "Dashboard"
   };
 
+  // Set the context to be used
+  // Refer to React Context API: https://reactjs.org/docs/context.html#contextprovider
+  // use the experimental public class fields syntax
+  // Refer to example: https://www.taniarascia.com/using-context-api-in-react/
+  static contextType = AppContext;
 
   render() {
 
+    const { user, setUser } = this.context;
 
     // TODO: this data should come from database
+    // load user data from database
+
     const userData = {
       totalCompost: 285,
       impact: {
@@ -48,9 +58,14 @@ class Dashboard extends Component {
     const marginLeft = 10;
 
     return (
+
     <View style={styles.container}>
     <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello, Ben</Text>
+      { user.loggedIn ? 
+         (<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
+         :
+         (<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello GUEST</Text>)
+      }
       <Text>You have diverted to date</Text>
 <Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
       <Text>compostable waste from landfills.</Text>
@@ -153,7 +168,7 @@ class Dashboard extends Component {
         </View>
       </View>
     </View>
-)
+   )
 };
 
 }

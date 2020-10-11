@@ -253,9 +253,6 @@ const AppNavigator = createStackNavigator(
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 const AboutStack = createStackNavigator({ About: AboutScreen });
 
-// create a global app context
-export const AppContext = React.createContext({userInfo:{name:"foo"}});
-
 // Create a switch navigator for login->home flow
 export default createAppContainer(createSwitchNavigator(
     {Auth: AuthStack,

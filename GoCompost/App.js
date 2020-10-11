@@ -1,20 +1,36 @@
 import React from "react";
 //Components
 import Navigator from "./components/Navigation/Navigator";
-//Encapsulate every other component inside the navigation
 
 // Firebase related
 import * as firebase from 'firebase';
 import { firebaseConfig } from './config'
 
-export default function App() {
-  // Disable warning messages for now
-  console.disableYellowBox = true;
+import { AppContext, AppContextProvider } from './AppContextProvider'
+import { faSmileBeam } from "@fortawesome/free-solid-svg-icons";
 
-  // Initialize firebase only once
-  firebase.initializeApp(firebaseConfig);
+class App extends React.Component {
 
-  return (
-        <Navigator />
-  );
+  render() {
+    // Disable warning messages for now
+    console.disableYellowBox = true;
+
+
+    // Initialize firebase only once
+    if (!firebase.apps.length) 
+      firebase.initializeApp(firebaseConfig);
+
+    const user = {
+      loggedIn: false,
+      userInfo: {},
+    }
+    return (
+        <AppContextProvider>
+          <Navigator />
+        </AppContextProvider>
+    );
+  }
 }
+
+export default App;
+

@@ -2,6 +2,7 @@ import React from "react";
 //Components
 import Navigator from "./components/Navigation/Navigator";
 //Encapsulate every other component inside the navigation
+import Footprint from "./components/Footprint/Footprint"
 
 // Firebase related
 import * as firebase from 'firebase';

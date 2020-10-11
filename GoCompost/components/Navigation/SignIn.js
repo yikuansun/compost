@@ -224,7 +224,10 @@ class SignInScreen extends React.Component {
       backgroundColor: "#fed66c",
       fontSize: 20,
       textAlign: "center",
-      padding: 6
+      padding: 6,
+      borderRadius:12,
+      borderWidth: 1,
+      borderColor: '#fed66c'
     },
     area: {
       borderTopLeftRadius: 20,
@@ -236,14 +239,21 @@ class SignInScreen extends React.Component {
       backgroundColor: "#efefef",
       fontSize: 20,
       textAlign: "center",
-      padding: 6
+      padding: 6,
+      borderRadius:12,
+      borderWidth: 1,
+      borderColor: '#efefef'
+
 
     },
     aboutButton: {
-      backgroundColor: "#cfe1e0",
+      backgroundColor: "#C2D58D",
       fontSize: 20,
       textAlign: "center",
-      padding: 6
+      padding: 6,
+      borderRadius:12,
+      borderWidth: 1,
+      borderColor: '#C2D58D'
 
     },
   });

@@ -152,6 +152,7 @@ const Community = () => {
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
+          contentContainerStyle={styles.container}
         />
       </View>
     </SafeAreaView>

@@ -4,13 +4,12 @@ import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Dime
 import { WebView } from "react-native-webview";
 
 const Community = () => {
+
+  const frameWidth = Dimensions.get('window').width;
+  const frameHeight = Dimensions.get('window').height;
+
   return (
-    <View>
-      <View style={{padding: 10,}}>
-        <Text>Hello World</Text>
-      </View>
-      <WebView source={{html: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd501FHNZQLILyL7FJmld04GL6UNrnVc0D_Jjfg-rGj48WdOg/viewform?embedded=true" width="640" height="538" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>'}} javaScriptEnabled={true} />
-    </View>
+    <WebView source={{html: '<style>iframe{width: 100%; height: 100%;}</style><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd501FHNZQLILyL7FJmld04GL6UNrnVc0D_Jjfg-rGj48WdOg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>'}} javaScriptEnabled={true} style={{width: frameWidth, height: frameHeight,}}/>
     
 )};
 

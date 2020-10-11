@@ -4,7 +4,6 @@ import { Text, StyleSheet, View, Button, Image, TextInput, ScrollView } from "re
 import NumericInput from 'react-native-numeric-input';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
-import DateTimePicker from "@react-native-community/datetimepicker";
 import DropDownPicker from 'react-native-dropdown-picker';
 
 // Use the user context
@@ -110,24 +109,8 @@ class Footprint extends Component {
                   </View>
 
                   <View style={{flex: 4, margin: 10}}>
-                      <TextInput
-                          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                          onChangeText={text => this.onChangeText(text)}
-                          value={this.state.value}
-                      />
-                      <View>
-                          <Button onPress={this.showDatepicker} title="Show date picker!" />
-                      </View>
-                      {this.componentWillMountshow && (
-                          <DateTimePicker
-                              testID="dateTimePicker"
-                              value={this.state.date}
-                              mode={this.state.mode}
-                              is24Hour={true}
-                              display="default"
-                              onChange={this.onChange}
-                          />
-                      )}
+
+
                       <View style={{flex: 3}}>
                           <Text style={styles.labelText}>Enter Type: </Text>
                           <DropDownPicker
@@ -186,7 +169,7 @@ class Footprint extends Component {
                               <Text style={{textAlign: 'center'}}>z lbs</Text>
                           </View>
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: '#78989e', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn")} >
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: '#78989e', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontWeight: 'bold', fontSize: 20}}>TRACK MY IMPACT</Text>
                       </TouchableOpacity>
                   </View>

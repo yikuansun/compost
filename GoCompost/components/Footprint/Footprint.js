@@ -186,7 +186,7 @@ class Footprint extends Component {
                               <Text style={{textAlign: 'center'}}>z lbs</Text>
                           </View>
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: '#78989e', margin: 10}} onPress={ () => this.props.navigation.navigate("Info")} >
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: '#78989e', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn")} >
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontWeight: 'bold', fontSize: 20}}>TRACK MY IMPACT</Text>
                       </TouchableOpacity>
                   </View>

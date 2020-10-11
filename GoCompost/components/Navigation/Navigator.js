@@ -11,6 +11,7 @@ import CommunityScreen from "../../components/Community/Community";
 import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
 import FootprintScreen from "../../components/Footprint/Footprint"
+import LearnScreen from "../../components/Footprint/LearnScreen"
 
 import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
@@ -74,8 +75,36 @@ const Dashboard = createStackNavigator (
   }
 });
 
-const Footprint = createStackNavigator (
-  {FootprintScreen},
+
+
+// Use a switch navigator for impact tab
+const ImpactSwitchNavigator = createSwitchNavigator(
+  {Impact: FootprintScreen,
+   Learn: LearnScreen,
+  }, {
+    initialRouteName: 'Impact'
+  }  
+);
+
+
+const Impact = createStackNavigator (
+  {ImpactSwitchNavigator},  // Use a switch navigator for impact tab
+  {navigationOptions: {
+    tabBarLabel: "Impact",
+    tabBarIcon: ({ focused }) => (
+      <MaterialCommunityIcons
+      name="foot-print" 
+      size={28}
+      color={`${focused ? iconFocusedColor: iconDefaultColor}`} />          
+    ),
+    style: {
+      backgroundColor: "blue"
+    }
+  }}
+);
+
+const Learn = createStackNavigator (
+  {LearnScreen},
   {navigationOptions: {
     tabBarLabel: "Footprint",
     tabBarIcon: ({ focused }) => (
@@ -89,6 +118,7 @@ const Footprint = createStackNavigator (
     }
   }}
 );
+
 
 const Community = createStackNavigator (
   {CommunityScreen},
@@ -109,9 +139,9 @@ const Community = createStackNavigator (
 
 const bottomTab = createBottomTabNavigator({
   Map: Map,
-  Checker: Checker,
+  Check: Checker,
   Home: Dashboard,
-  Footprint: Footprint,
+  Impact: Impact,
   Community: Community,
 });
 

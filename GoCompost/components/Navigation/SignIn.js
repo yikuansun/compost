@@ -126,6 +126,7 @@ class SignInScreen extends React.Component {
                 .then(function(result) {
                     if (result.additionalUserInfo.isNewUser) {
                         const userInfo = {
+                            user_id: result.user.uid,
                             email: result.user.email,
                             profile_picture: result.user.photoURL,
                             first_name: result.additionalUserInfo.profile.given_name,
@@ -159,6 +160,7 @@ class SignInScreen extends React.Component {
                             last_logged_in: Date.now(), 
                         })
                         const userInfo = {
+                          user_id: result.user.uid,
                           email: result.user.email,
                           profile_picture: result.user.photoURL,
                           first_name: result.additionalUserInfo.profile.given_name,

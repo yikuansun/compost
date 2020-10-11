@@ -1,12 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, Image } from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, Image } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto, FontAwesome5 } from '@expo/vector-icons';
 
-class LearnScreen extends Component {
+class LearnScreen extends React.Component {
     //const imageLink = require('./homeBackground.jpg');
-    imageLink = require('../../assets/landing_bg.jpg');
 
     state = {
         timePeriod: 'od'

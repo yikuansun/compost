@@ -31,20 +31,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c92dec7-cbdc-4b3b-93bc-83c8c20eb291" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/components/Footprint/LearnScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-webview/apple/RNCWebView.h" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native-webview/apple/RNCWebView.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-webview/apple/RNCWebView.m" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native-webview/apple/RNCWebView.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-webview/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native-webview/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-webview/react-native-webview.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native-webview/react-native-webview.podspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Footprint/Footprint.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Footprint/Footprint.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />

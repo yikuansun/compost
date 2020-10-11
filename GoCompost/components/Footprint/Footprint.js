@@ -17,7 +17,7 @@ const Footprint = props => {
     const [value2,onChangeText2] = React.useState();
     const [value4,onChangeText4] = React.useState();
     const [selectedValue, setSelectedValue] = useState("java");
-    const [date, setDate] = useState(new Date(Date.now()-604800000));
+    const [date, setDate] = useState(new Date(Date.now()));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [wasteType, setWasteType] = useState("fw");

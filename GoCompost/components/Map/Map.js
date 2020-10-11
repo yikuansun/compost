@@ -180,7 +180,7 @@ class MapScreen extends Component {
         </View>
         <View>
             <SegmentedControlTab
-              values={["Compost Centers", "Events"]}
+              values={["Organic Waste Drop Off", "Community Events"]}
               selectedIndex={this.state.selectedIndex}
               onTabPress={this.handleIndexChange}
               />

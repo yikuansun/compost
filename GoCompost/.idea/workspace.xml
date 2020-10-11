@@ -31,6 +31,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c92dec7-cbdc-4b3b-93bc-83c8c20eb291" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Footprint/Footprint.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Footprint/Footprint.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

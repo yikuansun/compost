@@ -7,13 +7,26 @@ const headerURL = 'https://tigersteve123.github.io/TigersteveTech/hosted_content
 
 
 const Community = () => {
+  const [postsDB, setDB] = useState([]);
+  
+  useEffect(() => {
+    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/posts_db.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setDB(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const PostView = (props) => {
     return (
-      <View style={{flexDirection: 'row',}}>
+      <View style={{flexDirection: 'row', flex: 1,}}>
         <View>
           <Image source={props.imgLink} style={styles.imgPost} />
         </View>
-        <View>
+        <View style={{flexShrink: 1,}}>
           <Text style={{padding: 10,}}>{props.text}</Text>
         </View>
       </View>
@@ -21,9 +34,11 @@ const Community = () => {
 
   return (
     <View>
-      <Image source={{uri:headerURL}} style={styles.imgColumn} />
+      <View>
+        <Image source={{uri:headerURL}} style={styles.imgColumn} />
+      </View>
       <View style={{padding: 10,}}>
-        <PostView imgLink={{uri:headerURL}} text={'Hello'} />
+        <Image source={{uri:'https://raw.githubusercontent.com/Tigersteve123/TigersteveTech/master/hosted_content/gocompost/assets/Dan+statement.PNG'}} style={{width: imageWidth*.9, height: imageWidth*.9*.5625, alignSelf:'center',}} />
       </View>
     </View>
     

@@ -74,7 +74,7 @@ class Checker extends Component {
             alertbox = document.createElement("customalert");
 
             textelem = document.createElement("center");
-            textelem.innerText = "\n" + this.name + "\n";
+            textelem.innerText = "\\n" + this.name + "\\n";
             textelem.style.whiteSpace = "pre";
             textelem.style.textAlign = "center";
             textelem.style.width = "75vmin";

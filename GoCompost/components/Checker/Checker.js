@@ -71,9 +71,25 @@ class Checker extends Component {
         div.name = (imgobj.name);
 
         div.onclick = function() {
-            alertbox = new Image();
-            alertbox.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".svg";
+            alertbox = document.createElement("customalert");
+
+            textelem = document.createElement("center");
+            textelem.innerText = "\n" + this.name + "\n";
+            textelem.style.whiteSpace = "pre";
+            textelem.style.textAlign = "center";
+            textelem.style.width = "75vmin";
+            textelem.style.fontSize = "2.5vmin";
+            textelem.style.fontFamily = "Arial";
+            alertbox.appendChild(textelem);
+
+            confimg = new Image();
+            confimg.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".svg";
+            confimg.style.width = "75vmin";
+            confimg.style.borderRadius = "25px";
+            alertbox.appendChild(confimg);
+
             alertbox.style.position = "fixed";
+            alertbox.style.backgroundColor = "white";
             alertbox.style.zIndex = "20";
             alertbox.style.top = "50vh";
             alertbox.style.left = "50vw";
@@ -100,6 +116,13 @@ class Checker extends Component {
                 alertbox.remove();
                 greywall.remove();
             }
+        }
+
+        div.ontouchstart = function() {
+            this.style.opacity = "0.6";
+        }
+        div.ontouchend = function() {
+            this.style.opacity = "";
         }
     }
 

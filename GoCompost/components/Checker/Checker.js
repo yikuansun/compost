@@ -130,7 +130,7 @@ class Checker extends Component {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         startInLoadingState={true}
-        style={{backgroundColor: "lightblue"}}
+        style={{backgroundColor: "#FDFDFD"}}
       />
       /*<Container style={{backgroundColor: "lightblue"}}>
         <Content>

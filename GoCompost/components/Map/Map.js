@@ -183,6 +183,11 @@ class MapScreen extends Component {
               values={["Organic Waste Drop Off", "Community Events"]}
               selectedIndex={this.state.selectedIndex}
               onTabPress={this.handleIndexChange}
+              tabTextStyle = {styles.placeListTabText}
+              tabStyle={styles.placeListTab}
+              activeTabStyle={styles.placeListTabActive}
+
+
               />
         </View>
         { this.state.selectedIndex===0 ? (

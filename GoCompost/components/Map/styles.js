@@ -14,5 +14,22 @@ export default StyleSheet.create({
   placeList: {
     flex: 1,
     justifyContent: "center"
-  }
+  }, 
+  placeListTabText: {
+    color: 'black',
+    flex: 1,
+    textAlign: "center"
+  },
+  placeListTab: {
+    color: '#B6D7AA',
+    flex: 1,
+    justifyContent: "center"
+  },
+  placeListTabActive: {
+    color: '#B6D7AA',
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#1c9145",
+    borderColor:  "#1c9145"
+  },
 });

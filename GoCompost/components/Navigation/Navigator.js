@@ -17,7 +17,7 @@ import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
 
 //Screen in the Home tab
-const iconFocusedColor = 'blue';
+const iconFocusedColor = '#1c9145'; // green icon
 const iconDefaultColor = '#575757'
 
 const Map = createStackNavigator (
@@ -33,7 +33,7 @@ const Map = createStackNavigator (
             color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
           ),
           style: {
-            backgroundColor: "blue"
+            backgroundColor: iconFocusedColor
           },
           headerMode: "screen",
           headerRight: (
@@ -56,7 +56,7 @@ const Checker = createStackNavigator (
             color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
           ),
           style: {
-            backgroundColor: "blue"
+            backgroundColor: iconFocusedColor
           }
         }
 });
@@ -98,7 +98,7 @@ const Impact = createStackNavigator (
       color={`${focused ? iconFocusedColor: iconDefaultColor}`} />          
     ),
     style: {
-      backgroundColor: "blue"
+      backgroundColor: iconFocusedColor
     }
   }}
 );
@@ -114,7 +114,7 @@ const Learn = createStackNavigator (
       color={`${focused ? iconFocusedColor: iconDefaultColor}`} />          
     ),
     style: {
-      backgroundColor: "blue"
+      backgroundColor: iconFocusedColor
     }
   }}
 );
@@ -132,7 +132,7 @@ const Community = createStackNavigator (
       />
     ),
     style: {
-      backgroundColor: "blue"
+      backgroundColor: iconFocusedColor
     }
   }}
 );
@@ -143,106 +143,12 @@ const bottomTab = createBottomTabNavigator({
   Home: Dashboard,
   Impact: Impact,
   Community: Community,
-});
-
-//Main Tab
-//Icon search: https://icons.expo.fyi/
-/*
-const bottomTab = createBottomTabNavigator(
-  {
-    Map: {
-        screen: MapScreen,
-        navigationOptions: {
-          tabBarLabel: "Map",
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-            name="map-search"
-            size={27}
-            color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
-          ),
-          style: {
-            backgroundColor: "blue"
-          }
-        }
-    },
-    Checker: {
-      screen: CheckerScreen,
-        navigationOptions: {
-          tabBarLabel: "Check",
-          tabBarIcon: ({ focused }) => (
-            <AntDesign
-            name="checkcircle"
-            size={24}
-            color={`${focused ? iconFocusedColor: iconDefaultColor}`} />
-          ),
-          style: {
-            backgroundColor: "blue"
-          }
-        }
-    },
-    Home: {
-        screen: DashboardScreen,
-        navigationOptions: {
-          tabBarLabel: "Home",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="ios-home"
-              size={30}
-              color={`${focused ? iconFocusedColor: iconDefaultColor}`}
-            />
-          ),
-
-        }
-    },
-    Footprint: {
-        screen: FootprintScreen,
-        navigationOptions: {
-          tabBarLabel: "Footprint",
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-            name="foot-print" 
-            size={28}
-            color={`${focused ? iconFocusedColor: iconDefaultColor}`} />          
-          ),
-          style: {
-            backgroundColor: "blue"
-          }
-        }
-    },
-    Community: {
-        screen: CommunityScreen,
-        navigationOptions: {
-          tabBarLabel: "Community",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-            name="md-people"
-            size={35}
-            color={`${focused ? iconFocusedColor: iconDefaultColor}`}         
-            />
-          ),
-          style: {
-            backgroundColor: "blue"
-          }
-        }
-    },
   },
-  {
-    navigationOptions: {
-      tabBarOptions: {
-        activeTintColor: "#e90000",
-        inactiveTintColor: "#575757",
-        style: {
-          backgroundColor: "#f2f2f2",
-          height: 60
-        }
-      }
-    }
-  },
-  {
-    lazy: false
-  }
+  {tabBarOptions: {
+    activeTintColor: iconFocusedColor,
+    inactiveTintColor: iconDefaultColor,
+  }}
 );
-*/
 
 //Getting the tab header title
 
@@ -266,16 +172,9 @@ const AppNavigator = createStackNavigator(
     initialRouteName: "Home",
     // mode to screen as Android style
     headerMode: "screen",   // header mode
-    //headerTitleAlign: "center",
-    /*headerStyle: {
-      backgroundColor: "blue",
-    },*/
-    /*
-    headerRight: (
-      <View>
-        <Text>Ben Li</Text>
-      </View>
-    )*/
+    headerTitleAlign: "center",
+
+
   }
 );
 

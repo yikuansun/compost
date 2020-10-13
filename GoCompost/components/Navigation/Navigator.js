@@ -15,6 +15,7 @@ import LearnScreen from "../../components/Footprint/LearnScreen"
 
 import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
+import LoginScreen from "./LoginScreen"
 
 //Screen in the Home tab
 const iconFocusedColor = '#1c9145'; // green icon
@@ -179,15 +180,17 @@ const AppNavigator = createStackNavigator(
 );
 
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const LandingStack = createStackNavigator({ Landing: SignInScreen });
 const AboutStack = createStackNavigator({ About: AboutScreen });
+const LoginStack = createStackNavigator({ Login: LoginScreen });
 
 // Create a switch navigator for login->home flow
 export default createAppContainer(createSwitchNavigator(
-    {Auth: AuthStack,
+    {Landing: LandingStack,
+     Login: LoginStack,
      App: AppNavigator,
      About: AboutStack,
     }, {
-      initialRouteName: 'Auth'
+      initialRouteName: 'Landing'
     }  
 ));

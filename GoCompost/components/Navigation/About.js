@@ -31,7 +31,7 @@ class AboutScreen extends Component {
         <View>
         <TouchableOpacity 
                 style={styles.backButton}
-                onPress= {() => {this.props.navigation.navigate('SignIn');}}
+                onPress= {() => {this.props.navigation.navigate('Landing');}}
             >
             <Text style={styles.backButton}>  Back  </Text>      
         </TouchableOpacity>

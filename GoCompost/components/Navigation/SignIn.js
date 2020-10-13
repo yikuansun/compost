@@ -55,7 +55,7 @@ class SignInScreen extends React.Component {
             <TouchableOpacity
                 style={styles.guestButton}
                 onPress= {() => {this.loginAsGuest();}}>
-              <Text style={styles.guestButton}>  ENTER as guest  </Text>
+              <Text style={styles.guestText}>  ENTER as guest  </Text>
             </TouchableOpacity>
             <View style={{flex:0.17}} />
 
@@ -238,24 +238,32 @@ class SignInScreen extends React.Component {
       borderBottomRightRadius: 20,
     },
     guestButton: {
-      backgroundColor: "#efefef",
+      backgroundColor: "#999999",
       fontSize: 20,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
       borderWidth: 1,
-      borderColor: '#efefef'
-
-
+      borderColor: '#999999'
+    },
+    guestText: {
+      backgroundColor: "#999999",
+      fontSize: 20,
+      textAlign: "center",
+      padding: 6,
+      borderRadius:12,
+      borderWidth: 1,
+      borderColor: '#999999',
+      color: 'white',
     },
     aboutButton: {
-      backgroundColor: "#C2D58D",
+      backgroundColor: "#B6D7AA",
       fontSize: 20,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
       borderWidth: 1,
-      borderColor: '#C2D58D'
+      borderColor: '#B6D7AA'
 
     },
   });

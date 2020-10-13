@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
-import { VictoryChart, VictoryAxis, VictoryBar, VictoryTheme } from "victory-native";
+import { VictoryChart, VictoryLegend, VictoryAxis, VictoryBar, VictoryTheme } from "victory-native";
 import event1 from '../../assets/event1_small.jpg';
 import event2 from '../../assets/event2_small.jpg';
 import event3 from '../../assets/event3_small.jpg';
@@ -31,25 +31,23 @@ class Dashboard extends Component {
     // load user data from database
 
     const userData = {
-      totalCompost: 285,
+      totalCompost: 255,
       impact: {
         month: {
           amount: 22,
-          money: 100.54,
+          money: 0.61,
           co2: -17.6,
         }
       },
-      monthlyGoal: 22,
-      monthlyPct: 110,
 
       dataHalfYear: [
-        {month: 4, amount: 30, label: "Apr"},
-        {month: 5, amount: 40, label: "May"},
-        {month: 6, amount: 25, label: "June"},
-        {month: 7, amount: 23, label: "July"},
-        {month: 8, amount: 28, label: "Aug"},
-        {month: 9, amount: 30, label: "Sept"},
-        {month: 10, amount: 32, label: "Oct"},
+        {day: 1, amount: 30, label: "10/10"},
+        {day: 2, amount: 40, label: "10/11"},
+        {day: 3, amount: 25, label: "10/12"},
+        {day: 4, amount: 23, label: "10/13"},
+        {day: 5, amount: 28, label: "10/14"},
+        {day: 6, amount: 30, label: "10/15"},
+        {day: 7, amount: 32, label: "10/16"},
       ],
     };
 
@@ -67,14 +65,14 @@ class Dashboard extends Component {
          (<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello GUEST</Text>)
       }
       <Text>You have diverted to date</Text>
-<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
+<Text style={{ fontWeight: 'bold', fontSize:20, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
       <Text>compostable waste from landfills.</Text>
-      <Text style={{ color:"blue", fontSize:20, alignContent:"center"}}>Way to go!</Text>
+      <Text style={{ color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
     </View>
 
   <View style={styles.container3}>
     <Text style={{ fontWeight: 'bold', fontSize:18, width:"100%", alignContent:"center"}}>MY IMPACT</Text>
-    <Text>in last 30 days</Text>
+    <Text>in last 7 days</Text>
     <View style={{
       flexDirection: 'row',
       justifyContent: 'center',
@@ -111,52 +109,41 @@ class Dashboard extends Component {
 
   </View>
 
-  <View style={{flex: 1, flexDirection: 'row'}}>
-        <View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems:'center', alignContent:"center"}}>
+
+
           <VictoryChart
             // domainPadding will add space to each side of VictoryBar to
             // prevent it from overlapping the axis
             theme={VictoryTheme.material}
             domainPadding={0}
             color="gray"
-            width={265}
-            height={170}
+            width={360}
+            height={180}
 
           >
             <VictoryAxis
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
-              tickValues={userData.dataHalfYear.map(item=>{return item.month})}
+              tickValues={userData.dataHalfYear.map(item=>{return item.day})}
               tickFormat={userData.dataHalfYear.map(item=>{return item.label})}
             />
             <VictoryAxis
               dependentAxis
               // tickFormat specifies how ticks should be displayed
-              tickFormat={(x) => (`${x}`)}
+              tickFormat={(x) => (`${x} lbs`)}
             />
             <VictoryBar
-              data={userData.dataHalfYear.map(item=>{return {month:item.month, amount:item.amount}})}
+              data={userData.dataHalfYear.map(item=>{return {month:item.day, amount:item.amount}})}
               x="month"
               y="amount"
             />
+
           </VictoryChart>
         </View>
-        <View>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
-          <Text styles={styles.text}>Monthly Goal: {userData.monthlyGoal} lb</Text>
-          <Text></Text>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={{ fontWeight: 'bold', fontSize:18}}>{userData.monthlyPct}%</Text><Text> Reached</Text>
-        </View>
 
-      </View>
-    </View>
       <View style={styles.container2}>
-        <Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>MY LIST</Text>
-        <Text>Bookmarked Events/Resources</Text>
+        <Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Upcoming Events</Text>
         <View style={{flex:1, flexDirection:"row"}}>
         <Image resizeMode="contain" resizeMethod="scale" source={event1}></Image>
         <Image resizeMode="contain" resizeMethod="scale" source={event2}></Image>
@@ -167,7 +154,7 @@ class Dashboard extends Component {
         <View style={{flex:1, alignContent:"center"}}>
         </View>
       </View>
-    </View>
+      </View>
    )
 };
 
@@ -190,7 +177,7 @@ const styles = StyleSheet.create({
   container3: {
     flex: 1,
     
-    backgroundColor: '#a9ccde',
+    backgroundColor: '#D9EAD3',
     alignItems: 'center',
     justifyContent: 'center',
   },

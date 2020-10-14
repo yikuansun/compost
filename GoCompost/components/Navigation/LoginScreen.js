@@ -1,10 +1,11 @@
 import React from 'react';
 import {Container, Content, Header, Form, Input, Item, Button, Label} from 'native-base'
-import { StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import * as firebase from 'firebase';
 import { AppContext } from '../../AppContextProvider'
 import * as Google from 'expo-google-app-auth';
 import googleSignIn from '../../assets/SignInWithGoogle.png';
+import loginBackgroundImage from '../../assets/login_bg.png';
 
 class LoginScreen extends React.Component {
 
@@ -28,7 +29,7 @@ class LoginScreen extends React.Component {
                 alert("Please enter at least 6 characters for password")
                 return;
             }
-
+            console.log(`creating user: ${email}`)
             firebase.auth().createUserWithEmailAndPassword(email, password)
             console.log(`user created ${email}`)
 
@@ -40,7 +41,6 @@ class LoginScreen extends React.Component {
             }, 2000);
             */
             //firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-                console.log("user signed in: " + JSON.stringify(user, null, 4))
 
                 // TODO: need to be able to add user name to be similar to gmail account
                 const userInfo = {
@@ -55,6 +55,8 @@ class LoginScreen extends React.Component {
                     created_at: Date.now(),
                     last_logged_in: Date.now()
                 }
+                console.log("user signed in: " + JSON.stringify(user, null, 4))
+
                 // add a user record into database
                 firebase.firestore()
                 .collection('users')
@@ -124,9 +126,11 @@ class LoginScreen extends React.Component {
     render() {
 
         return (
+
             <Container style={styles.container2}>
-
+            <ImageBackground source={loginBackgroundImage} style={styles.backgroundImage} >
                 <Form>
+
                     <Text style={{fontSize: 20, color: 'black'}}>    </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>    </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
@@ -135,18 +139,18 @@ class LoginScreen extends React.Component {
                     <Text style={{fontSize: 20, color: 'black'}}>    </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
 
-                    <Item floatingLabel>
-                        <Label>Email</Label>
-                        <Input 
+                    <Item floatingLabel style={{marginLeft:50, marginRight:50, marginBottom:10}}>
+                        <Label style={{fontSize: 20, color:"white" }}>EMAIL</Label>
+                        <Input  style={{borderBottomColor: 'white', borderBottomWidth: 2  }}
                             autoCorrect={false}
                             autoCapitalize="none"
                             onChangeText={(email)=>this.setState({email})}
                         />
                         
                     </Item>
-                    <Item floatingLabel>
-                        <Label>Password</Label>
-                        <Input
+                    <Item floatingLabel style={{marginLeft:50, marginRight:50, marginBottom:10}}>
+                        <Label style={{fontSize: 20,  color:"white"}}>PASSWORD</Label>
+                        <Input style={{borderBottomColor: 'white', borderBottomWidth: 2  }}
                             secureTextEntry={true}
                             autoCorrect={false}
                             autoCapitalize="none"
@@ -156,18 +160,19 @@ class LoginScreen extends React.Component {
                         
                     </Item>
 
-                    <Button style={{marginTop: 30}} full rounded success
+                    <Button style={{marginTop: 30, marginBottom:10, marginLeft:48, marginRight:48, backgroundColor: "white"}} full rounded success
                         onPress={()=> this.loginUser(this.state.email, this.state.password, this.context, this.props.navigation)}
                     >
-                        <Text style={{fontSize: 20, color: 'white'}}>                     LOGIN                    </Text>
+                        <Text style={{fontSize: 20, color: '#739261'}}>                     LOG IN                    </Text>
 
                     </Button>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
 
-                    <Button style={{marginTop: 30, backgroundColor:"blue"}} full rounded primary
+                    <Button style={{marginTop:10, backgroundColor:"#95A778",  marginLeft:48, marginRight:48, }} full rounded primary
                         onPress={()=> this.signUpUser(this.state.email, this.state.password, this.context, this.props.navigation)}
 
                     >
-                    <Text style={{fontSize: 20, color: 'white'}}>                      SIGN UP                      </Text>
+                    <Text style={{fontSize: 20, color: 'white', }}>                      SIGN UP                      </Text>
                     </Button>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
@@ -181,28 +186,15 @@ class LoginScreen extends React.Component {
                         this.signInWithGoogleAsync(this.context);
                         }}>
 
-                    <Text style={styles.googleSignInButton}> Sign in with Google </Text>
+                    <Text style={styles.googleSignInButton}>SIGN IN WITH GOOGLE</Text>
                     </TouchableOpacity>
                 </Form>
-
+            </ImageBackground>
             </Container>
         )
     }
 
-/*
-                    <Image source={googleSignIn} style={styles.image} ></Image>
 
-                    <TouchableOpacity 
-                        style={styles.signInButton}
-                        onPress= {() => {
-                        //this.signInWithGoogleAsync(this.context);}
-                        console.log('switch to real loginscreen...');
-                        this.props.navigation.navigate('Login');
-                        }}>
-                    <Text style={styles.googleSignInButton}> Sign in with Google </Text>
-                </TouchableOpacity>
-
-                */
     signInWithGoogleAsync = async (context) => {
         try {
           console.log('signInWithGoogleAsync...');
@@ -343,8 +335,8 @@ const styles = StyleSheet.create({
         padding: 0
     },
     container2: {
-        flex: 1,
-        justifyContent: 'center',
+        //flex: 1,
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     buttonImageIconStyle: {
@@ -352,7 +344,7 @@ const styles = StyleSheet.create({
         margin: 0,
         height: 350,
         width: 380,
-        resizeMode: 'stretch',
+        resizeMode: 'center',
     },
     buttonIconSeparatorStyle: {
         
@@ -367,15 +359,22 @@ const styles = StyleSheet.create({
         height: 400
     },
     googleSignInButton: {
-        backgroundColor: "#4689F2",
-        fontSize: 20,
+        backgroundColor: "#949393",
+        fontSize: 17,
         textAlign: "center",
         padding: 4,
-        borderRadius:12,
+        borderRadius:20,
         borderWidth: 1,
-        borderColor: '#4689F2',
-        color: "white"
+        borderColor: '#949393',
+        color: "white", 
+        marginLeft:48, marginRight:48, 
       },
+    backgroundImage: {
+        resizeMode: 'center', // or 'stretch',
+        //justifyContent: 'center',
+        width: '100%',
+        height: '100%'
+    },
 })
 
 export default LoginScreen;

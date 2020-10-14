@@ -23,13 +23,15 @@ export default StyleSheet.create({
   placeListTab: {
     color: '#B6D7AA',
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+    borderColor:  "#C1D58D"
+
   },
   placeListTabActive: {
     color: '#B6D7AA',
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#1c9145",
-    borderColor:  "#1c9145"
+    backgroundColor: "#C1D58D",
+    borderColor:  "#C1D58D"
   },
 });

@@ -184,6 +184,8 @@ class MapScreen extends Component {
               selectedIndex={this.state.selectedIndex}
               onTabPress={this.handleIndexChange}
               tabTextStyle = {styles.placeListTabText}
+              activeTabTextStyle = {styles.placeListTabText}
+
               tabStyle={styles.placeListTab}
               activeTabStyle={styles.placeListTabActive}
 

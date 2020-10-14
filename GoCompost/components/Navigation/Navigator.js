@@ -18,8 +18,8 @@ import AboutScreen from "./About"
 import LoginScreen from "./LoginScreen"
 
 //Screen in the Home tab
-const iconFocusedColor = '#1c9145'; // green icon
-const iconDefaultColor = '#575757'
+const iconFocusedColor = '#6E8A5D'; // green icon
+const iconDefaultColor = '#575757'  // default gray
 
 const Map = createStackNavigator (
   {MapScreen}, 

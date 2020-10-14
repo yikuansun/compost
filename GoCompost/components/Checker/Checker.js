@@ -75,10 +75,13 @@ class Checker extends Component {
 
             textelem = document.createElement("center");
             textelem.innerText = "\\n" + this.name + "\\n";
-            textelem.style.whiteSpace = "pre";
+            textelem.style.whiteSpace = "pre-line";
             textelem.style.textAlign = "center";
             textelem.style.width = "75vmin";
-            textelem.style.fontSize = "2.5vmin";
+            textelem.style.fontSize = "4vmin";
+            textelem.style.textAlign = "center";
+            textelem.style.overflow = "hidden";
+            textelem.style.wordBreak = "break-word";
             textelem.style.fontFamily = "Arial";
             alertbox.appendChild(textelem);
 

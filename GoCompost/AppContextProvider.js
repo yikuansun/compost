@@ -10,7 +10,9 @@ class AppContextProvider extends Component {
     state = {
         user: {
             loggedIn: false,
-            userInfo: {},
+            userInfo: {
+                user_id: '',
+            },
         }
     }
 

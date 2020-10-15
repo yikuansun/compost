@@ -235,7 +235,7 @@ class Footprint extends Component {
                   <Text style={styles.labelText}>Choose Date: </Text>
 
 
-                  <TouchableOpacity onPress = {this._showDateTimePicker}>
+                  <TouchableOpacity style={{backgroundColor: "white",}} onPress = {this._showDateTimePicker}    >
                       <Text style={styles.labelText}>{this.state.dateText}</Text>
                   </TouchableOpacity>
                   {this.state.show &&

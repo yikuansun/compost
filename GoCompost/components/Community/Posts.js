@@ -2,7 +2,10 @@ import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 
-const Community = () => {
+const imageWidth = Dimensions.get('window').width * .95;
+const paddingSize = Dimensions.get('window').width * .05;
+
+const Posts = () => {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   
@@ -27,15 +30,12 @@ const Community = () => {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
-      <View style={{flexDirection: 'row',}}>
 
-        <View style={{flexShrink: 1,}}>
+      <View style={{padding: paddingSize, alignItems: 'center',}}>
         <Image source={{uri:item.imglink}} style={styles.imgPost} />
-
-          <Text style={{padding: 5, paddingTop: 10, fontSize: 14, color: '#666'}}>
-            {item.text}
-          </Text>
-        </View>
+        <Text style={{fontSize: 14, paddingTop: 10,}}>
+          {item.text}
+        </Text>
       </View>
     );
   };
@@ -71,10 +71,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   imgPost: {
-    alignSelf: 'center',
-    width: 360,
-    height: 360,
+    width: imageWidth,
+    height: imageWidth,
   },
 });
 
-export default Community;
+export default Posts;

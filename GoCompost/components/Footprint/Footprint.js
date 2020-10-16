@@ -13,6 +13,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 // Use the user context
 import { AppContext } from '../../AppContextProvider'
 
+import earthImpact from '../../assets/earthImpact.jpg';
+
 //Components
 
 class Footprint extends Component {
@@ -204,31 +206,31 @@ class Footprint extends Component {
         onChangeText={this._showDateTimePicker}
         value={dateValue}/>
         */
+       /*
+                 <View style={{flex: 1.9, alignItems: "center", justifyContent: "center", backgroundColor: "#606161"}}>
+                      <Text style={{color: "white", fontSize: 20, fontWeight: "bold"}}>I M P A C T</Text>
+                  </View>
+       */
         return (
       <View>
           <ScrollView>
               <View style={{flex: 2.2}}>
 
-                  <View style={{flex: 1.9, alignItems: "center", justifyContent: "center", backgroundColor: "#606161"}}>
-                      <Text style={{color: "white", fontSize: 20, fontWeight: "bold"}}>I M P A C T</Text>
-                  </View>
+                 <View style={{flex: 1.9, alignItems: "center", justifyContent: "center", backgroundColor: "#606161"}}>
+                 <Image source={earthImpact} style={{resizeMode: "stretch", justifyContent: "center"}}/>
+                 </View>
 
                   <View style={{flex: 2.7, flexDirection: "row", alignItems: "center", marginRight: 10, marginLeft: 10, marginTop: 0, marginBottom: 0}}>
 
-                      <View style={{flex: 1, flexDirection: "column", backgroundColor: "#ffcc33", alignItems: "center", justifyContent: "center"}}>
-                          <Text>Log Total</Text>
-        <Text style={{fontSize: 20, fontWeight: "bold"}}>{this.state.totalWeight} lb</Text>
+                      <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10, marginRight:5}}>
+                          <Text style={{marginTop:5,marginBottom:5}}>LOG TOTAL</Text>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginBottom:5}}>{this.state.totalWeight} lbs</Text>
                       </View>
-                      <View style={{flex: 2, flexDirection: "column", backgroundColor: "#e6e6e6", alignItems: "center", justifyContent: "center"}}>
-                          <Text>Account Name</Text>
-                          <Text style={{fontSize: 20, fontWeight: "bold"}}>{userId}</Text>
+                      <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10}}>
+                          <Text style={{marginTop:5,marginBottom:5}}>ACCOUNT NAME</Text>
+                          <Text style={{marginBottom:5, fontSize: 20, fontWeight: "bold"}}>{userId}</Text>
                       </View>
                   </View>
-                  <View style={{flex: 1}}>
-
-                      <Text style={styles.headerText}>Log how much compostable waste you save from landfills and estimate its impact on the Earth</Text>
-                  </View>
-
 
                   <View style={{flex: 4, margin: 10}}>
                   <View style={{flex: 2, flexDirection: 'row'}}>
@@ -266,6 +268,7 @@ class Footprint extends Component {
                               itemStyle={{
                                   justifyContent: 'flex-start'
                               }}
+                              searchablePlaceholder="Select a type"
                               dropDownStyle={{backgroundColor: '#fafafa'}}
                               onChangeItem={item => this.setState({wasteType: item.value})}
                           />
@@ -281,24 +284,24 @@ class Footprint extends Component {
                                         value={this.state.weight} />
                       </View>
                       <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(userId);} }>
-                          <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontWeight: 'bold', fontSize: 20}}>ADD TO LOG</Text>
+                          <Text style={{textAlign: 'center', margin: 5  , color: 'white',  fontSize: 16}}>A D D   T O   L O G</Text>
                       </TouchableOpacity>
                       <View style={{flex: 1, flexDirection: 'row'}}>
-                          <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#b4d6c4", margin: 9}}>
+                          <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#FEFED4", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Today</Text>
-                              <Text style={{textAlign: 'center', fontWeight:"bold"}}>{this.state.totalWeightToday} lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightToday} lbs</Text>
                           </View>
                           <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#cfcfcf", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Last 7 Days</Text>
-                              <Text style={{textAlign: 'center', fontWeight:"bold"}}>{this.state.totalWeightLastWeek}  lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastWeek}  lbs</Text>
                           </View>
-                          <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#a8bdbf", margin: 9}}>
+                          <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#C1C19C", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Last 30 Days</Text>
-                              <Text style={{textAlign: 'center', fontWeight:"bold"}}>{this.state.totalWeightLastMonth}  lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastMonth}  lbs</Text>
                           </View>
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: '#78989e', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >
-                          <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontWeight: 'bold', fontSize: 20}}>TRACK MY IMPACT</Text>
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >
+                          <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontSize: 16}}>T R A C K   M Y   I M P A C T</Text>
                       </TouchableOpacity>
                   </View>
 

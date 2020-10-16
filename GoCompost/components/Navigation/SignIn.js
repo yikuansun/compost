@@ -52,21 +52,21 @@ class SignInScreen extends React.Component {
                   this.props.navigation.navigate('Login');
                 }}
             >
-              <Text style={styles.signInButton}> SIGN IN / SIGN UP </Text>
+              <Text style={styles.signInButton}> S I G N  I N / S I G N  U P </Text>
             </TouchableOpacity>
             <View style={{flex:0.17}} />
 
             <TouchableOpacity
                 style={styles.guestButton}
                 onPress= {() => {this.loginAsGuest();}}>
-              <Text style={styles.guestText}>  ENTER as guest  </Text>
+              <Text style={styles.guestText}>  E N T E R  as guest  </Text>
             </TouchableOpacity>
             <View style={{flex:0.17}} />
 
             <TouchableOpacity
                 style={styles.aboutButton}
                 onPress= {() => {this.gotoAboutScreen();}}>
-              <Text style={styles.aboutButton}>    ABOUT  </Text>
+              <Text style={styles.aboutButton}>    A B O U T  </Text>
             </TouchableOpacity>
 
             </View>
@@ -101,7 +101,7 @@ class SignInScreen extends React.Component {
     },
     signInButton: {
       backgroundColor: "#fed66c",
-      fontSize: 20,
+      fontSize: 17,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
@@ -125,7 +125,7 @@ class SignInScreen extends React.Component {
     },
     guestText: {
       backgroundColor: "#999999",
-      fontSize: 20,
+      fontSize: 18,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
@@ -135,9 +135,9 @@ class SignInScreen extends React.Component {
     },
     aboutButton: {
       backgroundColor: "#B6D7AA",
-      fontSize: 20,
+      fontSize: 17,
       textAlign: "center",
-      padding: 6,
+      padding: 5,
       borderRadius:12,
       borderWidth: 1,
       borderColor: '#B6D7AA'

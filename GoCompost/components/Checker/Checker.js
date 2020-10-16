@@ -131,7 +131,7 @@ class Checker extends Component {
 
     searchbar = document.createElement("input");
     searchbar.type = "text";
-    searchbar.placeholder = "find an item";
+    searchbar.placeholder ="Search and check if an item is compostable";
     document.body.appendChild(searchbar);
 
     document.getElementsByTagName("input")[0].onkeyup = function(event) {

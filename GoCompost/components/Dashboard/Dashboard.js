@@ -9,6 +9,9 @@ import wasteImg from '../../assets/triangle_small.png';
 import moneyImg from '../../assets/money_small.png';
 import carbonImg from '../../assets/carbon_small.png';
 
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 import { AppContext } from '../../AppContextProvider'
 
 //Components
@@ -23,12 +26,64 @@ class Dashboard extends Component {
   // Refer to example: https://www.taniarascia.com/using-context-api-in-react/
   static contextType = AppContext;
 
+  // Get log data
+      // fetch all logs of the user and get the aggregated data
+      getLog = async (userId) => {
+        const dbh = firebase.firestore(); 
+        console.log(`get getLog of ${userId}...`);
+        const userLogRef = dbh.collection('logs').doc(userId);
+        const jsonata = require("jsonata");
+        var total = 0;
+        userLogRef.get()
+          .then((docSnapshot) => {
+              console.log(`fetched log succcessfuly`);
+              if (docSnapshot.exists) {
+                    const data = docSnapshot.data();
+                    
+                    // refer to https://docs.jsonata.org/overview for details of how to do filtering/aggregations
+                    // https://docs.jsonata.org/predicate
+                    // aggregate and get all the data
+                    // sum of total
+                    var totalWeightEpression = jsonata("$sum(log.weight)");
+                    var totalWeight = totalWeightEpression.evaluate(data);
+                    console.log(`get total weight:${totalWeight}`);
+                    this.setState({totalWeight: totalWeight});
+
+                    // get starting timestamp of 1day/7day/30day
+                    var seconds = (new Date()).getTime() / 1000;
+                    var yesterdayTimestamp = seconds - 3600*24;
+                    var lastWeekTimestamp = seconds - 3600*24*7;
+                    var lastMonthTimestamp = seconds - 3600*24*30;
+
+                    var yesterdayExpression = jsonata(`$sum(log[date.seconds>=${yesterdayTimestamp}].weight)`);
+                    var weekExpression = jsonata(`$sum(log[date.seconds>=${lastWeekTimestamp}].weight)`);
+                    var monthExpression = jsonata(`$sum(log[date.seconds>=${lastMonthTimestamp}].weight)`);
+
+                    var lastDayTotal = yesterdayExpression.evaluate(data);
+                    var lastWeekTotal = weekExpression.evaluate(data);
+                    var lastMonthTotal = monthExpression.evaluate(data);
+
+                    this.setState({totalWeightToday: lastDayTotal});
+                    this.setState({totalWeightLastWeek: lastWeekTotal});
+                    this.setState({totalWeightLastMonth: lastMonthTotal});
+                    
+                    console.log(`totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
+
+
+              } else { // new user with no data
+                console.log(`log does not exist for ${userId}`);
+
+              }
+          });
+
+    }
+
+
   render() {
 
     const { user, setUser } = this.context;
 
     // TODO: this data should come from database
-    // load user data from database
 
     const userData = {
       totalCompost: 255,
@@ -40,7 +95,7 @@ class Dashboard extends Component {
         }
       },
 
-      dataHalfYear: [
+      dataWeekly: [
         {day: 1, amount: 30, label: "10/10"},
         {day: 2, amount: 40, label: "10/11"},
         {day: 3, amount: 25, label: "10/12"},
@@ -60,19 +115,19 @@ class Dashboard extends Component {
     <View style={styles.container}>
     <View style={styles.container}>
       { user.loggedIn ? 
-         (<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
+         (<Text style={{ fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
          :
-         (<Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Hello GUEST</Text>)
+         (<Text style={{ fontWeight: 'bold', fontSize:20, alignContent:"center"}}>Hello GUEST</Text>)
       }
       <Text>You have diverted to date</Text>
-<Text style={{ fontWeight: 'bold', fontSize:20, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
-      <Text>compostable waste from landfills.</Text>
+<Text style={{ fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
+      <Text>organic waste from landfills to composting.</Text>
       <Text style={{ color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
     </View>
 
   <View style={styles.container3}>
-    <Text style={{ fontWeight: 'bold', fontSize:18, width:"100%", alignContent:"center"}}>MY IMPACT</Text>
-    <Text>in last 7 days</Text>
+    <Text style={{fontSize:18, width:"100%", alignContent:"center"}}>TOTAL LOGGED IMPACT</Text>
+  
     <View style={{
       flexDirection: 'row',
       justifyContent: 'center',
@@ -125,8 +180,8 @@ class Dashboard extends Component {
             <VictoryAxis
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
-              tickValues={userData.dataHalfYear.map(item=>{return item.day})}
-              tickFormat={userData.dataHalfYear.map(item=>{return item.label})}
+              tickValues={userData.dataWeekly.map(item=>{return item.day})}
+              tickFormat={userData.dataWeekly.map(item=>{return item.label})}
             />
             <VictoryAxis
               dependentAxis
@@ -134,7 +189,7 @@ class Dashboard extends Component {
               tickFormat={(x) => (`${x} lbs`)}
             />
             <VictoryBar
-              data={userData.dataHalfYear.map(item=>{return {month:item.day, amount:item.amount}})}
+              data={userData.dataWeekly.map(item=>{return {month:item.day, amount:item.amount}})}
               x="month"
               y="amount"
             />
@@ -143,7 +198,7 @@ class Dashboard extends Component {
         </View>
 
       <View style={styles.container2}>
-        <Text style={{ fontWeight: 'bold', fontSize:18, alignContent:"center"}}>Upcoming Events</Text>
+        <Text style={{ fontSize:16, alignContent:"center", marginTop: 5, marginBottom: 5}}>U P C O M I N G   E V E N T S</Text>
         <View style={{flex:1, flexDirection:"row"}}>
         <Image resizeMode="contain" resizeMethod="scale" source={event1}></Image>
         <Image resizeMode="contain" resizeMethod="scale" source={event2}></Image>

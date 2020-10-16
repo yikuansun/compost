@@ -140,8 +140,8 @@ class LoginScreen extends React.Component {
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
 
                     <Item floatingLabel style={{marginLeft:50, marginRight:50, marginBottom:10}}>
-                        <Label style={{fontSize: 20, color:"white" }}>EMAIL</Label>
-                        <Input  style={{borderBottomColor: 'white', borderBottomWidth: 2  }}
+                        <Label style={{fontSize: 18, color:"white" }}>EMAIL</Label>
+                        <Input  style={{borderBottomColor: 'white', borderBottomWidth: 1  }}
                             autoCorrect={false}
                             autoCapitalize="none"
                             onChangeText={(email)=>this.setState({email})}
@@ -149,8 +149,8 @@ class LoginScreen extends React.Component {
                         
                     </Item>
                     <Item floatingLabel style={{marginLeft:50, marginRight:50, marginBottom:10}}>
-                        <Label style={{fontSize: 20,  color:"white"}}>PASSWORD</Label>
-                        <Input style={{borderBottomColor: 'white', borderBottomWidth: 2  }}
+                        <Label style={{fontSize: 18,  color:"white"}}>PASSWORD</Label>
+                        <Input style={{borderBottomColor: 'white', borderBottomWidth: 1 }}
                             secureTextEntry={true}
                             autoCorrect={false}
                             autoCapitalize="none"
@@ -163,7 +163,7 @@ class LoginScreen extends React.Component {
                     <Button style={{marginTop: 30, marginBottom:10, marginLeft:48, marginRight:48, backgroundColor: "white"}} full rounded success
                         onPress={()=> this.loginUser(this.state.email, this.state.password, this.context, this.props.navigation)}
                     >
-                        <Text style={{fontSize: 20, color: '#739261'}}>                     LOG IN                    </Text>
+                        <Text style={{fontSize: 18, color: '#739261'}}>                   L O G  I N                    </Text>
 
                     </Button>
                     <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
@@ -172,7 +172,7 @@ class LoginScreen extends React.Component {
                         onPress={()=> this.signUpUser(this.state.email, this.state.password, this.context, this.props.navigation)}
 
                     >
-                    <Text style={{fontSize: 20, color: 'white', }}>                      SIGN UP                      </Text>
+                    <Text style={{fontSize: 18, color: 'white', }}>                    S I G N  U P                     </Text>
                     </Button>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>

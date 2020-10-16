@@ -10,7 +10,7 @@ const Community = () => {
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-  const [hideExpired, setHideExpired] = useState(true);
+  const [hideExpired, setHideExpired] = useState(false);
 
   useEffect(() => {
     fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')

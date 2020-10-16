@@ -28,12 +28,10 @@ const Community = () => {
     return (
       // Flat List Item
       <View style={{flexDirection: 'row',}}>
-        <View style = {{padding: 10,}}>
-          <TouchableOpacity onPress={() => getItem(item)}>
-            <Image source={{uri:item.imglink}} style={styles.imgPost} />
-          </TouchableOpacity>
-        </View>
+
         <View style={{flexShrink: 1,}}>
+        <Image source={{uri:item.imglink}} style={styles.imgPost} />
+
           <Text style={{padding: 5, paddingTop: 10, fontSize: 14, color: '#666'}}>
             {item.text}
           </Text>
@@ -70,12 +68,12 @@ const Community = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#a2c0de',
+    backgroundColor: 'white',
   },
   imgPost: {
     alignSelf: 'center',
-    width: 100,
-    height: 100,
+    width: 360,
+    height: 360,
   },
 });
 

@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import EventView from './EventView.js';
 import Feed from './Feed.js';
@@ -14,15 +14,25 @@ const Community = () => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'first', title: 'Feed'},
-    {key: 'second', title: 'Events'},
-    {key: 'third', title: 'Posts'},
+    {key: 'second', title: 'Posts'},
+    {key: 'third', title: 'Events'},
     {key: 'fourth', title: 'Feedback'},
   ]);
   
-  const renderScene = SceneMap({ first: Feed, second: EventView, third: Posts, fourth: Feedback });
+  const renderScene = SceneMap({ first: Feed, second: Posts, third: EventView, fourth: Feedback });
+  const renderTabBar = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={{ color:'black', backgroundColor: 'lightgray' }}
+      style={{ color:'black', backgroundColor: 'white' }}
+      activeColor='black'
+      inactiveColor='grey'
 
+    />
+  );
   return (
-    <TabView navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={initialLayout} />
+    <TabView navigationState={{ index, routes }} renderScene={renderScene} onIndexChange={setIndex} initialLayout={initialLayout}
+      renderTabBar={renderTabBar}/>
 )};
 
 export default Community;

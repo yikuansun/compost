@@ -3,7 +3,9 @@ import {View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, I
 import DropDownPicker from 'react-native-dropdown-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Fontisto, FontAwesome5 } from '@expo/vector-icons';
-
+import carbonImg from '../../assets/carbon_small.png';
+import wasteImg from '../../assets/triangle_small.png';
+import moneyImg from '../../assets/money_small.png';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -143,10 +145,10 @@ class LearnScreen extends React.Component {
       //console.log('data stored:' + JSON.stringify(this.state.data,null,4));
       var weight = this.state.data[dateRange].total;
       var foodWasteWeight = this.state.data[dateRange].food;
-      var dollar = (weight/pricePerTon).toFixed(2);
-      // TODO: need to change the formula here, using only food waste for emission and miles
-      var emission = (foodWasteWeight * 0.9).toFixed(1);
-      var miles = (foodWasteWeight * 1.3).toFixed(1);
+      var dollar = (pricePerTon*weight/2000).toFixed(2);
+      // using only food waste for emission and miles
+      var emission = (foodWasteWeight * 0.8).toFixed(1);
+      var miles = (emission * 1.126).toFixed(1);
       return (
         <View style={{flex: 1}}>
 
@@ -167,56 +169,55 @@ class LearnScreen extends React.Component {
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => this.setState({timePeriod: item.value})}
                 />
-                <View style={{flex: 0.5, flexDirection: 'row', margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
+                <View style={{flex: 0.5, flexDirection: 'row',margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
                     <View style={{flex: 3}}>
-                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                            <FontAwesome5 name="recycle" size={40} color="black" />
+                        <View style={{ marginTop:15, alignItems: 'center', justifyContent: 'center'}}>
+                            <Image resizeMode="contain" source={wasteImg}></Image>        
                         </View>
                     </View>
                     <View style={{flex: 4}}>
-                        <Text style={{fontSize:16, fontWeight:'bold'}}>{weight}</Text>
+                        <Text style={{fontSize:22, fontWeight:'bold'}}>{weight}</Text>
                         <Text>lbs</Text>
-                        <Text>Combined total diverted from landfills</Text>
+                        <Text>Combined total diverted from landfills to composting</Text>
                     </View>
                 </View>
                 <View style={{flex: 0.5, flexDirection: 'row', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>
-                    <View style={{flex: 3}}>
+                    <View style={{ marginTop:10, flex: 3}}>
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                            <Fontisto name="dollar" size={25} color="black" style={{margin: 10}}/>
+                            <Image resizeMode="contain" source={moneyImg}></Image>        
+
                         </View>
                     </View>
                     <View style={{flex: 4}}>
-                        <Text style={{fontSize:16, fontWeight:'bold'}}>{dollar}</Text>
+                        <Text style={{fontSize:22, fontWeight:'bold'}}>{dollar}</Text>
                         <Text>USD</Text>
-                        <Text>Landfill tip fee savings based on a national average of $55/ton</Text>
+                        <Text>Landfill tip fee savings based on a national average</Text>
 
                     </View>
                 </View>
-                <View style={{flex: 0.3, backgroundColor: '#cae0ce'}}>
-                    <View style={{flex: 0.6, flexDirection: "row"}}>
-                        <Text style={{flex: 2, textAlign: 'center', fontSize: 20, alignContent: 'center', fontWeight: "bold"}}>FOOD WASTE</Text>
-                        <Text style={{flex: 3, textAlign: 'center', alignContent: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold'}}>Greenhouse Gas Calculator</Text>
-                    </View>
+                <View style={{flex: 0.23, backgroundColor: '#cae0ce'}}>
+                        <Text style={{textAlign: 'center', fontSize: 16, alignContent: 'center', marginTop:3 }}>FOOD WASTE GREENHOUSE GAS CALCULATOR</Text>
                     <Text style={{textAlign: 'center', fontSize: 13}}>(only food waste logged is included in this calculation)</Text>
                 </View>
                 <View style={{flex: 0.8}}>
 
                     <View style={{flex: 4, flexDirection: 'column', margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{marginTop:8, flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 3}}>
                                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                    <Fontisto name="cloudy" size={36} color="black" style={{margin: 10}} />
+                                <Image resizeMode="contain" source={carbonImg}></Image>        
+
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:16, fontWeight:'bold'}}> -{emission}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}> -{emission}</Text>
                                 <Text>lbs CO2e</Text>
 
                             </View>
 
                         </View>
-                        <View style={{flex:1}}>
-                            <Text style={{fontSize: 14, margin: 3}}>Net Greenhouse Gas emission benefits from landfilling to composting food waste, based on the EPA Waste Reduction Model (WARM) and related assumptions and limitations.</Text>
+                        <View style={{flex:0.9}}>
+                            <Text style={{fontSize: 14, margin: 3}}>Net Greenhouse Gas emission benefits from composting instead of landfilling food waste, based on the EPA Waste Reduction Model (WARM).</Text>
                         </View>
                     </View>
 
@@ -230,11 +231,11 @@ class LearnScreen extends React.Component {
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 3}}>
                                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                    <MaterialCommunityIcons name='car-side' size={45} color="black" style={{margin: 10}} />
+                                    <MaterialCommunityIcons name='car-side' size={68} color="black" style={{margin: 10}} />
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:16, fontWeight:'bold'}}>{miles}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}>{miles}</Text>
                                 <Text>miles driven by an average passenger vehicle</Text>
                             </View>
                         </View>
@@ -245,11 +246,11 @@ class LearnScreen extends React.Component {
                 onPress= {() => {this.props.navigation.navigate('Impact');}}
             >
             <Text style={{backgroundColor: "#cfe1e0",
-                        fontSize: 20,
+                        fontSize: 16,
                         textAlign: "center",
                         padding: 6,  marginLeft:100, marginRight:100,         borderRadius:15,
-                        borderWidth: 1,        borderColor: '#cfe1e0',
-                    }}>  Back  </Text>      
+                        borderWidth: 1,        borderColor: 'lightgray', backgroundColor: 'lightgray'
+                    }}>  B A C K  </Text>      
         </TouchableOpacity>
                 </View>
             </View>

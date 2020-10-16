@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, ImageBackground } from 'react-native';
 import { VictoryChart, VictoryLegend, VictoryAxis, VictoryBar, VictoryTheme } from "victory-native";
 import event1 from '../../assets/event1_small.jpg';
 import event2 from '../../assets/event2_small.jpg';
@@ -8,6 +8,7 @@ import event4 from '../../assets/event4_small.jpg';
 import wasteImg from '../../assets/triangle_small.png';
 import moneyImg from '../../assets/money_small.png';
 import carbonImg from '../../assets/carbon_small.png';
+import topBackground from '../../assets/dashboardBackground.png';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -20,6 +21,14 @@ class Dashboard extends Component {
     headerTitle: "Dashboard"
   };
 
+  state = {
+    loaded: false,
+    data: {
+      totalWeight: 0,
+      foodTotalWeight: 0,
+      weekly: []
+    }
+  }
   // Set the context to be used
   // Refer to React Context API: https://reactjs.org/docs/context.html#contextprovider
   // use the experimental public class fields syntax
@@ -44,32 +53,35 @@ class Dashboard extends Component {
                     // https://docs.jsonata.org/predicate
                     // aggregate and get all the data
                     // sum of total
+                    console.log('data:' + JSON.stringify(data,null,4));
                     var totalWeightEpression = jsonata("$sum(log.weight)");
                     var totalWeight = totalWeightEpression.evaluate(data);
-                    console.log(`get total weight:${totalWeight}`);
-                    this.setState({totalWeight: totalWeight});
 
-                    // get starting timestamp of 1day/7day/30day
-                    var seconds = (new Date()).getTime() / 1000;
-                    var yesterdayTimestamp = seconds - 3600*24;
-                    var lastWeekTimestamp = seconds - 3600*24*7;
-                    var lastMonthTimestamp = seconds - 3600*24*30;
+                    // Food waste
+                    var foodTotalWeightExpression = jsonata("$sum(log[waste='fw'].weight)");
+                    var foodTotalWeight = foodTotalWeightExpression.evaluate(data);
+  
+                    console.log(`totalWeight:${totalWeight} foodTotalWeight:${foodTotalWeight}`);
+                    var weeklyData = [];
 
-                    var yesterdayExpression = jsonata(`$sum(log[date.seconds>=${yesterdayTimestamp}].weight)`);
-                    var weekExpression = jsonata(`$sum(log[date.seconds>=${lastWeekTimestamp}].weight)`);
-                    var monthExpression = jsonata(`$sum(log[date.seconds>=${lastMonthTimestamp}].weight)`);
+                    // construct weekly data
+                    /*
+                    dataWeekly: [
+                      {day: 1, amount: 30, label: "10/10"},
+                      {day: 2, amount: 40, label: "10/11"},
+                      {day: 3, amount: 25, label: "10/12"},
+                      {day: 4, amount: 23, label: "10/13"},
+                      {day: 5, amount: 28, label: "10/14"},
+                      {day: 6, amount: 30, label: "10/15"},
+                      {day: 7, amount: 32, label: "10/16"},
+                    ]; */
 
-                    var lastDayTotal = yesterdayExpression.evaluate(data);
-                    var lastWeekTotal = weekExpression.evaluate(data);
-                    var lastMonthTotal = monthExpression.evaluate(data);
-
-                    this.setState({totalWeightToday: lastDayTotal});
-                    this.setState({totalWeightLastWeek: lastWeekTotal});
-                    this.setState({totalWeightLastMonth: lastMonthTotal});
-                    
-                    console.log(`totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
-
-
+                    var compostData = {
+                      totalWeight: totalWeight,
+                      foodTotalWeight: foodTotalWeight,
+                      weekly: weeklyData
+                    }
+                    this.setState({data: compostData});
               } else { // new user with no data
                 console.log(`log does not exist for ${userId}`);
 
@@ -81,10 +93,23 @@ class Dashboard extends Component {
 
   render() {
 
-    const { user, setUser } = this.context;
+    console.log('dashboard data never loaded, load it. context:' + JSON.stringify(this.context,null,4) );
+    //const { user, setUser } = this.context;
+    //let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
+    const userId = 'GuestUser';
+    const user = this.context.user;
+    console.log(`in DashboardScreen, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
+    if (!this.state.loaded) {
+      this.setState({userId: userId});
+      this.getLog(userId);
+      this.setState({loaded: true});
+  } else {
+      console.log('alread loaded once');
+  }
+
+    console.log('render data:' + JSON.stringify(this.state.data));
     // TODO: this data should come from database
-
     const userData = {
       totalCompost: 255,
       impact: {
@@ -96,15 +121,26 @@ class Dashboard extends Component {
       },
 
       dataWeekly: [
-        {day: 1, amount: 30, label: "10/10"},
-        {day: 2, amount: 40, label: "10/11"},
-        {day: 3, amount: 25, label: "10/12"},
-        {day: 4, amount: 23, label: "10/13"},
-        {day: 5, amount: 28, label: "10/14"},
-        {day: 6, amount: 30, label: "10/15"},
-        {day: 7, amount: 32, label: "10/16"},
+        {day: 1, amount: 2, label: "10/10"},
+        {day: 2, amount: 1, label: "10/11"},
+        {day: 3, amount: 2, label: "10/12"},
+        {day: 4, amount: 4, label: "10/13"},
+        {day: 5, amount: 3, label: "10/14"},
+        {day: 6, amount: 1, label: "10/15"},
+        {day: 7, amount: 2, label: "10/16"},
       ],
     };
+
+
+    // calculate data 
+    const pricePerTon = 55;
+    var totalWeight = 229;
+    var totalFoodWasteWeight = 19;
+    var dollar = (pricePerTon * totalWeight/2000).toFixed(2);
+    // using only food waste for emission and miles
+    var emission = (totalFoodWasteWeight * 0.8).toFixed(1);
+    var miles = (emission * 1.126).toFixed(1);
+
 
     const DeviceWidth = Dimensions.get('window').width;
     const marginBottom = 10;
@@ -113,17 +149,22 @@ class Dashboard extends Component {
     return (
 
     <View style={styles.container}>
-    <View style={styles.container}>
+
+      <ImageBackground source={topBackground} style={styles.backgroundImage}>
+
       { user.loggedIn ? 
-         (<Text style={{ fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
+         (<Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
          :
-         (<Text style={{ fontWeight: 'bold', fontSize:20, alignContent:"center"}}>Hello GUEST</Text>)
+         (<Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, alignContent:"center"}}>Hello {userId}</Text>)
       }
-      <Text>You have diverted to date</Text>
-<Text style={{ fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{userData.totalCompost} lbs</Text>
-      <Text>organic waste from landfills to composting.</Text>
-      <Text style={{ color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
-    </View>
+      <View styles={styles.container}>
+      <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>
+      <Text style={{ textAlign:'center' }}>organic waste from landfills to composting.</Text>
+      <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
+      </View>
+      </ImageBackground>
+
 
   <View style={styles.container3}>
     <Text style={{fontSize:18, width:"100%", alignContent:"center"}}>TOTAL LOGGED IMPACT</Text>
@@ -138,8 +179,8 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={wasteImg}></Image>
           </View>
         <View style={{justifyContent: 'center',alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {userData.impact.month.amount} </Text>
-          <Text> lbs </Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}>   {totalWeight} </Text>
+          <Text>    lbs </Text>
         </View>
       </View>
       <View>
@@ -147,8 +188,8 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={moneyImg}></Image>        
         </View>
         <View style={{justifyContent: 'center',alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0 }} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {userData.impact.month.money} </Text>
-          <Text>USD</Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}>    {dollar} </Text>
+          <Text>   USD</Text>
           </View>
       </View>
       <View>
@@ -156,8 +197,8 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={carbonImg}></Image>        
           </View>
         <View style={{justifyContent: 'center', alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {userData.impact.month.co2} </Text>
-          <Text>lbs CO2e</Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}> {emission} </Text>
+          <Text>     lbs CO2e</Text>
         </View>
       </View>
     </View>
@@ -235,6 +276,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9EAD3',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'center', // or 'stretch',
+    //justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    alignContent:"stretch",
+    justifyContent: 'center',
+
   },
 
   text: {

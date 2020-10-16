@@ -156,13 +156,15 @@ class Checker extends Component {
             this.blur();
         }
     }
+
+    document.body.innerHTML += "<p style='font-size: 4vmin;'>When possible, almost make effort to first reduce, reuse or recycle the waste.</p>";
 </script>
           `
         }}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         startInLoadingState={true}
-        style={{backgroundColor: "#FDFDFD"}}
+        style={{backgroundColor: "#EEEEEE"}}
       />
       /*<Container style={{backgroundColor: "lightblue"}}>
         <Content>

@@ -3,7 +3,7 @@ import { Container, Content } from "native-base";
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-import EventView from './EventView.js';
+import Events from './EventView.js';
 import Feed from './Feed.js';
 import Posts from './Posts.js';
 import Feedback from './Feedback.js';
@@ -14,12 +14,12 @@ const Community = () => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'first', title: 'Feed'},
-    {key: 'second', title: 'Posts'},
-    {key: 'third', title: 'Events'},
+    {key: 'second', title: 'Events'},
+    {key: 'third', title: 'Posts'},
     {key: 'fourth', title: 'Feedback'},
   ]);
   
-  const renderScene = SceneMap({ first: Feed, second: Posts, third: EventView, fourth: Feedback });
+  const renderScene = SceneMap({ first: Feed, second: Events, third: Posts, fourth: Feedback });
   const renderTabBar = props => (
     <TabBar
       {...props}

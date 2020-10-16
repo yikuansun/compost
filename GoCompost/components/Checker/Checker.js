@@ -68,17 +68,23 @@ class Checker extends Component {
         div.dataset.home = (parseFloat(imgobj.homecompostable)?"yes":"no");
         div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
 
-        div.name = (imgobj.name);
+        div.name = (imgobj.name).replace(
+            /\\w\\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
 
         div.onclick = function() {
             alertbox = document.createElement("customalert");
 
             textelem = document.createElement("center");
-            textelem.innerText = "\\n" + this.name + "\\n";
+            textelem.innerHTML = this.name + "<br/>";
             textelem.style.whiteSpace = "pre-line";
+            textelem.style.marginTop = "3vmin";
             textelem.style.textAlign = "center";
             textelem.style.width = "75vmin";
-            textelem.style.fontSize = "4vmin";
+            textelem.style.fontSize = "7.5vmin";
             textelem.style.textAlign = "center";
             textelem.style.overflow = "hidden";
             textelem.style.wordBreak = "break-word";

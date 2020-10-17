@@ -196,6 +196,8 @@ class Footprint extends Component {
         const dbh = firebase.firestore(); 
         // Fetch user Id from context, if not logged in then use GuestUser as user ID
         let userId = this.state.userId;
+        let user = this.context.user;
+        const nickname = user.loggedIn ? user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')) : userId;
 
         var date = this.state.date;
         //var dateValue = parseInt(date.getMonth()+1) + "/"+ date.getDate()  +"/"+ date.getFullYear();
@@ -228,7 +230,7 @@ class Footprint extends Component {
                       </View>
                       <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10}}>
                           <Text style={{marginTop:5,marginBottom:5}}>ACCOUNT NAME</Text>
-                          <Text style={{marginBottom:5, fontSize: 20, fontWeight: "bold"}}>{userId}</Text>
+                          <Text style={{marginBottom:5, fontSize: 20, fontWeight: "bold"}}>{nickname}</Text>
                       </View>
                   </View>
 

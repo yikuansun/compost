@@ -104,9 +104,9 @@ class Dashboard extends Component {
       this.setState({userId: userId});
       this.getLog(userId);
       this.setState({loaded: true});
-  } else {
-      console.log('alread loaded once');
-  }
+    } else {
+        console.log('alread loaded once');
+    }
 
     console.log('render data:' + JSON.stringify(this.state.data));
     // TODO: this data should come from database
@@ -134,7 +134,7 @@ class Dashboard extends Component {
 
     // calculate data 
     const pricePerTon = 55;
-    var totalWeight = 229;
+    var totalWeight = this.state.data.totalWeight;
     var totalFoodWasteWeight = 19;
     var dollar = (pricePerTon * totalWeight/2000).toFixed(2);
     // using only food waste for emission and miles

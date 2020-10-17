@@ -66,7 +66,7 @@ class SignInScreen extends React.Component {
             <TouchableOpacity
                 style={styles.aboutButton}
                 onPress= {() => {this.gotoAboutScreen();}}>
-              <Text style={styles.aboutButton}>    A B O U T  </Text>
+              <Text style={styles.aboutButton}>  A B O U T  </Text>
             </TouchableOpacity>
 
             </View>

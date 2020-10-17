@@ -234,7 +234,7 @@ class Footprint extends Component {
 
                   <View style={{flex: 4, margin: 10}}>
                   <View style={{flex: 2, flexDirection: 'row'}}>
-                  <Text style={styles.labelText}>Choose Date: </Text>
+                  <Text style={styles.labelText}>CHOOSE DATE:    </Text>
 
 
                   <TouchableOpacity style={{backgroundColor: "white",}} onPress = {this._showDateTimePicker}    >
@@ -255,8 +255,8 @@ class Footprint extends Component {
                           />) }
 
                       </View>
-                      <View style={{flex: 3}}>
-                          <Text style={styles.labelText}>Enter Type: </Text>
+                      <View style={{flex: 3, marginBottom:10}}>
+                          <Text style={styles.labelText}>ENTER TYPE: </Text>
                           <DropDownPicker
                               items={[
                                   {label: 'Food Waste', value: 'fw' },
@@ -274,7 +274,7 @@ class Footprint extends Component {
                           />
                       </View>
                       <View style={{flex: 2, flexDirection: 'row'}}>
-                          <Text style={styles.labelText}>Enter Weight (lb):</Text>
+                          <Text style={styles.labelText}>ENTER WEIGHT (lb):   </Text>
                           <NumericInput style={{flex: 2}}
                                         onChange={
                                             value => {
@@ -320,8 +320,10 @@ const styles = StyleSheet.create({
 
     },
     labelText: {
-        fontSize: 20,
-        margin: 2
+        fontSize: 15,
+        margin: 2,
+        marginTop: 5,
+        marginBottom: 13
     },
     bottomText: {
         fontSize: 15,

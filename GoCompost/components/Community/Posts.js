@@ -10,7 +10,7 @@ const Posts = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
   
   useEffect(() => {
-    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/posts_db.json')
+    fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/yichen_post.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setMasterDataSource(responseJson);
@@ -32,7 +32,7 @@ const Posts = () => {
       // Flat List Item
 
       <View style={{padding: paddingSize, alignItems: 'center',}}>
-        <Image source={{uri:item.imglink}} style={styles.imgPost} />
+        <Image source={{uri:item.imglink}} style={styles.imgPost} resizeMode={'contain'} />
         <Text style={{fontSize: 14, paddingTop: 10,}}>
           {item.text}
         </Text>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   imgPost: {
     width: imageWidth,
-    height: imageWidth,
+    height: imageWidth * 476/847,
   },
 });
 

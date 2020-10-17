@@ -13,7 +13,7 @@ const Community = () => {
   const [hideExpired, setHideExpired] = useState(false);
 
   useEffect(() => {
-    fetch('https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/database.json')
+    fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/yichen_data.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));

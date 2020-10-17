@@ -101,7 +101,7 @@ class SignInScreen extends React.Component {
     },
     signInButton: {
       backgroundColor: "#fed66c",
-      fontSize: 17,
+      fontSize: 15,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
@@ -125,7 +125,7 @@ class SignInScreen extends React.Component {
     },
     guestText: {
       backgroundColor: "#999999",
-      fontSize: 18,
+      fontSize: 15,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
@@ -135,7 +135,7 @@ class SignInScreen extends React.Component {
     },
     aboutButton: {
       backgroundColor: "#B6D7AA",
-      fontSize: 17,
+      fontSize: 15,
       textAlign: "center",
       padding: 5,
       borderRadius:12,

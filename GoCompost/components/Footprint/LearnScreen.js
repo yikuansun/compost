@@ -80,7 +80,8 @@ class LearnScreen extends React.Component {
                         var lastDayTotal = yesterdayExpression.evaluate(data);
                         var lastWeekTotal = weekExpression.evaluate(data);
                         var lastMonthTotal = monthExpression.evaluate(data);
-                       
+                        if (!Number.isNaN(lastDayTotal)) lastDayTotal = 0;
+
                         // Food waste
                         var foodTotalWeightExpression = jsonata("$sum(log[waste='fw'].weight)");
                         var foodTotalWeight = foodTotalWeightExpression.evaluate(data);
@@ -88,10 +89,11 @@ class LearnScreen extends React.Component {
                         var foodYesterdayExpression = jsonata(`$sum(log[waste='fw' and date.seconds>=${yesterdayTimestamp}].weight)`);
                         var foodWeekExpression = jsonata(`$sum(log[waste='fw' and date.seconds>=${lastWeekTimestamp}].weight)`);
                         var foodMonthExpression = jsonata(`$sum(log[waste='fw' and date.seconds>=${lastMonthTimestamp}].weight)`);
-    
+
                         var foodLastDayTotal = foodYesterdayExpression.evaluate(data);
                         var foodLastWeekTotal = foodWeekExpression.evaluate(data);
                         var foodLastMonthTotal = foodMonthExpression.evaluate(data);
+                        if (!Number.isNaN(foodLastDayTotal)) foodLastDayTotal = 0;
 
                         console.log(`totalWeight(${totalWeight}) totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
                         console.log(`foodTotalWeight(${foodTotalWeight}) foodLastDayTotal(${foodLastDayTotal}) foodLastWeekTotal(${foodLastWeekTotal}) foodLastMonthTotal(${foodLastMonthTotal})`);
@@ -134,15 +136,15 @@ class LearnScreen extends React.Component {
             this.getLog(userId);
             this.setState({loaded: true});
         } else {
-            console.log('alread loaded once');
+            console.log('already loaded once');
         }
 
 
-
+      
       const pricePerTon = 55;
       var dateRange = this.state.timePeriod;
       console.log(`dateRange selected: ${dateRange}`);
-      //console.log('data stored:' + JSON.stringify(this.state.data,null,4));
+      console.log('data stored:' + JSON.stringify(this.state.data,null,4));
       var weight = this.state.data[dateRange].total;
       var foodWasteWeight = this.state.data[dateRange].food;
       var dollar = (pricePerTon*weight/2000).toFixed(2);

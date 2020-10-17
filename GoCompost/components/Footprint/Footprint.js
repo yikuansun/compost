@@ -196,6 +196,8 @@ class Footprint extends Component {
         const dbh = firebase.firestore(); 
         // Fetch user Id from context, if not logged in then use GuestUser as user ID
         let userId = this.state.userId;
+        let user = this.context.user;
+        const nickname = user.loggedIn ? user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')) : userId;
 
         var date = this.state.date;
         //var dateValue = parseInt(date.getMonth()+1) + "/"+ date.getDate()  +"/"+ date.getFullYear();
@@ -228,13 +230,13 @@ class Footprint extends Component {
                       </View>
                       <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10}}>
                           <Text style={{marginTop:5,marginBottom:5}}>ACCOUNT NAME</Text>
-                          <Text style={{marginBottom:5, fontSize: 20, fontWeight: "bold"}}>{userId}</Text>
+                          <Text style={{marginBottom:5, fontSize: 20, fontWeight: "bold"}}>{nickname}</Text>
                       </View>
                   </View>
 
                   <View style={{flex: 4, margin: 10}}>
                   <View style={{flex: 2, flexDirection: 'row'}}>
-                  <Text style={styles.labelText}>Choose Date: </Text>
+                  <Text style={styles.labelText}>CHOOSE DATE:    </Text>
 
 
                   <TouchableOpacity style={{backgroundColor: "white",}} onPress = {this._showDateTimePicker}    >
@@ -255,8 +257,8 @@ class Footprint extends Component {
                           />) }
 
                       </View>
-                      <View style={{flex: 3}}>
-                          <Text style={styles.labelText}>Enter Type: </Text>
+                      <View style={{flex: 3, marginBottom:10}}>
+                          <Text style={styles.labelText}>ENTER TYPE: </Text>
                           <DropDownPicker
                               items={[
                                   {label: 'Food Waste', value: 'fw' },
@@ -274,7 +276,7 @@ class Footprint extends Component {
                           />
                       </View>
                       <View style={{flex: 2, flexDirection: 'row'}}>
-                          <Text style={styles.labelText}>Enter Weight (lb):</Text>
+                          <Text style={styles.labelText}>ENTER WEIGHT (lb):   </Text>
                           <NumericInput style={{flex: 2}}
                                         onChange={
                                             value => {
@@ -320,8 +322,10 @@ const styles = StyleSheet.create({
 
     },
     labelText: {
-        fontSize: 20,
-        margin: 2
+        fontSize: 15,
+        margin: 2,
+        marginTop: 5,
+        marginBottom: 13
     },
     bottomText: {
         fontSize: 15,

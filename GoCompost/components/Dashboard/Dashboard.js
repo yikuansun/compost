@@ -95,9 +95,9 @@ class Dashboard extends Component {
 
     console.log('dashboard data never loaded, load it. context:' + JSON.stringify(this.context,null,4) );
     //const { user, setUser } = this.context;
-    //let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
-    const userId = 'GuestUser';
     const user = this.context.user;
+    let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
+    //const userId = 'GuestUser';
     console.log(`in DashboardScreen, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
     if (!this.state.loaded) {
@@ -145,18 +145,15 @@ class Dashboard extends Component {
     const DeviceWidth = Dimensions.get('window').width;
     const marginBottom = 10;
     const marginLeft = 10;
-
+    const nickname = user.loggedIn ? user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')) : userId;
+     // strip @ from email
     return (
 
     <View style={styles.container}>
 
       <ImageBackground source={topBackground} style={styles.backgroundImage}>
 
-      { user.loggedIn ? 
-         (<Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {user.userInfo.name}</Text>)
-         :
-         (<Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, alignContent:"center"}}>Hello {userId}</Text>)
-      }
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>

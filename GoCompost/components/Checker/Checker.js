@@ -156,8 +156,6 @@ class Checker extends Component {
             this.blur();
         }
     }
-
-    document.body.innerHTML += "<p style='font-size: 4vmin;'>When possible, almost make effort to first reduce, reuse or recycle the waste.</p>";
 </script>
           `
         }}

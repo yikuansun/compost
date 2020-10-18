@@ -26,7 +26,15 @@ class Dashboard extends Component {
     data: {
       totalWeight: 0,
       foodTotalWeight: 0,
-      weekly: []
+      dataWeekly: [
+        {day: 1, amount: 0, label: "10/10"},
+        {day: 2, amount: 0, label: "10/11"},
+        {day: 3, amount: 0, label: "10/12"},
+        {day: 4, amount: 0, label: "10/13"},
+        {day: 5, amount: 0, label: "10/14"},
+        {day: 6, amount: 0, label: "10/15"},
+        {day: 7, amount: 0, label: "10/16"},
+      ],
     }
   }
   // Set the context to be used
@@ -64,22 +72,44 @@ class Dashboard extends Component {
                     console.log(`totalWeight:${totalWeight} foodTotalWeight:${foodTotalWeight}`);
                     var weeklyData = [];
 
-                    // construct weekly data
-                    /*
-                    dataWeekly: [
-                      {day: 1, amount: 30, label: "10/10"},
-                      {day: 2, amount: 40, label: "10/11"},
-                      {day: 3, amount: 25, label: "10/12"},
-                      {day: 4, amount: 23, label: "10/13"},
-                      {day: 5, amount: 28, label: "10/14"},
-                      {day: 6, amount: 30, label: "10/15"},
-                      {day: 7, amount: 32, label: "10/16"},
-                    ]; */
+                    var arrayLength = data.log.length;
+                    var log = data.log;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var date1 = new Date(log[i].date.seconds * 1000);
+                        var dateStr = (date1.getMonth() + 1) + '/' + date1.getDate();
+                        var dayOrderStr = date1.getMonth()*30 + date1.getDate();
+                        log[i].day=dateStr;
+                        log[i].dayOrder = dayOrderStr;
+                    
+                    }
+                    
+                    var weightByDayExpression = jsonata("log{day: $sum(weight)}^(dayOrder)");
+                    var groupResult = weightByDayExpression.evaluate(data);
+                    console.log(`groupResult:` + JSON.stringify(groupResult,null,4));
+                    
+                    var dataWeekly=[];
+                    var count=1;
+                    for (const [key, value] of Object.entries(groupResult)) {
+                        //Do stuff where key would be 0 and value would be the object
+                        console.log(`key:${key} value:${value}`);
+                    
+                        var entry = {
+                            day: count,
+                            label: key,
+                            amount: value
+                        };
+                        dataWeekly.push(entry);
+                        count = count + 1;
+                    }
+                    if (dataWeekly.length>7) {
+                        dataWeekly=dataWeekly.slice(-7);
+                    }
+                    console.log('dataWeekly: ' + JSON.stringify(dataWeekly,null,4));
 
                     var compostData = {
                       totalWeight: totalWeight,
                       foodTotalWeight: foodTotalWeight,
-                      weekly: weeklyData
+                      dataWeekly: dataWeekly
                     }
                     this.setState({data: compostData});
               } else { // new user with no data
@@ -110,6 +140,7 @@ class Dashboard extends Component {
 
     console.log('render data:' + JSON.stringify(this.state.data));
     // TODO: this data should come from database
+    /*
     const userData = {
       totalCompost: 255,
       impact: {
@@ -121,7 +152,7 @@ class Dashboard extends Component {
       },
 
       dataWeekly: [
-        {day: 1, amount: 2, label: "10/10"},
+        {day: 1, amount: 0, label: "10/10"},
         {day: 2, amount: 1, label: "10/11"},
         {day: 3, amount: 2, label: "10/12"},
         {day: 4, amount: 4, label: "10/13"},
@@ -129,8 +160,8 @@ class Dashboard extends Component {
         {day: 6, amount: 1, label: "10/15"},
         {day: 7, amount: 2, label: "10/16"},
       ],
-    };
-
+    };*/
+    var dataWeekly = this.state.data.dataWeekly;
 
     // calculate data 
     const pricePerTon = 55;
@@ -218,8 +249,8 @@ class Dashboard extends Component {
             <VictoryAxis
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
-              tickValues={userData.dataWeekly.map(item=>{return item.day})}
-              tickFormat={userData.dataWeekly.map(item=>{return item.label})}
+              tickValues={dataWeekly.map(item=>{return item.day})}
+              tickFormat={dataWeekly.map(item=>{return item.label})}
             />
             <VictoryAxis
               dependentAxis
@@ -227,7 +258,7 @@ class Dashboard extends Component {
               tickFormat={(x) => (`${x} lbs`)}
             />
             <VictoryBar
-              data={userData.dataWeekly.map(item=>{return {month:item.day, amount:item.amount}})}
+              data={dataWeekly.map(item=>{return {month:item.day, amount:item.amount}})}
               x="month"
               y="amount"
             />

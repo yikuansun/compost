@@ -106,7 +106,7 @@ class Checker extends Component {
                 redText.style.whiteSpace = "pre-line";
                 redText.style.marginBottom = "1.5vmin";
                 redText.style.width = "75vmin";
-                redText.style.fontSize = "2vmin";
+                redText.style.fontSize = "3.5vmin";
                 redText.style.textAlign = "center";
                 redText.style.overflow = "hidden";
                 redText.style.wordBreak = "break-word";

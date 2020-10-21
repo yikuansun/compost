@@ -75,6 +75,8 @@ class Checker extends Component {
             }
         );
 
+        div.dataset.footnote = imgobj.foot;
+
         div.onclick = function() {
             alertbox = document.createElement("customalert");
 
@@ -96,6 +98,21 @@ class Checker extends Component {
             confimg.style.width = "75vmin";
             confimg.style.borderRadius = "25px";
             alertbox.appendChild(confimg);
+
+            if (this.dataset.footnote.length) {
+                redText = document.createElement("center");
+                redText.style.color = "red";
+                redText.innerText = "*" + this.dataset.footnote;
+                redText.style.whiteSpace = "pre-line";
+                redText.style.marginBottom = "1.5vmin";
+                redText.style.width = "75vmin";
+                redText.style.fontSize = "3.5vmin";
+                redText.style.textAlign = "center";
+                redText.style.overflow = "hidden";
+                redText.style.wordBreak = "break-word";
+                redText.style.fontFamily = "Arial";
+                alertbox.appendChild(redText);
+            }
 
             alertbox.style.position = "fixed";
             alertbox.style.backgroundColor = "white";

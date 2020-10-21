@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker applies styling to DatePicker 1`] = `
+<RNDateTimePicker
+  date={1376949600000}
+  displayIOS="default"
+  mode="date"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 216,
+      },
+      Object {
+        "backgroundColor": "red",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DatePicker renders a native Component 1`] = `
+<RNDateTimePicker
+  date={1376949600000}
+  displayIOS="default"
+  mode="date"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 216,
+    }
+  }
+/>
+`;
+
+exports[`DatePicker renders with mode countdown 1`] = `
+<RNDateTimePicker
+  date={1376949600000}
+  displayIOS="default"
+  mode="countdown"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 216,
+    }
+  }
+/>
+`;
+
+exports[`DatePicker renders with mode datetime 1`] = `
+<RNDateTimePicker
+  date={1376949600000}
+  displayIOS="default"
+  mode="datetime"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 216,
+    }
+  }
+/>
+`;
+
+exports[`DatePicker renders with mode time 1`] = `
+<RNDateTimePicker
+  date={1376949600000}
+  displayIOS="default"
+  mode="time"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 216,
+    }
+  }
+/>
+`;

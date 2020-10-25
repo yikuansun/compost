@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
+import { SearchBar } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions, Alert } from 'react-native';
 
 const imageWidth = Dimensions.get('window').width / 3;
@@ -49,6 +50,11 @@ const Checker = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <SearchBar
+          round
+          searchIcon={{ size: 24 }}
+          placeholder="Find an item"
+        />
         <FlatList
           numColumns={3}
           data={filteredDataSource}

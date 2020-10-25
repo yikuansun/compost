@@ -67,7 +67,7 @@ const Checker = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: "#EEEEEE",
   },
   imgPost: {
     width: imageWidth,

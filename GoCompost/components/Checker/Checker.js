@@ -34,19 +34,6 @@ const Checker = () => {
         <Image source={{uri:item.url}} style={styles.imgPost} resizeMode={'contain'} />
     );
   };
-  
-  const ItemSeparatorView = () => {
-    return (
-      // Flat List Item Separator
-      <View
-        /*style={{
-          height: 1,
-          width: '100%',
-          backgroundColor: '#C8C8C8',
-        }}*/
-      />
-    );
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -55,7 +42,6 @@ const Checker = () => {
           numColumns={3}
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
         />
       </View>

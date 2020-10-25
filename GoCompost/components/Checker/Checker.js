@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions, Alert } from 'react-native';
 
 const imageWidth = Dimensions.get('window').width / 3;
 const paddingSize = 0;
@@ -27,11 +27,22 @@ const Checker = () => {
     );
   };
   
+  const createMsg = () =>
+    Alert.alert(
+        'Warning',
+        'bla bla bla',
+        [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]
+    )
+  
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
 
+    <TouchableOpacity onPress={createMsg}>
         <Image source={{uri:item.url}} style={styles.imgPost} resizeMode={'contain'} />
+    </TouchableOpacity>
     );
   };
 

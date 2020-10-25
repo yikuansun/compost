@@ -27,10 +27,10 @@ const Checker = () => {
     );
   };
   
-  const createMsg = () =>
+  const createMsg = (itemname, home, orange) =>
     Alert.alert(
-        'Warning',
-        'bla bla bla',
+        itemname,
+        'Compostable at home: ' + (parseInt(home)?"yes":"no") + '\nCompostable via Orange County drop off: ' + (parseInt(orange)?"yes":"no"),
         [
             {text: 'OK', onPress: () => console.log('OK Pressed')},
         ]
@@ -40,7 +40,7 @@ const Checker = () => {
     return (
       // Flat List Item
 
-    <TouchableOpacity onPress={createMsg}>
+    <TouchableOpacity onPress={() => createMsg(item.name, item.homecompostable, item.orange,)}>
         <Image source={{uri:item.url}} style={styles.imgPost} resizeMode={'contain'} />
     </TouchableOpacity>
     );

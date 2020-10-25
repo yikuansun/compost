@@ -32,7 +32,7 @@ const Checker = () => {
         itemname.replace(/\b(\w)/g, k => k.toUpperCase()),
         '\nCompostable at home: ' + (parseInt(home)?"✓":"✗") + '\n\nCompostable via Orange County drop off: ' + (parseInt(orange)?"✓":"✗") + (footer.length?("\n\n*" + footer):""),
         [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
+            {text: 'Got it!', onPress: () => console.log('OK Pressed')},
         ]
     )
   

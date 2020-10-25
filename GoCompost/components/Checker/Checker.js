@@ -1,192 +1,75 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
-import { WebView } from "react-native-webview";
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
 
-//Components
-class Checker extends Component {
+const imageWidth = Dimensions.get('window').width / 3;
+const paddingSize = 0;
 
-  static navigationOptions = {
-    headerTitle: "Checker"
-  };
-  render() {
+const Checker = () => {
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+  
+  useEffect(() => {
+    fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/image_urls.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setMasterDataSource(responseJson);
+        setFilteredDataSource(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  
+  const getItem = (item) => {    
     return (
-      <WebView
-        source={{
-          html: `
-    <style>
-    div {
-        background-size: contain;
-        float: left;
-        width: 33.33vw;
-        width: calc(100vw / 3);
-        height: 33.33vw;
-        height: calc(100vw / 3);
-    }
-    body {
-        margin: 0;
-    }
-    input {
-        position: fixed;
-        z-index: 5;
-        top: 45px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 95vw;
-        padding: 15px 30px;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 50px;
-        box-sizing: border-box;
-        font-size: 30px;
-        background-image: url("https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/search_icon.svg");
-        background-position: 20px 15px;
-        background-repeat: no-repeat;
-        padding-left: 60px;
-        filter: drop-shadow(0px 3px 3px #333333);
-        -webkit-filter: drop-shadow(0px 3px 3px #333333);
-    }
-</style>
-
-<meta name='viewport' content='user-scalable=0'>
-
-<body></body>
-
-<script>
-    request = new XMLHttpRequest();
-    request.open('GET', "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/image_urls.json", false);
-    request.send();
-    if (request.status != 200) {
-        document.write("Error in fetching data");
-        throw "ball";
-    }
-
-    for (imgobj of JSON.parse(request.responseText).images) {
-        div = document.createElement("div");
-        div.style.backgroundImage = "url('" + imgobj.url + "')";
-        document.body.appendChild(div);
-
-        div.dataset.home = (parseFloat(imgobj.homecompostable)?"yes":"no");
-        div.dataset.orange = (parseFloat(imgobj.orange)?"yes":"no");
-
-        div.name = (imgobj.name).replace(
-            /\\w\\S*/g,
-            function(txt) {
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            }
-        );
-
-        div.dataset.footnote = imgobj.foot;
-
-        div.onclick = function() {
-            alertbox = document.createElement("customalert");
-
-            textelem = document.createElement("center");
-            textelem.innerHTML = this.name + "<br/>";
-            textelem.style.whiteSpace = "pre-line";
-            textelem.style.marginTop = "3vmin";
-            textelem.style.textAlign = "center";
-            textelem.style.width = "75vmin";
-            textelem.style.fontSize = "7.5vmin";
-            textelem.style.textAlign = "center";
-            textelem.style.overflow = "hidden";
-            textelem.style.wordBreak = "break-word";
-            textelem.style.fontFamily = "Arial";
-            alertbox.appendChild(textelem);
-
-            confimg = new Image();
-            confimg.src = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + ({"yes":"1","no":"0"}[this.dataset.home]) + ({"yes":"1","no":"0"}[this.dataset.orange]) + ".svg";
-            confimg.style.width = "75vmin";
-            confimg.style.borderRadius = "25px";
-            alertbox.appendChild(confimg);
-
-            if (this.dataset.footnote.length) {
-                redText = document.createElement("center");
-                redText.style.color = "red";
-                redText.innerText = "*" + this.dataset.footnote;
-                redText.style.whiteSpace = "pre-line";
-                redText.style.marginBottom = "1.5vmin";
-                redText.style.width = "75vmin";
-                redText.style.fontSize = "3.5vmin";
-                redText.style.textAlign = "center";
-                redText.style.overflow = "hidden";
-                redText.style.wordBreak = "break-word";
-                redText.style.fontFamily = "Arial";
-                alertbox.appendChild(redText);
-            }
-
-            alertbox.style.position = "fixed";
-            alertbox.style.backgroundColor = "white";
-            alertbox.style.zIndex = "20";
-            alertbox.style.top = "50vh";
-            alertbox.style.left = "50vw";
-            alertbox.style.transform = "translate(-50%, -50%)";
-            alertbox.style.width = "75vmin";
-            alertbox.style.height = "auto";
-            alertbox.style.filter = "drop-shadow(0px 3px 3px #333333)";
-            alertbox.style.borderRadius = "25px";
-
-            greywall = document.createElement("greywall");
-            greywall.style.backgroundColor = "grey";
-            greywall.style.zIndex = "10";
-            greywall.style.width = "100vw";
-            greywall.style.height = "100vh";
-            greywall.style.position = "fixed";
-            greywall.style.top = "0";
-            greywall.style.left = "0";
-            greywall.style.opacity = "0.75";
-
-            document.body.appendChild(greywall);
-            document.body.appendChild(alertbox);
-
-            greywall.onclick = function() {
-                alertbox.remove();
-                greywall.remove();
-            }
-        }
-
-        div.ontouchstart = function() {
-            this.style.opacity = "0.6";
-        }
-        div.ontouchend = function() {
-            this.style.opacity = "";
-        }
-    }
-
-    searchbar = document.createElement("input");
-    searchbar.type = "text";
-    searchbar.placeholder ="Search and check if an item is compostable";
-    document.body.appendChild(searchbar);
-
-    document.getElementsByTagName("input")[0].onkeyup = function(event) {
-        for (div of document.getElementsByTagName("div")) {
-            if (div.name.toUpperCase().includes(this.value.toUpperCase())) {
-                div.style.display = "";
-            }
-            else {
-                div.style.display = "none";
-            }
-        }
-
-        if (event.keyCode == 13) {
-            //decoy = document.createElement("a");
-            //decoy.focus();
-            this.blur();
-        }
-    }
-</script>
-          `
-        }}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        startInLoadingState={true}
-        style={{backgroundColor: "#EEEEEE"}}
-      />
-      /*<Container style={{backgroundColor: "lightblue"}}>
-        <Content>
-        </Content>
-      </Container>*/
+      null
     );
-  }
-}
+  };
+  
+  const ItemView = ({ item }) => {
+    return (
+      // Flat List Item
+
+        <Image source={{uri:item.url}} style={styles.imgPost} resizeMode={'contain'} />
+    );
+  };
+  
+  const ItemSeparatorView = () => {
+    return (
+      // Flat List Item Separator
+      <View
+        /*style={{
+          height: 1,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}*/
+      />
+    );
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <FlatList
+          numColumns={3}
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+      </View>
+    </SafeAreaView>
+  )};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  imgPost: {
+    width: imageWidth,
+    height: imageWidth,
+  },
+});
 
 export default Checker;

@@ -29,7 +29,7 @@ const Checker = () => {
   
   const createMsg = (itemname, home, orange, footer) =>
     Alert.alert(
-        itemname,
+        itemname.replace(/\b(\w)/g, k => k.toUpperCase()),
         '\nCompostable at home: ' + (parseInt(home)?"yes":"no") + '\n\nCompostable via Orange County drop off: ' + (parseInt(orange)?"yes":"no") + (footer.length?("\n\n*" + footer):""),
         [
             {text: 'OK', onPress: () => console.log('OK Pressed')},

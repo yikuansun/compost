@@ -27,10 +27,10 @@ const Checker = () => {
     );
   };
   
-  const createMsg = (itemname, home, orange) =>
+  const createMsg = (itemname, home, orange, footer) =>
     Alert.alert(
         itemname,
-        'Compostable at home: ' + (parseInt(home)?"yes":"no") + '\nCompostable via Orange County drop off: ' + (parseInt(orange)?"yes":"no"),
+        '\nCompostable at home: ' + (parseInt(home)?"yes":"no") + '\n\nCompostable via Orange County drop off: ' + (parseInt(orange)?"yes":"no") + (footer.length?("\n\n*" + footer):""),
         [
             {text: 'OK', onPress: () => console.log('OK Pressed')},
         ]
@@ -40,7 +40,7 @@ const Checker = () => {
     return (
       // Flat List Item
 
-    <TouchableOpacity onPress={() => createMsg(item.name, item.homecompostable, item.orange,)}>
+    <TouchableOpacity onPress={() => createMsg(item.name, item.homecompostable, item.orange, item.foot)}>
         <Image source={{uri:item.url}} style={styles.imgPost} resizeMode={'contain'} />
     </TouchableOpacity>
     );

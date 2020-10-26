@@ -7,6 +7,7 @@ const imageWidth = Dimensions.get('window').width / 3;
 const paddingSize = 0;
 
 const Checker = () => {
+  const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   
@@ -79,6 +80,7 @@ const Checker = () => {
           placeholder="Find an item"
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
+          value={search}
         />
         <FlatList
           numColumns={3}

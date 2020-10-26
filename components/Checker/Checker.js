@@ -27,6 +27,29 @@ const Checker = () => {
       null
     );
   };
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.name
+          ? item.name.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
   
   const createMsg = (itemname, home, orange, footer) =>
     Alert.alert(
@@ -54,6 +77,8 @@ const Checker = () => {
           round
           searchIcon={{ size: 24 }}
           placeholder="Find an item"
+          onChangeText={(text) => searchFilterFunction(text)}
+          onClear={(text) => searchFilterFunction('')}
         />
         <FlatList
           numColumns={3}

@@ -64,7 +64,7 @@ const Checker = () => {
   const createMsg = (item) => {
     ModalContent.name = item.name.replace(/\b(\w)/g, k => k.toUpperCase());
     ModalContent.imgSrc = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + item.homecompostable + item.orange + ".png";
-    ModalContent.footNote = (item.foot.length?"*":"") + item.foot;
+    ModalContent.footNote = (item.foot.length?"*":"") + item.foot + (item.foot.length?"\n":"");
     setModalOpen();
   };
   
@@ -97,6 +97,14 @@ const Checker = () => {
         />
       </View>
       <Modal visible={ModalOpen} animationType="slide">
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
           <Text h2 style={{textAlign: "center"}}>{ModalContent.name}</Text>
           <Image
             source={{uri:ModalContent.imgSrc}}
@@ -108,6 +116,7 @@ const Checker = () => {
           />
           <Text style={{color: "red"}}>{ModalContent.footNote}</Text>
           <Button title="Got it!" onPress={setModalOpen} color="#6E8A5D" />
+          </View>
       </Modal>
     </SafeAreaView>
   )};

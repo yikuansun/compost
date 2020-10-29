@@ -80,7 +80,7 @@ const Checker = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+      <View>
         <SearchBar
           round
           searchIcon={{ size: 24 }}
@@ -122,9 +122,6 @@ const Checker = () => {
   )};
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#EEEEEE",
-  },
   imgPost: {
     width: imageWidth,
     height: imageWidth,

@@ -1,5 +1,9 @@
 
-# GoCompost Projecct
+# GoCompost
+
+## About
+
+GoCompost is the app that will be used for the new Orange County composting program.
 
 ## Build from source with Expo
 

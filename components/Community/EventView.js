@@ -10,14 +10,18 @@ const Community = () => {
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-  const [hideExpired, setHideExpired] = useState(false);
+  const [hideExpired, setHideExpired] = useState(true);
 
   useEffect(() => {
     fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/yichen_data.json')
       .then((response) => response.json())
       .then((responseJson) => {
-        setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
-        setFilteredDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ));
+        setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      }));
+        setFilteredDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
+        return Date.parse(item.date) > Date.now();
+      }));
       })
       .catch((error) => {
         console.error(error);
@@ -143,10 +147,10 @@ const Community = () => {
           placeholder="Search by title, category, or month"
           value={search}
         />
-        <View style={{flexDirection: 'row',}}>
+        {/*<View style={{flexDirection: 'row',}}>
           <CheckBox value={hideExpired} onValueChange={setHideExpired} />
           <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
-        </View>
+        </View>*/}
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}

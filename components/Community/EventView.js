@@ -147,7 +147,7 @@ const Community = () => {
           placeholder="Search by title, category, or month"
           value={search}
         />
-        {/*<View style={{flexDirection: 'row',}}>
+        {/*<View style={{flexDirection: 'row', backgroundColor: 'white',}}>
           <CheckBox value={hideExpired} onValueChange={setHideExpired} />
           <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
         </View>*/}

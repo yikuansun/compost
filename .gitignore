@@ -14,7 +14,7 @@ ehthumbs.db
 Thumbs.db
 
 # Packager Info #
-.expo/packager-info.json
+/.expo/packager-info.json
 
 # IntelliJ Config Directory (why?) #
-.idea
+/.idea

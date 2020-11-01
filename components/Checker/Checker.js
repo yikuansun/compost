@@ -113,10 +113,10 @@ const Checker = () => {
           <Text h2 style={{textAlign: "center"}}>{ModalContent.name}</Text>
           <Text></Text>
           <View style={{flexDirection: 'row'}}>
-            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Compostable at home</Text></View>
-            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Eubanks/Walnut Grove</Text></View>
-            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Carrboro Farmers’ Market</Text></View>
-            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>NC Botanical Gardens</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Compostable at home</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Eubanks/Walnut Grove</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carrboro Farmers’ Market</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>NC Botanical Gardens</Text></View>
           </View>
           <View style={{flexDirection: 'row'}}>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[0]}} style={styles.checkx} resizeMode={'contain'} /></View>

@@ -55,7 +55,7 @@ class LoginScreen extends React.Component {
                     created_at: Date.now(),
                     last_logged_in: Date.now()
                 }
-                console.log("user signed in: " + JSON.stringify(user, null, 4))
+                console.log("user signed in: " + JSON.stringify(userInfo, null, 4))
 
                 // add a user record into database
                 firebase.firestore()

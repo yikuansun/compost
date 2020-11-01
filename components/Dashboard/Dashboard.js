@@ -148,8 +148,16 @@ class Dashboard extends Component {
     const DeviceWidth = Dimensions.get('window').width;
     const marginBottom = 10;
     const marginLeft = 10;
-    const nickname = user.loggedIn ? user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')) : userId;
-     // strip @ from email
+    let nickname = "";
+    if (user.loggedIn)  {
+      if (user.userInfo.name.indexOf('@') != -1) {
+        nickname = user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')); // strip @ from email
+      } else {
+        nickname = user.userInfo.name;
+      }
+    } else {
+      nickname = userId; 
+    }
     return (
 
     <View style={styles.container}>

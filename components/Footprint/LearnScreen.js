@@ -80,7 +80,7 @@ class LearnScreen extends React.Component {
                         var lastDayTotal = yesterdayExpression.evaluate(data);
                         var lastWeekTotal = weekExpression.evaluate(data);
                         var lastMonthTotal = monthExpression.evaluate(data);
-                        if (!Number.isNaN(lastDayTotal)) lastDayTotal = 0;
+                        if (Number.isNaN(lastDayTotal)) lastDayTotal = 0;
 
                         // Food waste
                         var foodTotalWeightExpression = jsonata("$sum(log[waste='fw'].weight)");
@@ -93,7 +93,7 @@ class LearnScreen extends React.Component {
                         var foodLastDayTotal = foodYesterdayExpression.evaluate(data);
                         var foodLastWeekTotal = foodWeekExpression.evaluate(data);
                         var foodLastMonthTotal = foodMonthExpression.evaluate(data);
-                        if (!Number.isNaN(foodLastDayTotal)) foodLastDayTotal = 0;
+                        if (Number.isNaN(foodLastDayTotal)) foodLastDayTotal = 0;
 
                         console.log(`totalWeight(${totalWeight}) totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
                         console.log(`foodTotalWeight(${foodTotalWeight}) foodLastDayTotal(${foodLastDayTotal}) foodLastWeekTotal(${foodLastWeekTotal}) foodLastMonthTotal(${foodLastMonthTotal})`);
@@ -136,7 +136,7 @@ class LearnScreen extends React.Component {
             this.getLog(userId);
             this.setState({loaded: true});
         } else {
-            console.log('already loaded once');
+            console.log('already loaded once in learn screen');
         }
 
 

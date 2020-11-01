@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Dimensions, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, ImageBackground} from 'react-native';
 import { VictoryChart, VictoryLegend, VictoryAxis, VictoryBar, VictoryTheme } from "victory-native";
 import event1 from '../../assets/event1_small.jpg';
 import event2 from '../../assets/event2_small.jpg';
@@ -22,19 +22,20 @@ class Dashboard extends Component {
   };
 
   state = {
-    loaded: false,
+    loaded: 0,
     data: {
       totalWeight: 0,
       foodTotalWeight: 0,
       dataWeekly: [
-        {day: 1, amount: 0, label: "10/10"},
-        {day: 2, amount: 0, label: "10/11"},
-        {day: 3, amount: 0, label: "10/12"},
-        {day: 4, amount: 0, label: "10/13"},
-        {day: 5, amount: 0, label: "10/14"},
-        {day: 6, amount: 0, label: "10/15"},
-        {day: 7, amount: 0, label: "10/16"},
+        {day: 1, amount: 2, label: "10/25"},
+        {day: 2, amount: 1, label: "10/26"},
+        {day: 3, amount: 2, label: "10/27"},
+        {day: 4, amount: 4, label: "10/28"},
+        {day: 5, amount: 5, label: "10/29"},
+        {day: 6, amount: 2, label: "10/30"},
+        {day: 7, amount: 2, label: "10/31"},
       ],
+      //dataWeekly: [{"day":6,"label":"10/15","amount":6},{"day":7,"label":"10/16","amount":35},{"day":8,"label":"10/17","amount":10},{"day":9,"label":"10/18","amount":2},{"day":10,"label":"10/25","amount":1},{"day":11,"label":"10/30","amount":2},{"day":12,"label":"10/31","amount":7}]
     }
   }
   // Set the context to be used
@@ -124,43 +125,23 @@ class Dashboard extends Component {
   render() {
 
     console.log('dashboard data never loaded, load it. context:' + JSON.stringify(this.context,null,4) );
-    //const { user, setUser } = this.context;
     const user = this.context.user;
     let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
-    //const userId = 'GuestUser';
     console.log(`in DashboardScreen, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
-    if (!this.state.loaded) {
+    let loadCount = this.state.loaded;
+    if (loadCount<3) {
+      loadCount = loadCount + 1;
       this.setState({userId: userId});
       this.getLog(userId);
-      this.setState({loaded: true});
+      this.setState({loaded: loadCount});
     } else {
-        console.log('alread loaded once');
+        console.log('already loaded. loadCount:' + loadCount);
+        //this.getLog(userId);
     }
 
     console.log('render data:' + JSON.stringify(this.state.data));
-    // TODO: this data should come from database
-    /*
-    const userData = {
-      totalCompost: 255,
-      impact: {
-        month: {
-          amount: 22,
-          money: 0.61,
-          co2: -17.6,
-        }
-      },
 
-      dataWeekly: [
-        {day: 1, amount: 0, label: "10/10"},
-        {day: 2, amount: 1, label: "10/11"},
-        {day: 3, amount: 2, label: "10/12"},
-        {day: 4, amount: 4, label: "10/13"},
-        {day: 5, amount: 3, label: "10/14"},
-        {day: 6, amount: 1, label: "10/15"},
-        {day: 7, amount: 2, label: "10/16"},
-      ],
-    };*/
     var dataWeekly = this.state.data.dataWeekly;
 
     // calculate data 
@@ -249,8 +230,8 @@ class Dashboard extends Component {
             <VictoryAxis
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
-              tickValues={dataWeekly.map(item=>{return item.day})}
-              tickFormat={dataWeekly.map(item=>{return item.label})}
+              tickValues={this.state.data.dataWeekly.map(item=>{return item.day})}
+              tickFormat={this.state.data.dataWeekly.map(item=>{return item.label})}
             />
             <VictoryAxis
               dependentAxis
@@ -258,7 +239,7 @@ class Dashboard extends Component {
               tickFormat={(x) => (`${x} lbs`)}
             />
             <VictoryBar
-              data={dataWeekly.map(item=>{return {month:item.day, amount:item.amount}})}
+              data={this.state.data.dataWeekly.map(item=>{return {month:item.day, amount:item.amount}})}
               x="month"
               y="amount"
             />

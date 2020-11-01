@@ -22,7 +22,7 @@ class Dashboard extends Component {
   };
 
   state = {
-    loaded: 0,
+    loaded: 0, // triggers a reload
     data: {
       totalWeight: 0,
       foodTotalWeight: 0,
@@ -112,6 +112,29 @@ class Dashboard extends Component {
 
     }
 
+
+  // set a loop to check the user.timestamp every 30 seconds
+  // if flag changed, then reload data
+  // it will trigger the page to render again
+
+  componentDidMount() {
+    setInterval(() => {
+      console.log('check if data refreshed');
+      let { user, setUser } = this.context;
+      console.log('user data: ' + JSON.stringify(user));
+      if (user.timestamp !== "") {
+        let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
+        this.getLog(userId);
+        user.timestamp = "";  // reset timestamp back to empty
+        setUser(user);
+        this.setState({loaded:1}); // need to rewind this value to one so the bar chart can be loaded 
+      }
+    }, 10000); // check if dashboard need refresh every 10 seconds
+  }
+
+  componentWillUnmount() {
+    console.log('dashboard component unmounted.')
+  }
 
   render() {
 

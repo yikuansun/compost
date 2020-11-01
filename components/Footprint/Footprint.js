@@ -65,7 +65,7 @@ class Footprint extends Component {
         this.showMode('date');
     };
 
-    saveLog = async () => {
+    saveLog = async (context) => {
         const userId = this.state.userId;
 
         const dbh = firebase.firestore(); 
@@ -108,6 +108,13 @@ class Footprint extends Component {
                 console.log(`add record  userId: ${userId} date: ${this.state.date} waste: ${this.state.wasteType} weight: ${this.state.weight}`);
 
               }
+
+              // trigger data to be updated in dashboard page
+              let { user, setUser } = context;
+              user.timestamp = new Date(); // timestamp change from "" to current date
+              setUser(user);
+              console.log('footprint user data: ' + JSON.stringify(user));
+
           });
 
           // now propagate the changes to the UI by calling the database fetch again
@@ -285,7 +292,7 @@ class Footprint extends Component {
                                         }
                                         value={this.state.weight} />
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(userId);} }>
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(this.context);} }>
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white',  fontSize: 16}}>A D D   T O   L O G</Text>
                       </TouchableOpacity>
                       <View style={{flex: 1, flexDirection: 'row'}}>

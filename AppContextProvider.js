@@ -13,7 +13,8 @@ class AppContextProvider extends Component {
             userInfo: {
                 user_id: '',
             },
-        }
+            timestamp: ""
+        },
     }
 
     setUser = (user) => {

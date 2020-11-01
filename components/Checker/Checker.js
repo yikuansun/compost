@@ -13,7 +13,7 @@ const Checker = () => {
   const [ModalOpen, setModalOpen] = useState(false);
   const [ModalContent, setModalContent] = useState({
     name: "name",
-    imgSrc: "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/00.png",
+    tbody: ["https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png"],
     footNote: "ok"
   });
   
@@ -63,7 +63,7 @@ const Checker = () => {
 
   const createMsg = (item) => {
     ModalContent.name = item.name.replace(/\b(\w)/g, k => k.toUpperCase());
-    ModalContent.imgSrc = "https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/truefalseicons/" + item.homecompostable + item.orange + ".png";
+    //ModalContent.tbody = item.binstring.split("");
     ModalContent.footNote = (item.foot.length?"*":"") + item.foot + (item.foot.length?"\n":"");
     setModalOpen();
   };
@@ -106,14 +106,18 @@ const Checker = () => {
           }}
         >
           <Text h2 style={{textAlign: "center"}}>{ModalContent.name}</Text>
-          <Image
-            source={{uri:ModalContent.imgSrc}}
-            style={{
-              width: imageWidth * 3,
-              height: imageWidth * 3 * 884/1572,
-            }}
-            resizeMode={'contain'}
-          />
+          <View style={{flexDirection: 'row'}}>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Compostable at home</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Eubanks/Walnut Grove</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Carrboro Farmers’ Market</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>NC Botanical Gardens</Text></View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[0]}} style={styles.checkx} resizeMode={'contain'} /></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[1]}} style={styles.checkx} resizeMode={'contain'} /></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[2]}} style={styles.checkx} resizeMode={'contain'} /></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[3]}} style={styles.checkx} resizeMode={'contain'} /></View>
+          </View>
           <Text style={{color: "red"}}>{ModalContent.footNote}</Text>
           <Button title="Got it!" onPress={setModalOpen} color="#6E8A5D" />
           </View>
@@ -125,6 +129,10 @@ const styles = StyleSheet.create({
   imgPost: {
     width: imageWidth,
     height: imageWidth,
+  },
+  checkx: {
+    width: imageWidth * 3/4,
+    height: imageWidth * 3/4,
   },
 });
 

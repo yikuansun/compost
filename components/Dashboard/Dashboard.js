@@ -26,16 +26,7 @@ class Dashboard extends Component {
     data: {
       totalWeight: 0,
       foodTotalWeight: 0,
-      dataWeekly: [
-        {day: 1, amount: 2, label: "10/25"},
-        {day: 2, amount: 1, label: "10/26"},
-        {day: 3, amount: 2, label: "10/27"},
-        {day: 4, amount: 4, label: "10/28"},
-        {day: 5, amount: 5, label: "10/29"},
-        {day: 6, amount: 2, label: "10/30"},
-        {day: 7, amount: 2, label: "10/31"},
-      ],
-      //dataWeekly: [{"day":6,"label":"10/15","amount":6},{"day":7,"label":"10/16","amount":35},{"day":8,"label":"10/17","amount":10},{"day":9,"label":"10/18","amount":2},{"day":10,"label":"10/25","amount":1},{"day":11,"label":"10/30","amount":2},{"day":12,"label":"10/31","amount":7}]
+      dataWeekly: [],
     }
   }
   // Set the context to be used
@@ -147,7 +138,7 @@ class Dashboard extends Component {
     // calculate data 
     const pricePerTon = 55;
     var totalWeight = this.state.data.totalWeight;
-    var totalFoodWasteWeight = 19;
+    var totalFoodWasteWeight = this.state.data.foodTotalWeight;
     var dollar = (pricePerTon * totalWeight/2000).toFixed(2);
     // using only food waste for emission and miles
     var emission = (totalFoodWasteWeight * 0.8).toFixed(1);
@@ -157,8 +148,16 @@ class Dashboard extends Component {
     const DeviceWidth = Dimensions.get('window').width;
     const marginBottom = 10;
     const marginLeft = 10;
-    const nickname = user.loggedIn ? user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')) : userId;
-     // strip @ from email
+    let nickname = "";
+    if (user.loggedIn)  {
+      if (user.userInfo.name.indexOf('@') != -1) {
+        nickname = user.userInfo.name.substring(0,user.userInfo.name.indexOf('@')); // strip @ from email
+      } else {
+        nickname = user.userInfo.name;
+      }
+    } else {
+      nickname = userId; 
+    }
     return (
 
     <View style={styles.container}>
@@ -170,8 +169,13 @@ class Dashboard extends Component {
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>
       <Text style={{ textAlign:'center' }}>organic waste from landfills to composting.</Text>
-      <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
-      </View>
+      {totalWeight===0 ? (
+        <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
+      ):
+        <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
+
+      }
+        </View>
       </ImageBackground>
 
 

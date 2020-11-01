@@ -148,7 +148,7 @@ const Community = () => {
           value={search}
         />
         {/*<View style={{flexDirection: 'row', backgroundColor: 'white',}}>
-          <CheckBox value={hideExpired} onValueChange={setHideExpired} />
+          <CheckBox disabled={false} value={hideExpired} onValueChange={(newValue) => setHideExpired(newValue)} boxType={'circle'}/>
           <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
         </View>*/}
         <FlatList

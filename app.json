@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "CompostableProject",
-    "slug": "CompostableProject",
+    "name": "GoCompost",
+    "slug": "GoCompost",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

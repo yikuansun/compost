@@ -23,11 +23,10 @@ const Community = () => {
   const renderTabBar = props => (
     <TabBar
       {...props}
-      indicatorStyle={{ color:'black', backgroundColor: 'lightgray' }}
-      style={{ color:'black', backgroundColor: 'white' }}
+      indicatorStyle={{ color:'black', backgroundColor: 'lightgray', }}
+      style={{ color:'black', backgroundColor: 'white', }}
       activeColor='black'
       inactiveColor='grey'
-
     />
   );
   return (

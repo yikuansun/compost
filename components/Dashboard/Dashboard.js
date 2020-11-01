@@ -26,16 +26,7 @@ class Dashboard extends Component {
     data: {
       totalWeight: 0,
       foodTotalWeight: 0,
-      dataWeekly: [
-        {day: 1, amount: 2, label: "10/25"},
-        {day: 2, amount: 1, label: "10/26"},
-        {day: 3, amount: 2, label: "10/27"},
-        {day: 4, amount: 4, label: "10/28"},
-        {day: 5, amount: 5, label: "10/29"},
-        {day: 6, amount: 2, label: "10/30"},
-        {day: 7, amount: 2, label: "10/31"},
-      ],
-      //dataWeekly: [{"day":6,"label":"10/15","amount":6},{"day":7,"label":"10/16","amount":35},{"day":8,"label":"10/17","amount":10},{"day":9,"label":"10/18","amount":2},{"day":10,"label":"10/25","amount":1},{"day":11,"label":"10/30","amount":2},{"day":12,"label":"10/31","amount":7}]
+      dataWeekly: [],
     }
   }
   // Set the context to be used

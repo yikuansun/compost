@@ -42,6 +42,7 @@ class LoginScreen extends React.Component {
             */
             //firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
 
+                
                 // TODO: need to be able to add user name to be similar to gmail account
                 const userInfo = {
                     //TODO: instant auth right after user creation
@@ -56,7 +57,7 @@ class LoginScreen extends React.Component {
                     last_logged_in: Date.now()
                 }
                 console.log("user signed in: " + JSON.stringify(userInfo, null, 4))
-
+                /*
                 // add a user record into database
                 firebase.firestore()
                 .collection('users')
@@ -64,7 +65,7 @@ class LoginScreen extends React.Component {
                 .set(userInfo)
                 .then(function (snapshot) {
                     console.log("write success.")
-                })
+                })*/
 
                 console.log('added user:' + JSON.stringify(userInfo, null, 4))
                 const { userOldInfo, setUser } = context;
@@ -89,32 +90,63 @@ class LoginScreen extends React.Component {
 
                 // TODO: need to be able to add user name to be similar to gmail account
 
-                // update user last login time
-                firebase.firestore()
-                    .collection('users')
-                    .doc(user.user.uid)
-                    .update({
-                            last_logged_in: Date.now(), 
-                    })
-                                        
-                    const userInfo = {
-                                          user_id: user.user.uid,
-                                          email: email,
-                                          profile_picture: "",
-                                          first_name: "",
-                                          last_name: "",
-                                          name: email,
-                                          last_logged_in: Date.now()
-                    }
-                    console.log('updated user last_logged_in:' + JSON.stringify(userInfo, null, 4))
-                                        
-                    // Set context with logged ininfo
-                    const { userOldInfo, setUser } = context;
-                    setUser({loggedIn: true, userInfo: userInfo});
-                    //this.props.navigation.navigate('App');
-                    navigation.navigate('App');
-
-
+                // if user document does not exist, then create first
+                const userRef = firebase.firestore().collection('users').doc(user.user.uid);
+                userRef.get()
+                    .then((userSnapshot) => {
+                        let userInfo = {};
+                        if (!userSnapshot.exists) {
+                                // TODO: need to be able to add user name to be similar to gmail account
+                                userInfo = {
+                                    //TODO: instant auth right after user creation
+                                    //user_id: user.user.uid,  
+                                    user_id: email,
+                                    email: email,
+                                    profile_picture: "",
+                                    first_name:  "",
+                                    last_name:  "",
+                                    name: email,
+                                    created_at: Date.now(),
+                                    last_logged_in: Date.now()
+                                }
+                                console.log("user signed in: " + JSON.stringify(userInfo, null, 4))
+                                
+                                // add a user record into database
+                                firebase.firestore()
+                                .collection('users')
+                                .doc(user.user.uid)
+                                .set(userInfo)
+                                .then(function (snapshot) {
+                                    console.log("added user record.")
+                                })
+                        } else {
+                            // update user last login time
+                            firebase.firestore()
+                                .collection('users')
+                                .doc(user.user.uid)
+                                .update({
+                                        last_logged_in: Date.now(), 
+                                })
+                                                    
+                            userInfo = {
+                                        user_id: user.user.uid,
+                                                    email: email,
+                                                    profile_picture: "",
+                                                    first_name: "",
+                                                    last_name: "",
+                                                    name: email,
+                                                    last_logged_in: Date.now()
+                            }
+                            console.log('updated user record last_logged_in:' + JSON.stringify(userInfo, null, 4))
+                    
+                        }
+                               
+                        // Set context with logged ininfo
+                        const { userOldInfo, setUser } = context;
+                        setUser({loggedIn: true, userInfo: userInfo});
+                        //this.props.navigation.navigate('App');
+                        navigation.navigate('App');
+                    });
             });
 
         }

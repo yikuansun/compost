@@ -138,7 +138,7 @@ class Dashboard extends Component {
     // calculate data 
     const pricePerTon = 55;
     var totalWeight = this.state.data.totalWeight;
-    var totalFoodWasteWeight = 19;
+    var totalFoodWasteWeight = this.state.data.foodTotalWeight;
     var dollar = (pricePerTon * totalWeight/2000).toFixed(2);
     // using only food waste for emission and miles
     var emission = (totalFoodWasteWeight * 0.8).toFixed(1);
@@ -169,8 +169,13 @@ class Dashboard extends Component {
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>
       <Text style={{ textAlign:'center' }}>organic waste from landfills to composting.</Text>
-      <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
-      </View>
+      {totalWeight===0 ? (
+        <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
+      ):
+        <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
+
+      }
+        </View>
       </ImageBackground>
 
 

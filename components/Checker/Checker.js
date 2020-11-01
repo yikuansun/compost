@@ -63,7 +63,12 @@ const Checker = () => {
 
   const createMsg = (item) => {
     ModalContent.name = item.name.replace(/\b(\w)/g, k => k.toUpperCase());
-    //ModalContent.tbody = item.binstring.split("");
+    ModalContent.tbody = [
+      parseInt(item.binstring.split("")[0])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
+      parseInt(item.binstring.split("")[1])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
+      parseInt(item.binstring.split("")[2])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
+      parseInt(item.binstring.split("")[3])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png"
+    ];
     ModalContent.footNote = (item.foot.length?"*":"") + item.foot + (item.foot.length?"\n":"");
     setModalOpen();
   };
@@ -106,6 +111,7 @@ const Checker = () => {
           }}
         >
           <Text h2 style={{textAlign: "center"}}>{ModalContent.name}</Text>
+          <Text></Text>
           <View style={{flexDirection: 'row'}}>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Compostable at home</Text></View>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Text style={{textAlign: "center"}}>Eubanks/Walnut Grove</Text></View>

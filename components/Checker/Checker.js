@@ -80,7 +80,7 @@ const Checker = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View>
+      <View style={{ flex: 1 }}>
         <SearchBar
           round
           searchIcon={{ size: 24 }}

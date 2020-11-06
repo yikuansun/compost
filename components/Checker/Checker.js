@@ -116,7 +116,7 @@ const Checker = () => {
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Compostable at home</Text></View>
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Eubanks/Walnut Grove</Text></View>
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carrboro Farmers’ Market</Text></View>
-            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>NC Botanical Gardens</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carolina Compost Community Garden</Text></View>
           </View>
           <View style={{flexDirection: 'row'}}>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[0]}} style={styles.checkx} resizeMode={'contain'} /></View>

@@ -26,6 +26,7 @@ const Community = () => {
       .catch((error) => {
         console.error(error);
       });
+    //console.log('Event data =', filteredDataSource);
   }, []);
   
   useEffect(() => {

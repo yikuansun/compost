@@ -5,20 +5,29 @@ import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Touc
 const imageWidth = Dimensions.get('window').width * .95;
 const paddingSize = Dimensions.get('window').width * .05;
 
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 const Posts = () => {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   
+  const data = firebase.firestore();
+  
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/yichen_post.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setMasterDataSource(responseJson);
-        setFilteredDataSource(responseJson);
+    data.collection('posts').get()
+      .then((querySnapshot) => {
+        const m = [];
+        querySnapshot.forEach(doc => {
+          m.push(doc.data());
+        });
+        setMasterDataSource(m);
+        setFilteredDataSource(m);
       })
       .catch((error) => {
         console.error(error);
       });
+    console.log('Post data =', filteredDataSource);
   }, []);
   
   const getItem = (item) => {    

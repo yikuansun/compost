@@ -5,27 +5,36 @@ import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Touc
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import CheckBox from '@react-native-community/checkbox';
 
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 const Community = () => {
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisibility] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
   const [hideExpired, setHideExpired] = useState(true);
+  
+  const data = firebase.firestore();
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/yichen_data.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setMasterDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
+    data.collection('community_events').get()
+      .then((querySnapshot) => {
+        const m = [];
+        querySnapshot.forEach(doc => {
+          m.push(doc.data());
+        });
+        setMasterDataSource(m.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
         return Date.parse(item.date) > Date.now();
       }));
-        setFilteredDataSource(responseJson.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
+        setFilteredDataSource(m.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
         return Date.parse(item.date) > Date.now();
       }));
       })
       .catch((error) => {
         console.error(error);
       });
+    //console.log('Event data =', filteredDataSource);
   }, []);
   
   useEffect(() => {

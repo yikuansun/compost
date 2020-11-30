@@ -1,9 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, CheckBox } from 'react-native-elements';
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import CheckBox from '@react-native-community/checkbox';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -157,8 +156,7 @@ const Community = () => {
           value={search}
         />
         {/*<View style={{flexDirection: 'row', backgroundColor: 'white',}}>
-          <CheckBox disabled={false} value={hideExpired} onValueChange={(newValue) => setHideExpired(newValue)} boxType={'circle'}/>
-          <Text style={{textAlignVertical: 'center',}}>Hide Expired Events</Text>
+          <CheckBox checked={hideExpired} onPress={() => setHideExpired(!hideExpired)} title='Hide Expired Events' iconType='material' />
         </View>*/}
         <FlatList
           data={filteredDataSource}

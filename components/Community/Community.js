@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Container, Content } from "native-base";
-import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, TouchableOpacity, Modal, Dimensions, Platform, PixelRatio } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import Events from './EventView.js';
@@ -25,6 +25,7 @@ const Community = () => {
       {...props}
       indicatorStyle={{ color:'black', backgroundColor: 'lightgray', }}
       style={{ color:'black', backgroundColor: 'white', }}
+      labelStyle={{ padding: 0, }}
       activeColor='black'
       inactiveColor='grey'
     />

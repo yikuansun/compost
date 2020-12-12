@@ -63,11 +63,11 @@ class SignInScreen extends React.Component {
             </TouchableOpacity>
             <View style={{flex:0.17}} />
 
-            <TouchableOpacity
+            {/*<TouchableOpacity
                 style={styles.aboutButton}
                 onPress= {() => {this.gotoAboutScreen();}}>
               <Text style={styles.aboutButton}>  A B O U T  </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
 
             </View>
           </View>

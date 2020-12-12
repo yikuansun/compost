@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Content } from "native-base";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import compostable from '../../assets/compostableTopLogo.jpg';
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -22,7 +22,7 @@ class AboutScreen extends Component {
         </View>
         <View style={{flex:1, flexDirection:'column'}}>
         <ScrollView>
-        <Text>
+        <Text style={{margin:10, fontSize:16}}>
         {`
           “What can we do to help our community as students?”
           
@@ -32,7 +32,7 @@ class AboutScreen extends Component {
 
           The students all agreed that they wanted to apply their interest in STEM to help increase community composting. Aimed at engaging the community to divert compostable waste from landfills, the GoCompost app was created as a simple, friendly tool to make composting more accessible, inclusive, and simple for all community members. As everyone has a role in addressing climate change, this app is designed to reach people who encounter barriers in their green efforts, including a lack of awareness, motivation, resources, or community support. The app is currently set for Orange County, where the students live. It can be adapted for other communities in the future.	
 
-          Our everyday choices and actions have a significant impact on the environment. Use GoCompost App to CHECK if waste is compostable, see a MAP of where to send the food waste, log and track your IMPACT, and find COMMUNITY posts and events to get involved. Visit www.GoCompost.org to learn more.
+          Our everyday choices and actions have a significant impact on the environment. Use GoCompost App to `}<Text style={{fontWeight:"bold"}}>CHECK</Text>{` if waste is compostable, see a `}<Text style={{fontWeight:"bold"}}>MAP</Text>{` of where to send the food waste, log and track your `}<Text style={{fontWeight:"bold"}}>IMPACT</Text>{`, and find `}<Text style={{fontWeight:"bold"}}>COMMUNITY</Text>{` posts and events to get involved. Visit `}<Text style={{color: 'deepskyblue'}} onPress={() => Linking.openURL('http://gocompost.org')}>www.GoCompost.org</Text>{` to learn more.
         `}
         </Text>
         </ScrollView>

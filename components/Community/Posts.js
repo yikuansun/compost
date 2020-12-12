@@ -43,7 +43,7 @@ const Posts = () => {
       <View style={{padding: paddingSize, alignItems: 'center',}}>
         <Image source={{uri:item.imglink}} style={styles.imgPost} resizeMode={'contain'} />
         <Text style={{fontSize: 14, paddingTop: 10,}}>
-          {item.text.replaceAll("\\n", "\n")}
+          {item.text.split("\\n").join("\n")}
         </Text>
       </View>
     );

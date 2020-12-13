@@ -62,6 +62,14 @@ class SignInScreen extends React.Component {
               <Text style={styles.guestText}>  E N T E R  as guest  </Text>
             </TouchableOpacity>
             <View style={{flex:0.17}} />
+            
+            <TouchableOpacity
+                style={styles.aboutButton}
+                onPress={() => {
+                  this.props.navigation.navigate('Terms')
+                }}>
+                  <Text style={styles.aboutButton}> Terms of use </Text>
+            </TouchableOpacity>
 
             {/*<TouchableOpacity
                 style={styles.aboutButton}

@@ -16,6 +16,7 @@ import LearnScreen from "../../components/Footprint/LearnScreen"
 import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
 import LoginScreen from "./LoginScreen"
+import Terms from "./Terms"
 
 // Use the user context
 import { AppContext } from '../../AppContextProvider'
@@ -166,6 +167,7 @@ class Navigator extends React.Component {
     const LandingStack = createStackNavigator({ Landing: SignInScreen });
     const AboutStack = createStackNavigator({ About: AboutScreen });
     const LoginStack = createStackNavigator({ Login: LoginScreen });
+    const TermsStack = createStackNavigator({ Terms: Terms });
 
     this.AppContainer = createAppContainer ( 
       createSwitchNavigator(
@@ -173,6 +175,7 @@ class Navigator extends React.Component {
         Login: LoginStack,
         App: AppNavigator,
         About: AboutStack,
+        Terms: TermsStack,
         },
         {
           initialRouteName: 'Landing'

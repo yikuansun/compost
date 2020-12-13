@@ -13,7 +13,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 // Use the user context
 import { AppContext } from '../../AppContextProvider'
 
-import earthImpact from '../../assets/earthImpact.jpg';
+import earthImpact from '../../assets/earthImpact.png';
 
 //Components
 
@@ -157,11 +157,17 @@ class Footprint extends Component {
                     var lastWeekTotal = weekExpression.evaluate(data);
                     var lastMonthTotal = monthExpression.evaluate(data);
 
+                    if (typeof(lastDayTotal) == "undefined") lastDayTotal = 0;
+                    if (typeof(lastWeekTotal) == "undefined") lastWeekTotal = 0;
+                    if (typeof(lastMonthTotal) == "undefined") lastMonthTotal = 0;
+                    if (typeof(totalWeight) == "undefined") totalWeight = 0;
+
+                    console.log(`footprint totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
+
                     this.setState({totalWeightToday: lastDayTotal});
                     this.setState({totalWeightLastWeek: lastWeekTotal});
                     this.setState({totalWeightLastMonth: lastMonthTotal});
                     
-                    console.log(`totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
 
 
               } else { // new user with no data
@@ -271,7 +277,8 @@ class Footprint extends Component {
                                   {label: 'Food Waste', value: 'fw' },
                                   {label: 'Non-Food Compostable Waste', value: 'nfw'},
                               ]}
-                              defaultValue={this.wasteType}
+                              defaultValue='fw'
+
                               containerStyle={{height: 40}}
                               style={{backgroundColor: '#fafafa'}}
                               itemStyle={{

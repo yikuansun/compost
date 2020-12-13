@@ -186,8 +186,8 @@ class Dashboard extends Component {
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
-      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>
-      <Text style={{ textAlign:'center' }}>organic waste from landfills to composting.</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{totalWeight} lbs</Text>
+      <Text style={{ textAlign:'center' }}>organic waste from landfills by composting.</Text>
       {totalWeight===0 ? (
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
       ):
@@ -294,7 +294,8 @@ const styles = StyleSheet.create({
   container3: {
     flex: 1,
     
-    backgroundColor: '#D9EAD3',
+    //backgroundColor: '#C5DAB2',
+    backgroundColor: '#dbe3d1',
     alignItems: 'center',
     justifyContent: 'center',
   },

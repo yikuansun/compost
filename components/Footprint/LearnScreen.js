@@ -80,7 +80,10 @@ class LearnScreen extends React.Component {
                         var lastDayTotal = yesterdayExpression.evaluate(data);
                         var lastWeekTotal = weekExpression.evaluate(data);
                         var lastMonthTotal = monthExpression.evaluate(data);
-                        if (Number.isNaN(lastDayTotal)) lastDayTotal = 0;
+                        if (typeof(totalWeight) == "undefined") totalWeight = 0;
+                        if (typeof(lastDayTotal) == "undefined") lastDayTotal = 0;
+                        if (typeof(lastWeekTotal) == "undefined") lastWeekTotal = 0;
+                        if (typeof(lastMonthTotal) == "undefined") lastMonthTotal = 0;
 
                         // Food waste
                         var foodTotalWeightExpression = jsonata("$sum(log[waste='fw'].weight)");
@@ -93,10 +96,16 @@ class LearnScreen extends React.Component {
                         var foodLastDayTotal = foodYesterdayExpression.evaluate(data);
                         var foodLastWeekTotal = foodWeekExpression.evaluate(data);
                         var foodLastMonthTotal = foodMonthExpression.evaluate(data);
-                        if (Number.isNaN(foodLastDayTotal)) foodLastDayTotal = 0;
 
-                        console.log(`totalWeight(${totalWeight}) totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
-                        console.log(`foodTotalWeight(${foodTotalWeight}) foodLastDayTotal(${foodLastDayTotal}) foodLastWeekTotal(${foodLastWeekTotal}) foodLastMonthTotal(${foodLastMonthTotal})`);
+                        if (typeof(foodLastDayTotal) == "undefined") foodLastDayTotal = 0;
+                        if (typeof(foodLastWeekTotal) == "undefined") foodLastWeekTotal = 0;
+                        if (typeof(foodLastMonthTotal) == "undefined") foodLastMonthTotal = 0;
+                        if (typeof(foodTotalWeight) == "undefined") foodTotalWeight = 0;
+
+
+
+                        console.log(`learnscreen totalWeight(${totalWeight}) totalWeightToday(${lastDayTotal}) totalWeightLastWeek(${lastWeekTotal}) totalWeightLastMonth(${lastMonthTotal})`);
+                        console.log(`learnscreen foodTotalWeight(${foodTotalWeight}) foodLastDayTotal(${foodLastDayTotal}) foodLastWeekTotal(${foodLastWeekTotal}) foodLastMonthTotal(${foodLastMonthTotal})`);
                         
                         // write it into state for later use
                         this.setState({data: {
@@ -180,7 +189,7 @@ class LearnScreen extends React.Component {
                     <View style={{flex: 4}}>
                         <Text style={{fontSize:22, fontWeight:'bold'}}>{weight}</Text>
                         <Text>lbs</Text>
-                        <Text>Combined total diverted from landfills to composting</Text>
+                        <Text>Combined total diverted from landfills by composting</Text>
                     </View>
                 </View>
                 <View style={{flex: 0.5, flexDirection: 'row', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>

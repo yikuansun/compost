@@ -63,9 +63,7 @@ class PlaceList extends Component {
                         title={item.name}
                         rounded={false}
                         //Use extra large picture as avatar for events
-                        size= { type==='events' ? (
-                                "xlarge"):("large")
-                              }
+                        size= "large"
                         source={
                           item.photo && type==="places" &&
                           // call google API to get the photo

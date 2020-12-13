@@ -39,7 +39,6 @@ class MapScreen extends Component {
     //Initial State
     this.state = {
         places: [],
-        events: [],
         selectedIndex: 0
     };
   }
@@ -55,7 +54,7 @@ class MapScreen extends Component {
 
   async getPlaces() {
     const placeMarkers = [];
-    const eventMarkers = [];
+    //const eventMarkers = [];
 
     // Get data from firestore
     const firestore = firebase.firestore();
@@ -68,20 +67,9 @@ class MapScreen extends Component {
             placeMarkers.push(documentSnapshot.data());
         });
     });
-    
-    // Loop through the events data and generate eventMarkers array
-    // default order by id ascedent
-    await firestore.collection("events").orderBy("id").get().then(querySnapshot => {
-      console.log("Total events: ", querySnapshot.size);
-      querySnapshot.forEach(documentSnapshot => {
-          console.log("data: ", documentSnapshot.data());
-          eventMarkers.push(documentSnapshot.data());
-      });
-    });
 
     //Update our places array
     this.setState({ places: placeMarkers });
-    this.setState({ events: eventMarkers });
     console.log("updated markers data.");
     //console.log("places to display: " +  JSON.stringify(markers,null,4));
 
@@ -109,7 +97,8 @@ class MapScreen extends Component {
     };
   
 
-    const { places, events } = this.state;
+    const { places } = this.state;
+
     // Followed the solution from https://stackoverflow.com/questions/58564916/react-native-maps-show-marker-callout
     if (places.length>0) {
       console.log("data is ready.");
@@ -150,59 +139,12 @@ class MapScreen extends Component {
                   </MapView.Callout>
                 </MapView.Marker>
             ))}
-          {events.map((marker, i) => (
-              <MapView.Marker
-                key={i}
-                coordinate={{
-                  latitude: marker.location.latitude,
-                  longitude: marker.location.longitude
-                }}
-                image={eventIcon}
-                title={marker.name}
-                onCalloutPress={
-                  () => {
-                    // Launch google map
-                    const url = "https://www.google.com/maps/search/?api=1&query="+marker.location.longitude+","+marker.location.latitude+"&query_place_id="+marker.place_id;
-                    Linking.openURL(url);
-                  }
-                }>
-                  <MapView.Callout>
-                      <View>
-                        <Text>{marker.name}</Text>
-                        <Text>Hosted by {marker.host}</Text>
-                        <Text>{marker.date}</Text>
-                      </View>
-                  </MapView.Callout>
-                </MapView.Marker>
-            ))}
           </MapView>
 
         </View>
-        <View>
-            <SegmentedControlTab
-              values={["Organic Waste Drop Off", "Community Events"]}
-              selectedIndex={this.state.selectedIndex}
-              onTabPress={this.handleIndexChange}
-              tabTextStyle = {styles.placeListTabText}
-              activeTabTextStyle = {styles.placeListTabText}
-
-              tabStyle={styles.placeListTab}
-              activeTabStyle={styles.placeListTabActive}
-
-
-              />
-        </View>
-        { this.state.selectedIndex===0 ? (
           <View style={styles.placeList}>
           <PlaceList type='places' places={places} map={this.map} />
           </View>
-        ) : null }
-
-        { this.state.selectedIndex===1 ? (
-          <View style={styles.placeList}>
-          <PlaceList type='events' places={events} map={this.map} />
-          </View>
-        ) : null }
 
       </View>
     ) }

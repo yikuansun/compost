@@ -167,7 +167,7 @@ class Navigator extends React.Component {
     const LandingStack = createStackNavigator({ Landing: SignInScreen });
     const AboutStack = createStackNavigator({ About: AboutScreen });
     const LoginStack = createStackNavigator({ Login: LoginScreen });
-    const TermsStack = createStackNavigator({ Terms: Terms });
+    const TermsStack = createStackNavigator({ "Terms of Use": Terms });
 
     this.AppContainer = createAppContainer ( 
       createSwitchNavigator(

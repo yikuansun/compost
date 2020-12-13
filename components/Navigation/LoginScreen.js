@@ -206,16 +206,12 @@ class LoginScreen extends React.Component {
                     >
                     <Text style={{fontSize: 18, color: 'white', }}>                    S I G N  U P                     </Text>
                     </Button>
-                    <Text style={{fontSize: 20, color: 'black'}}>   </Text>
-                    <Text style={{fontSize: 20, color: 'black'}}>   </Text>
-
 
                     <TouchableOpacity 
                         style={styles.googleSignInButton}
                        
                         onPress= {() => {
-                            console.log('pressed signInWithGoogleAsync');
-                        this.signInWithGoogleAsync(this.context);
+                            this.signInWithGoogleAsync(this.context);
                         }}>
 
                     <Text style={styles.googleSignInButton}>SIGN IN WITH GOOGLE</Text>

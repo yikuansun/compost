@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Dimensions, Image, ImageBackground} from 'react-native';
 import { VictoryChart, VictoryLegend, VictoryAxis, VictoryBar, VictoryTheme } from "victory-native";
-import event1 from '../../assets/event1_small.jpg';
-import event2 from '../../assets/event2_small.jpg';
-import event3 from '../../assets/event3_small.jpg';
-import event4 from '../../assets/event4_small.jpg';
 import wasteImg from '../../assets/triangle_small.png';
 import moneyImg from '../../assets/money_small.png';
 import carbonImg from '../../assets/carbon_small.png';
@@ -190,8 +186,8 @@ class Dashboard extends Component {
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
-      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>{totalWeight} lbs</Text>
-      <Text style={{ textAlign:'center' }}>organic waste from landfills to composting.</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{totalWeight} lbs</Text>
+      <Text style={{ textAlign:'center' }}>organic waste from landfills by composting.</Text>
       {totalWeight===0 ? (
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
       ):
@@ -203,7 +199,7 @@ class Dashboard extends Component {
 
 
   <View style={styles.container3}>
-    <Text style={{fontSize:18, width:"100%", alignContent:"center"}}>TOTAL LOGGED IMPACT</Text>
+    <Text style={{fontSize:18, width:"100%", alignContent:"center", marginBottom: 10}}>TOTAL LOGGED IMPACT</Text>
   
     <View style={{
       flexDirection: 'row',
@@ -243,6 +239,7 @@ class Dashboard extends Component {
 
         <View style={{flex: 1, justifyContent: 'center', alignItems:'center', alignContent:"center"}}>
 
+        <Text style={{ fontSize:18, alignContent:"center", marginTop: 20, marginBottom: 0}}>RECENT PROGRESS</Text>
 
           <VictoryChart
             // domainPadding will add space to each side of VictoryBar to
@@ -274,18 +271,6 @@ class Dashboard extends Component {
           </VictoryChart>
         </View>
 
-      <View style={styles.container2}>
-        <Text style={{ fontSize:16, alignContent:"center", marginTop: 5, marginBottom: 5}}>U P C O M I N G   E V E N T S</Text>
-        <View style={{flex:1, flexDirection:"row"}}>
-        <Image resizeMode="contain" resizeMethod="scale" source={event1}></Image>
-        <Image resizeMode="contain" resizeMethod="scale" source={event2}></Image>
-        <Image resizeMode="contain" resizeMethod="scale" source={event3}></Image>
-        <Image resizeMode="contain" resizeMethod="scale" source={event4}></Image>
-        </View>
-
-        <View style={{flex:1, alignContent:"center"}}>
-        </View>
-      </View>
       </View>
    )
 };
@@ -309,7 +294,8 @@ const styles = StyleSheet.create({
   container3: {
     flex: 1,
     
-    backgroundColor: '#D9EAD3',
+    //backgroundColor: '#C5DAB2',
+    backgroundColor: '#dbe3d1',
     alignItems: 'center',
     justifyContent: 'center',
   },

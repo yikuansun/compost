@@ -6,7 +6,8 @@ import {
     StyleSheet,
     ImageBackground,
     TouchableOpacity,
-    Text
+    Text,
+    Linking
   } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 //Firebase
@@ -15,7 +16,7 @@ import 'firebase/firestore';
 
 import { AppContext } from '../../AppContextProvider'
 
-import landing_bg from '../../assets/landing_bg.jpg';
+import landing_bg from '../../assets/landing_bg.png';
 
   /**
  * Used the following tutorials:
@@ -59,7 +60,7 @@ class SignInScreen extends React.Component {
             <TouchableOpacity
                 style={styles.guestButton}
                 onPress= {() => {this.loginAsGuest();}}>
-              <Text style={styles.guestText}>  E N T E R  as guest  </Text>
+              <Text style={styles.guestText}>  G U E S T  </Text>
             </TouchableOpacity>
             <View style={{flex:0.17}} />
             
@@ -68,19 +69,25 @@ class SignInScreen extends React.Component {
                 onPress={() => {
                   this.props.navigation.navigate('Terms')
                 }}>
-                  <Text style={styles.aboutButton}> Terms of use </Text>
+                  <Text style={styles.aboutButton}> T E R M S  O F  U S E </Text>
             </TouchableOpacity>
+            <View style={{flex:0.17}} />
 
-            {/*<TouchableOpacity
-                style={styles.aboutButton}
-                onPress= {() => {this.gotoAboutScreen();}}>
-              <Text style={styles.aboutButton}>  A B O U T  </Text>
-            </TouchableOpacity>*/}
-
+            <TouchableOpacity onPress={() => Linking.openURL('http://www.GoCompost.org')}>
+              <Text style={styles.websiteButton}>
+                www.GoCompost.org
+              </Text>
+            </TouchableOpacity>
             </View>
+
+            <View>
+
+
+
           </View>
-          </ImageBackground>
         </View>
+        </ImageBackground>
+      </View>
       );
     }
     loginAsGuest = async () => {
@@ -108,13 +115,14 @@ class SignInScreen extends React.Component {
       height: '100%',
     },
     signInButton: {
-      backgroundColor: "#fed66c",
+      //backgroundColor: "#fed66c",
+      backgroundColor: "#f0e090",
       fontSize: 15,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
       borderWidth: 1,
-      borderColor: '#fed66c'
+      borderColor: '#f0e090'
     },
     area: {
       borderTopLeftRadius: 20,
@@ -123,32 +131,43 @@ class SignInScreen extends React.Component {
       borderBottomRightRadius: 20,
     },
     guestButton: {
-      backgroundColor: "#999999",
-      fontSize: 20,
-      textAlign: "center",
-      padding: 6,
-      borderRadius:12,
-      borderWidth: 1,
-      borderColor: '#999999'
-    },
-    guestText: {
-      backgroundColor: "#999999",
+      backgroundColor: "#d6c49a",
       fontSize: 15,
       textAlign: "center",
       padding: 6,
       borderRadius:12,
       borderWidth: 1,
-      borderColor: '#999999',
-      color: 'white',
+      borderColor: '#d6c49a'
+    },
+    guestText: {
+      backgroundColor: "#d6c49a",
+      fontSize: 15,
+      textAlign: "center",
+      padding: 4,
+      borderRadius:12,
+      borderWidth: 1,
+      borderColor: '#d6c49a',
+      color: 'black',
     },
     aboutButton: {
-      backgroundColor: "#B6D7AA",
+      backgroundColor: "#b6c4a7",
       fontSize: 15,
       textAlign: "center",
       padding: 5,
       borderRadius:12,
       borderWidth: 1,
-      borderColor: '#B6D7AA'
+      borderColor: '#b6c4a7'
+
+    },
+    websiteButton: {
+      color: 'blue',
+      backgroundColor: "#F5F3F4",
+      fontSize: 15,
+      textAlign: "center",
+      padding: 0,
+      borderRadius:40,
+      borderWidth: 0,
+      borderColor: '#F5F3F4'
 
     },
   });

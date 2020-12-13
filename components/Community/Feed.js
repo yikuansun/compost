@@ -3,7 +3,7 @@ import { Container, Content } from "native-base";
 import { Text, ScrollView, SafeAreaView, View, FlatList, StyleSheet, Image, Dimensions } from 'react-native';
 
 const imageWidth = Dimensions.get('window').width;
-const headerURL = 'https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/assets/Feed%20page.PNG';
+const headerURL = 'https://tigersteve123.github.io/TigersteveTech/hosted_content/gocompost/assets/Community-banner.PNG';
 
 
 const Community = () => {

@@ -192,8 +192,10 @@ class Dashboard extends Component {
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
       ):
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
-
       }
+        <Text></Text>
+        <Text></Text>
+
         </View>
       </ImageBackground>
 
@@ -237,9 +239,9 @@ class Dashboard extends Component {
 
   </View>
 
-        <View style={{flex: 1, justifyContent: 'center', alignItems:'center', alignContent:"center"}}>
-
-        <Text style={{ fontSize:18, alignContent:"center", marginTop: 20, marginBottom: 0}}>RECENT PROGRESS</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems:'center', alignContent:"center", backgroundColor:'#F5F3F4', width:'100%'}}>
+        <Text /><Text />
+        <Text style={{ fontSize:18, alignContent:"center", marginTop: 0, marginBottom: 0}}>RECENT PROGRESS</Text>
 
           <VictoryChart
             // domainPadding will add space to each side of VictoryBar to

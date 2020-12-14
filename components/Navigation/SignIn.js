@@ -160,7 +160,7 @@ class SignInScreen extends React.Component {
 
     },
     websiteButton: {
-      color: 'blue',
+      color: '#526645',
       backgroundColor: "#F5F3F4",
       fontSize: 15,
       textAlign: "center",

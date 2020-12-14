@@ -24,10 +24,10 @@ const Community = () => {
           m.push(doc.data());
         });
         setMasterDataSource(m.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
-        return Date.parse(item.date) > Date.now();
+        return Date.parse(item.date) > Date.now() || item.date == "Ongoing";
       }));
         setFilteredDataSource(m.sort( (a,b) => Date.parse(a.date) - Date.parse(b.date) ).filter(function (item) {
-        return Date.parse(item.date) > Date.now();
+        return Date.parse(item.date) > Date.now() || item.date == "Ongoing";
       }));
       })
       .catch((error) => {

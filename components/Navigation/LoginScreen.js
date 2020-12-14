@@ -192,13 +192,13 @@ class LoginScreen extends React.Component {
                         
                     </Item>
 
-                    <Button style={{marginTop: 30, marginBottom:10, marginLeft:48, marginRight:48, backgroundColor: "white"}} full rounded success
+                    <Button style={{marginTop: 30, marginBottom:0, marginLeft:48, marginRight:48, backgroundColor: "white"}} full rounded success
                         onPress={()=> this.loginUser(this.state.email, this.state.password, this.context, this.props.navigation)}
                     >
                         <Text style={{fontSize: 18, color: '#739261'}}>                   L O G  I N                    </Text>
 
                     </Button>
-                    <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
+                    <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
 
                     <Button style={{marginTop:10, backgroundColor:"#95A778",  marginLeft:48, marginRight:48, }} full rounded primary
                         onPress={()=> this.signUpUser(this.state.email, this.state.password, this.context, this.props.navigation)}
@@ -206,6 +206,7 @@ class LoginScreen extends React.Component {
                     >
                     <Text style={{fontSize: 18, color: 'white', }}>                    S I G N  U P                     </Text>
                     </Button>
+                    <Text style={{fontSize: 22, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
 
                     <TouchableOpacity 
                         style={styles.googleSignInButton}
@@ -216,6 +217,18 @@ class LoginScreen extends React.Component {
 
                     <Text style={styles.googleSignInButton}>SIGN IN WITH GOOGLE</Text>
                     </TouchableOpacity>
+
+                    <View>
+
+
+                    <Button style={{marginTop:30, backgroundColor:"gray",  marginLeft:120, marginRight:120 }} full rounded primary
+                            onPress= {() => {this.props.navigation.navigate('Landing');}}
+
+                    >
+                            <Text style={{fontSize: 18, color: 'white', }}>BACK</Text>
+                    </Button>
+                    </View>
+
                 </Form>
             </ImageBackground>
             </Container>
@@ -396,6 +409,17 @@ const styles = StyleSheet.create({
         borderColor: '#949393',
         color: "white", 
         marginLeft:48, marginRight:48, 
+      },
+    backButton: {
+        backgroundColor: "#cfe1e0",
+        fontSize: 14,
+        textAlign: "center",
+        padding: 4,
+        borderRadius:20,
+        borderWidth: 1,
+        borderColor: '#cfe1e0',
+        color: "white", 
+        marginLeft: 0, marginRight:0, 
       },
     backgroundImage: {
         resizeMode: 'center', // or 'stretch',

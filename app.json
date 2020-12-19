@@ -17,7 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.wesense.gocompost",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.wesense.gocompost",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

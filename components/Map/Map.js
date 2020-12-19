@@ -110,7 +110,7 @@ class MapScreen extends Component {
             style={{
               flex: 1
             }}
-            showsUserLocation = {true}
+            showsUserLocation = {false}
             enableZoomControl={true}
             provider={PROVIDER_GOOGLE}
             ref={ref => this.map = ref}

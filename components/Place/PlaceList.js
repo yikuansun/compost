@@ -66,9 +66,12 @@ class PlaceList extends Component {
                         size= "large"
                         source={
                           item.photo && type==="places" &&
-                          // call google API to get the photo
+                          /* call google API to get the photo
+                            {uri: 
+                              `https://maps.googleapis.com/maps/api/place/photo?photoreference=${item.photo.photo_reference}&sensor=false&maxheight=${item.photo.height}&maxwidth=${item.photo.width}&key=${GOOGLE_API_KEY}`
+                          } */ 
                           {uri: 
-                            `https://maps.googleapis.com/maps/api/place/photo?photoreference=${item.photo.photo_reference}&sensor=false&maxheight=${item.photo.height}&maxwidth=${item.photo.width}&key=${GOOGLE_API_KEY}`
+                            `${item.photo.url}`
                           } ||
                           item.photo && type==="events" &&
                           // use direct URL for event picture

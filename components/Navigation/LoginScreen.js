@@ -22,6 +22,15 @@ class LoginScreen extends React.Component {
         })
 
     }
+    
+    validateEmail(email)
+    {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+        {
+            return (true)
+        }
+        return (false)
+    }
 
     signUpUser = async(email, password, context, navigation) => {
         try {
@@ -29,54 +38,66 @@ class LoginScreen extends React.Component {
                 alert("Please enter at least 6 characters for password")
                 return;
             }
+            // check to make sure it is a valid email TODO
+            if (!this.validateEmail(email)) {
+                alert("Please enter a valid email address")
+                return;
+            }
             console.log(`creating user: ${email}`)
             firebase.auth().createUserWithEmailAndPassword(email, password)
-            console.log(`user created ${email}`)
+            .then( user => {
+                // created user successfully
 
-            //Immediately sign in
-            //Wait a second here for user to be created
-            /*
-            setTimeout(function() {
-                console.log('sleep 2 seconds here')
-            }, 2000);
-            */
-            //firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+            
+                console.log(`user created ${email}`)
 
-                
-                // TODO: need to be able to add user name to be similar to gmail account
-                const userInfo = {
-                    //TODO: instant auth right after user creation
-                    //user_id: user.user.uid,  
-                    user_id: email,
-                    email: email,
-                    profile_picture: "",
-                    first_name:  "",
-                    last_name:  "",
-                    name: email,
-                    created_at: Date.now(),
-                    last_logged_in: Date.now()
-                }
-                console.log("user signed in: " + JSON.stringify(userInfo, null, 4))
-                /*
-                // add a user record into database
-                firebase.firestore()
-                .collection('users')
-                .doc(user.user.uid)
-                .set(userInfo)
-                .then(function (snapshot) {
-                    console.log("write success.")
-                })*/
+                //Immediately sign in
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
 
-                console.log('added user:' + JSON.stringify(userInfo, null, 4))
-                const { userOldInfo, setUser } = context;
-                // Set context with logged ininfo
-                setUser({loggedIn: true, userInfo: userInfo});
-                //this.props.navigation.navigate('App');
-                navigation.navigate('App');
+                    // TODO: need to be able to add user name to be similar to gmail account
+                    const userInfo = {
+                        //TODO: instant auth right after user creation
+                        //user_id: user.user.uid,  
+                        user_id: email,
+                        email: email,
+                        profile_picture: "",
+                        first_name:  "",
+                        last_name:  "",
+                        name: email,
+                        created_at: Date.now(),
+                        last_logged_in: Date.now()
+                    }
+                    console.log("user signed in: " + JSON.stringify(userInfo, null, 4))
+                    // add a user record into database
+                    firebase.firestore()
+                        .collection('users')
+                        .doc(user.user.uid)
+                        .set(userInfo)
+                        .then(function (snapshot) {
+                            console.log("write success.")
+                        })
+                        .catch(error => {
+                            console.log("failed to save user into userInfo table.");
+                        });
 
-                //}
-            //);
-        }
+                    console.log('added user:' + JSON.stringify(userInfo, null, 4))
+                    const { userOldInfo, setUser } = context;
+                    // Set context with logged ininfo
+                    setUser({loggedIn: true, userInfo: userInfo});
+                    //this.props.navigation.navigate('App');
+                    navigation.navigate('App');
+
+                })
+                .catch(error => {
+                    alert('Failed to log in the user.');
+                });
+
+            })
+            .catch( error => {
+                // failed to create user
+                alert("Failed to create user. Please try again. \nError:" + error.message);
+            });
+            }
 
         catch (error) {
             console.log(error.toString())
@@ -118,7 +139,7 @@ class LoginScreen extends React.Component {
                                 .set(userInfo)
                                 .then(function (snapshot) {
                                     console.log("added user record.")
-                                })
+                                }.catch(error))
                         } else {
                             // update user last login time
                             firebase.firestore()
@@ -146,8 +167,12 @@ class LoginScreen extends React.Component {
                         setUser({loggedIn: true, userInfo: userInfo});
                         //this.props.navigation.navigate('App');
                         navigation.navigate('App');
-                    });
-            });
+                    }).catch(function(error) {
+                        alert('Login failed. Not able to connect to server.')
+                      });;
+            }).catch(function(error) {
+                alert('Login failed. Username or password is incorrect');
+              });
 
         }
         catch (error) {
@@ -300,11 +325,10 @@ class LoginScreen extends React.Component {
                         .set(userInfo)
                         .then(function (snapshot) {
                             console.log("write success.")
-                        })
-                        /*.error(function (e) {
+                        }).error(function (e) {
                             console.log("write error:" + JSON.stringify(e, null, 4))
 
-                        });*/
+                        });
                         console.log('added user:' + JSON.stringify(userInfo, null, 4))
                         const { user, setUser } = context;
                         // Set context with logged ininfo
@@ -344,6 +368,7 @@ class LoginScreen extends React.Component {
                     var credential = error.credential;
                     // ...
                     console.log('onSignIn error:' + JSON.stringify(error));
+                    alert('Login failed. Please check your account info.');
                 });
           } else {
             console.log('User already signed-in Firebase.');

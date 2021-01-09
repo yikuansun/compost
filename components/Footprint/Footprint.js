@@ -266,6 +266,7 @@ class Footprint extends Component {
                               isVisible={this.state.isDateTimePickerVisible} 
                               onConfirm={this._handleDatePicked} 
                               onCancel={this._hideDateTimePicker}
+                              style={{width: 320, backgroundColor: "white"}}
 
                           />) }
 

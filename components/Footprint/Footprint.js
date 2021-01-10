@@ -4,7 +4,7 @@ import { Text, StyleSheet, View,  Button, Image, TextInput, ScrollView } from "r
 import { Input } from "react-native-elements";
 
 import NumericInput from 'react-native-numeric-input';
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import * as firebase from 'firebase';
 
 import 'firebase/firestore';
@@ -197,8 +197,10 @@ class Footprint extends Component {
 
     _handleDatePicked = date => {
         var date = new Date(date);
+        var dateText = parseInt(new Date(date).getMonth()+1) + "/"+ (new Date(date)).getDate()  +"/"+ (new Date(date)).getFullYear();
         if (! isNaN(date)) {
             this.setState({ date: date });
+            this.setState({ dateText: dateText });
         }
         this._hideDateTimePicker();
     }
@@ -256,17 +258,12 @@ class Footprint extends Component {
                       <Text style={styles.labelText}>{this.state.dateText}</Text>
                   </TouchableOpacity>
                   {this.state.show &&
-                     (<DateTimePicker
+                     (<DateTimePickerModal
                               testID="dateTimePicker"
-                              value={this.state.date}
                               mode={this.state.mode}
-                              is24Hour={true}
-                              display="default"
-                              onChange={this.onChange}
-                              isVisible={this.state.isDateTimePickerVisible} 
+                              isVisible={this.state.show} 
                               onConfirm={this._handleDatePicked} 
                               onCancel={this._hideDateTimePicker}
-                              style={{width: 320, backgroundColor: "white"}}
 
                           />) }
 

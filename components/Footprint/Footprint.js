@@ -295,6 +295,9 @@ class Footprint extends Component {
                                                 this.setState({weight: value});
                                             }
                                         }
+                                        minValue={0}
+                                        step={0.1}
+                                        valueType='real'
                                         value={this.state.weight} />
                       </View>
                       <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(this.context);} }>

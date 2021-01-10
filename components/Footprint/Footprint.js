@@ -271,7 +271,7 @@ class Footprint extends Component {
                           />) }
 
                       </View>
-                      <View style={{flex: 3, marginBottom:10}}>
+                      <View style={{flex: 3, marginBottom: 10, zIndex: 69}}>
                           <Text style={styles.labelText}>ENTER TYPE: </Text>
                           <DropDownPicker
                               items={[

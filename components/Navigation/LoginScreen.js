@@ -171,7 +171,7 @@ class LoginScreen extends React.Component {
                         alert('Login failed. Not able to connect to server.')
                       });;
             }).catch(function(error) {
-                alert('Login failed. Username or password is incorrect');
+                alert('Login failed. Email address is not valid.')
               });
 
         }

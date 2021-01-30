@@ -17,8 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.wesense.gocompost",
-      "buildNumber": "1.0.1"
+      "bundleIdentifier": "org.wesense.compostable",
+      "buildNumber": "1.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "config": {
+        "googleMapsApiKey": "AIzaSyA5CcYkZmiNkdhJoCt4G1NwIUgZgpqoarM"
+      }
+
     },
     "android": {
       "package": "com.wesense.gocompost",

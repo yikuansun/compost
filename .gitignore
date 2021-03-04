@@ -1,5 +1,6 @@
 # Packages (must install after clone) #
 /node_modules
+package-lock.json
 
 # API Key #
 api_key.js

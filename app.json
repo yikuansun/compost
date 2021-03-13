@@ -2,7 +2,7 @@
   "expo": {
     "name": "GoCompost",
     "slug": "GoCompost",
-    "version": "1.0.7",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "bundleIdentifier": "org.wesense.compostable",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.9",
       "googleServicesFile": "./GoogleService-Info.plist",
       "config": {
         "googleMapsApiKey": "AIzaSyA5CcYkZmiNkdhJoCt4G1NwIUgZgpqoarM"

@@ -233,6 +233,7 @@ class LoginScreen extends React.Component {
                     </Button>
                     <Text style={{fontSize: 22, fontWeight: 'bold', textAlign: "center", color: 'white'}}></Text>
 
+                    {/*
                     <TouchableOpacity 
                         style={styles.googleSignInButton}
                        
@@ -242,7 +243,7 @@ class LoginScreen extends React.Component {
 
                     <Text style={styles.googleSignInButton}>SIGN IN WITH GOOGLE</Text>
                     </TouchableOpacity>
-
+                    */}
                     <View>
 
 

@@ -9,7 +9,7 @@ const Community = () => {
   const frameHeight = Dimensions.get('window').height;
 
   return (
-    <WebView source={{html: '<style>div {overflow: hidden;} iframe {transform: scale(1.5); transform-origin: 50% 0%;}</style><div><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd501FHNZQLILyL7FJmld04GL6UNrnVc0D_Jjfg-rGj48WdOg/viewform?embedded=true" frameborder="0" width="100%" height="90%"></iframe></div>'}}/>
+    <WebView source={{html: '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"><style>div {overflow: hidden;} iframe {transform: scale(1.5); transform-origin: 50% 0%;}</style><div><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd501FHNZQLILyL7FJmld04GL6UNrnVc0D_Jjfg-rGj48WdOg/viewform?embedded=true" frameborder="0" width="100%" height="90%"></iframe></div>'}}/>
     
 )};
 

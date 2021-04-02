@@ -186,7 +186,7 @@ class Dashboard extends Component {
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
-      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{totalWeight} lbs</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{parseFloat(totalWeight.toFixed(1))} lbs</Text>
       <Text style={{ textAlign:'center' }}>organic waste from landfills by composting.</Text>
       {totalWeight===0 ? (
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
@@ -213,7 +213,7 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={wasteImg}></Image>
           </View>
         <View style={{justifyContent: 'center',alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}>   {totalWeight} </Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}>   {parseFloat(totalWeight.toFixed(1))} </Text>
           <Text>    lbs </Text>
         </View>
       </View>
@@ -231,7 +231,7 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={carbonImg}></Image>        
           </View>
         <View style={{justifyContent: 'center', alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {emission} </Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}> {parseFloat(parseFloat(emission).toFixed(1))} </Text>
           <Text>     lbs CO2e</Text>
         </View>
       </View>

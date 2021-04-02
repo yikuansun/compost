@@ -162,24 +162,24 @@ class LearnScreen extends React.Component {
       var miles = (emission * 1.126).toFixed(1);
       return (
         <View style={{flex: 1}}>
+        <DropDownPicker
+            items={[
+                {label: 'Today', value: '1day' },
+                {label: '7 Days', value: '7day'},
+                {label: '30 Days', value: '30day' },
+                {label: 'All Time', value: 'all'}
+            ]}
+            defaultValue={this.state.timePeriod}
+            containerStyle={{height: 40}}
+            style={{backgroundColor: '#fafafa'}}
+            itemStyle={{
+                justifyContent: 'flex-start'
+            }}
+            dropDownStyle={{backgroundColor: '#fafafa'}}
+            onChangeItem={item => this.setState({timePeriod: item.value})}
+        />
 
             <ScrollView style={{flex: 6}}>
-                <DropDownPicker
-                    items={[
-                        {label: 'Today', value: '1day' },
-                        {label: '7 Days', value: '7day'},
-                        {label: '30 Days', value: '30day' },
-                        {label: 'All Time', value: 'all'}
-                    ]}
-                    defaultValue={this.state.timePeriod}
-                    containerStyle={{height: 40}}
-                    style={{backgroundColor: '#fafafa'}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({timePeriod: item.value})}
-                />
                 <View style={{flex: 0.5, flexDirection: 'row',margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
                     <View style={{flex: 3}}>
                         <View style={{ marginTop:15, alignItems: 'center', justifyContent: 'center'}}>

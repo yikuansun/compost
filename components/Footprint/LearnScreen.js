@@ -163,7 +163,7 @@ class LearnScreen extends React.Component {
       return (
         <View style={{flex: 1}}>
 
-            <View style={{flex: 6}}>
+            <ScrollView style={{flex: 6}}>
                 <DropDownPicker
                     items={[
                         {label: 'Today', value: '1day' },
@@ -264,7 +264,7 @@ class LearnScreen extends React.Component {
                     }}>  B A C K  </Text>      
         </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
 
 
         </View>

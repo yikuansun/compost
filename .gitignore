@@ -5,6 +5,9 @@ package-lock.json
 # API Key #
 api_key.js
 
+# Firestore XML #
+GoogleService-Info.plist
+
 # OS generated files #
 .DS_Store
 .DS_Store?

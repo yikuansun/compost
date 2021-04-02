@@ -187,7 +187,7 @@ class LearnScreen extends React.Component {
                         </View>
                     </View>
                     <View style={{flex: 4}}>
-                        <Text style={{fontSize:22, fontWeight:'bold'}}>{weight}</Text>
+                        <Text style={{fontSize:22, fontWeight:'bold'}}>{weight.toFixed(1)}</Text>
                         <Text>lbs</Text>
                         <Text>Combined total diverted from landfills by composting</Text>
                     </View>
@@ -221,7 +221,7 @@ class LearnScreen extends React.Component {
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:22, fontWeight:'bold'}}> -{emission}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}> -{parseFloat(parseFloat(emission).toFixed(1))}</Text>
                                 <Text>lbs CO2e</Text>
 
                             </View>
@@ -246,7 +246,7 @@ class LearnScreen extends React.Component {
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:22, fontWeight:'bold'}}>{miles}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}>{parseFloat(miles).toFixed(0)}</Text>
                                 <Text>miles driven by an average passenger vehicle</Text>
                             </View>
                         </View>

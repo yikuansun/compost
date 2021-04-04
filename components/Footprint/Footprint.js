@@ -300,7 +300,12 @@ class Footprint extends Component {
                                         valueType='real'
                                         value={this.state.weight} />
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(this.context);} }>
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}}
+                        onPress = { () => {
+                            if (this.state.userId == "GuestUser") alert("Sorry... you need to make an account to save logs :(");
+                            else this.saveLog(this.context);
+                        } }
+                      >
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white',  fontSize: 16}}>A D D   T O   L O G</Text>
                       </TouchableOpacity>
                       <View style={{flex: 1, flexDirection: 'row'}}>
@@ -317,7 +322,12 @@ class Footprint extends Component {
                               <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastMonth}  lbs</Text>
                           </View>
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}}
+                        onPress={ () => {
+                            if (this.state.userId == "GuestUser") alert("Sorry... you must sign in to track your impact :(");
+                            else this.props.navigation.navigate("Learn");
+                        } } 
+                      >
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontSize: 16}}>T R A C K   M Y   I M P A C T</Text>
                       </TouchableOpacity>
                   </View>

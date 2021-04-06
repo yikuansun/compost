@@ -324,7 +324,7 @@ class Footprint extends Component {
                       </View>
                       <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}}
                         onPress={ () => {
-                            if (this.state.userId == "GuestUser") alert("Sorry... you must sign in to track your impact :(");
+                            if (this.state.userId == "GuestUser") alert("Sorry... you need to make an account to track your impact :(");
                             else this.props.navigation.navigate("Learn");
                         } } 
                       >

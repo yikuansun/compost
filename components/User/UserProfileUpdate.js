@@ -195,7 +195,7 @@ class UserProfileUpdateScreen extends Component {
       </Form>
 
 
-    <Button style={{marginTop:80, backgroundColor:"gray",  marginLeft:120, marginRight:120 }} full rounded primary
+    <Button style={{marginTop:80, backgroundColor:"gray",  marginLeft:100, marginRight:100 }} full rounded primary
                             onPress= {() => {this.props.navigation.navigate('App');}}>
                             <Text style={{fontSize: 18, color: 'white' }}>B A C K</Text>
     </Button>

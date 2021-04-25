@@ -7,11 +7,10 @@ import NumericInput from 'react-native-numeric-input';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import * as firebase from 'firebase';
 
-import 'firebase/firestore';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 // Use the user context
-import { AppContext } from '../../AppContextProvider'
+import { AppContext } from '../../AppContextProvider';
 
 import earthImpact from '../../assets/earthImpact.png';
 
@@ -31,6 +30,7 @@ class Footprint extends Component {
     // Initial state
     state = {
         userId: '',
+        logs: [],
         totalWeight: 0,
         totalWeightToday: 0,
         totalWeightLastWeek: 0,
@@ -77,10 +77,12 @@ class Footprint extends Component {
                     const doc = docSnapshot.data();
                     const log = doc.log;
                     const newEntry = {
-                        "weight": this.state.weight,
+                        "weight": parseFloat(this.state.weight),
                         "date": this.state.date,
                         "waste": this.state.wasteType
                     };
+                    console.log("new entry:" + JSON.stringify(newEntry));
+                    console.log("weight:" + this.state.weight + "  parsedWeight", parseFloat(this.state.weight));
                     log.push(newEntry);
                     doc.log = log;
                     // append to the doc
@@ -88,7 +90,9 @@ class Footprint extends Component {
                             // now propagate the changes to the UI by calling the database fetch again
                             console.log("added log record for the user.");
                             this.getLog(userId);
-                    });
+                            alert("Log added successfully");
+                            this.setState({weight:0});
+                    }).catch((reason=>alert("Failed to add log")));
                     console.log(`updated record  userId: ${userId} date: ${this.state.date} waste: ${this.state.wasteType} weight: ${this.state.weight}`);
 
               } else { // create the doc
@@ -113,7 +117,7 @@ class Footprint extends Component {
               let { user, setUser } = context;
               user.timestamp = new Date(); // timestamp change from "" to current date
               setUser(user);
-              console.log('footprint user data: ' + JSON.stringify(user));
+              //console.log('footprint user data: ' + JSON.stringify(user));
 
           });
 
@@ -133,7 +137,6 @@ class Footprint extends Component {
               console.log(`fetched log succcessfuly`);
               if (docSnapshot.exists) {
                     const data = docSnapshot.data();
-                    
                     // refer to https://docs.jsonata.org/overview for details of how to do filtering/aggregations
                     // https://docs.jsonata.org/predicate
                     // aggregate and get all the data
@@ -169,20 +172,20 @@ class Footprint extends Component {
                     this.setState({totalWeightLastMonth: lastMonthTotal});
                     
 
-
+                    this.setState({logs: data});
               } else { // new user with no data
                 console.log(`log does not exist for ${userId}`);
 
               }
+            console.log("logs state DUMP:" + JSON.stringify(this.state.logs));
           });
-
     }
 
     componentDidMount() {
         // Runs after the first render() lifecycle
         let userId = this.context.user.loggedIn ? this.context.user.userInfo.user_id : 'GuestUser';
         this.setState({userId: userId});
-        console.log(`in footprint, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
+        //console.log(`in footprint, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
         this.getLog(userId);
     }
@@ -268,7 +271,7 @@ class Footprint extends Component {
                           />) }
 
                       </View>
-                      <View style={{flex: 3, marginBottom: 10, zIndex: 69}}>
+                      <View style={{flex: 2, marginBottom: 10, zIndex: 69}}>
                           <Text style={styles.labelText}>ENTER TYPE: </Text>
                           <DropDownPicker
                               items={[
@@ -292,20 +295,30 @@ class Footprint extends Component {
                           <NumericInput style={{flex: 2}}
                                         onChange={
                                             value => {
-                                                this.setState({weight: value});
+                                                // round to 0.x pound
+                                                const value2 = Math.trunc(value*10)/10;
+                                                //value = Number.parseFloat(value).toFixed(1);
+                                                if (value>value2) {
+                                                    alert("Please input one decimal at most");
+                                                    this.setState({weight: value2});
+                                                    return;
+                                                }
+                                                if (value>50) {
+                                                    alert("Exceed a reasonable limit of 50 lbs per entry");
+                                                    this.setState({weight: 50});
+                                                    return;
+                                                }
+                                                this.setState({weight:value});
+                                                console.log("value:" + value + " state: " + this.state.weight);
                                             }
                                         }
                                         minValue={0}
+                                        maxValue={50}
                                         step={0.1}
                                         valueType='real'
                                         value={this.state.weight} />
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}}
-                        onPress = { () => {
-                            if (this.state.userId == "GuestUser") alert("Sorry... you need to make an account to save logs :(");
-                            else this.saveLog(this.context);
-                        } }
-                      >
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress = { () => {this.saveLog(this.context);} }>
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white',  fontSize: 16}}>A D D   T O   L O G</Text>
                       </TouchableOpacity>
                       <View style={{flex: 1, flexDirection: 'row'}}>
@@ -322,14 +335,14 @@ class Footprint extends Component {
                               <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastMonth}  lbs</Text>
                           </View>
                       </View>
-                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}}
-                        onPress={ () => {
-                            if (this.state.userId == "GuestUser") alert("Sorry... you need to make an account to track your impact :(");
-                            else this.props.navigation.navigate("Learn");
-                        } } 
-                      >
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >
                           <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontSize: 16}}>T R A C K   M Y   I M P A C T</Text>
                       </TouchableOpacity>
+
+                      <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress={ () => this.props.navigation.navigate("Log") } >
+                          <Text style={{textAlign: 'center', margin: 5  , color: 'white', fontSize: 16}}>V I E W  L O G S</Text>
+                      </TouchableOpacity>
+
                   </View>
 
               </View>

@@ -24,15 +24,8 @@ import 'firebase/firestore';
 class MapScreen extends Component {
 
   static navigationOptions = { 
-      title: "Map123",
-      headerRight: (
-        <Button
-          title="test"
-          color="#fff"
-        />
-      ),
-      headerMode: "screen",
-    };
+
+  };
 
   constructor(props) {
     super(props);

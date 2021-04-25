@@ -14,7 +14,6 @@ import { AppContext } from '../../AppContextProvider';
 //Components
 class Dashboard extends Component {
   static navigationOptions = {
-    headerTitle: "Dashboard"
   };
 
   state = {
@@ -156,10 +155,10 @@ class Dashboard extends Component {
     const pricePerTon = 55;
     var totalWeight = this.state.data.totalWeight;
     var totalFoodWasteWeight = this.state.data.foodTotalWeight;
-    var dollar = (pricePerTon * totalWeight/2000).toFixed(2);
+    var dollar = Number.parseFloat(pricePerTon * totalWeight/2000).toFixed(2);
     // using only food waste for emission and miles
-    var emission = (totalFoodWasteWeight * 0.8).toFixed(1);
-    var miles = (emission * 1.126).toFixed(1);
+    var emission = Number.parseFloat(totalFoodWasteWeight * 0.8).toFixed(1);
+    var miles = Number.parseFloat(emission * 1.126).toFixed(1);
 
 
     const DeviceWidth = Dimensions.get('window').width;
@@ -233,7 +232,7 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={carbonImg}></Image>        
           </View>
         <View style={{justifyContent: 'center', alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {parseFloat(emission.toFixed(1)} </Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}> {Number.parseFloat(emission).toFixed(1)} </Text>
           <Text>     lbs CO2e</Text>
         </View>
       </View>

@@ -168,6 +168,7 @@ class LoginScreen extends React.Component {
                         //this.props.navigation.navigate('App');
                         navigation.navigate('App');
                     }).catch(function(error) {
+                        console.log(error.message);
                         alert('Login failed. Not able to connect to server.')
                       });;
             }).catch(function(error) {

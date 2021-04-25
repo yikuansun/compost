@@ -47,7 +47,9 @@ class Navigator extends React.Component {
       {MapScreen}, 
       {
             //defaultNavigationOptions: (navigationOptions),
+            headerMode: "none",
             navigationOptions: {
+              headerShown: false,
               tabBarLabel: "Map",
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -58,13 +60,12 @@ class Navigator extends React.Component {
               style: {
                 backgroundColor: iconFocusedColor
               },
-              headerMode: "screen",
             }
     });
 
     const Checker = createStackNavigator (
       {CheckerScreen},
-      {
+      {     headerMode: "none",
             navigationOptions: {
               tabBarLabel: "Check",
               tabBarIcon: ({ focused }) => (
@@ -81,7 +82,9 @@ class Navigator extends React.Component {
 
     const Dashboard = createStackNavigator (
       {DashboardScreen},
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
+        headerShown: false,
         tabBarLabel: "Home",
         tabBarIcon: ({ focused }) => (
           <Ionicons
@@ -97,18 +100,19 @@ class Navigator extends React.Component {
 
     // Use a switch navigator for impact tab
     const ImpactSwitchNavigator = createSwitchNavigator(
-      {Impact: FootprintScreen,
-      Learn: LearnScreen,
-      Log: LogScreen,
+      { Impact: FootprintScreen,
+        Learn: LearnScreen,
+        Log: LogScreen,
       }, {
-        initialRouteName: 'Impact'
-      }  
+        initialRouteName: 'Impact',
+      }
     );
 
 
     const Impact = createStackNavigator (
       {ImpactSwitchNavigator},  // Use a switch navigator for impact tab
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
         tabBarLabel: "Impact",
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons
@@ -124,7 +128,8 @@ class Navigator extends React.Component {
 
     const Community = createStackNavigator (
       {CommunityScreen},
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
         tabBarLabel: "Community",
         tabBarIcon: ({ focused }) => (
           <Ionicons
@@ -190,7 +195,7 @@ class Navigator extends React.Component {
           UserProfile: UserProfileStack,
           UserProfileUpdate: UserProfileUpdateStack
         },
-        {
+        { headerMode: "none",
           initialRouteName: 'Landing'
         }  
       )

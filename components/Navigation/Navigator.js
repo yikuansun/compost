@@ -12,14 +12,19 @@ import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
 import FootprintScreen from "../../components/Footprint/Footprint"
 import LearnScreen from "../../components/Footprint/LearnScreen"
+import LogScreen from "../../components/Footprint/LogScreen"
 
 import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
 import LoginScreen from "./LoginScreen"
 import Terms from "./Terms"
+import PasswordResetScreen from "../User/PasswordReset"
+import UserProfileScreen from "../User/UserProfile"
+import UserProfileUpdateScreen from "../User/UserProfileUpdate"
 
 // Use the user context
 import { AppContext } from '../../AppContextProvider'
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Navigator extends React.Component {
 
@@ -94,6 +99,7 @@ class Navigator extends React.Component {
     const ImpactSwitchNavigator = createSwitchNavigator(
       {Impact: FootprintScreen,
       Learn: LearnScreen,
+      Log: LogScreen,
       }, {
         initialRouteName: 'Impact'
       }  
@@ -168,14 +174,21 @@ class Navigator extends React.Component {
     const AboutStack = createStackNavigator({ About: AboutScreen });
     const LoginStack = createStackNavigator({ Login: LoginScreen });
     const TermsStack = createStackNavigator({ "Terms of Use": Terms });
+    const PasswordResetStack = createStackNavigator({ "Password Reset": PasswordResetScreen});
+    const UserProfileStack = createStackNavigator({ "User Profile": UserProfileScreen});
+    const UserProfileUpdateStack = createStackNavigator({ "User Profile Update": UserProfileUpdateScreen});
 
     this.AppContainer = createAppContainer ( 
       createSwitchNavigator(
-        {Landing: LandingStack,
-        Login: LoginStack,
-        App: AppNavigator,
-        About: AboutStack,
-        Terms: TermsStack,
+        {
+          Landing: LandingStack,
+          Login: LoginStack,
+          App: AppNavigator,
+          About: AboutStack,
+          Terms: TermsStack,
+          PasswordReset: PasswordResetStack,
+          UserProfile: UserProfileStack,
+          UserProfileUpdate: UserProfileUpdateStack
         },
         {
           initialRouteName: 'Landing'
@@ -191,7 +204,7 @@ render() {
   if (userId.indexOf('@') != -1) {
     userId = userId.substring(0,user.userInfo.name.indexOf('@')); // strip @ from email
   }
-  console.log(`in Navigator, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
+  //console.log(`in Navigator, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
 
   //Getting the tab header title
@@ -202,7 +215,14 @@ render() {
     return {
       headerTitle: headerTitle,
       headerRight: (
-        <Text>{userId}</Text>
+        <TouchableOpacity onPress={
+          ()=> {
+            if (userId !== 'GuestUser')
+                navigation.navigate('UserProfile')
+            }
+        } >
+          <Text>{userId}</Text>
+        </TouchableOpacity>
       )
     }};
 
@@ -214,17 +234,3 @@ render() {
 }
 
 export default Navigator;
-/*
-// Create a switch navigator for login->home flow
-export default createAppContainer( 
-  createSwitchNavigator(
-    {Landing: LandingStack,
-     Login: LoginStack,
-     App: AppNavigator,
-     About: AboutStack,
-    },
-    {
-      initialRouteName: 'Landing'
-    }  
-  )
-);*/

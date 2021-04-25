@@ -192,8 +192,6 @@ class LoginScreen extends React.Component {
                     <Text style={{fontSize: 20, color: 'black'}}>    </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
-                    <Text style={{fontSize: 20, color: 'black'}}>    </Text>
-                    <Text style={{fontSize: 20, color: 'black'}}>    </Text>
                     <Text style={{fontSize: 20, color: 'black'}}>   </Text>
 
                     <Item floatingLabel style={{marginLeft:50, marginRight:50, marginBottom:10}}>
@@ -246,7 +244,11 @@ class LoginScreen extends React.Component {
                     */}
                     <View>
 
+                    <TouchableOpacity onPress={()=> this.forgotPassword()} >
 
+                    <Text style={{marginTop:20, color: 'darkblue', textAlign: "center"}}> Forgot Password?</Text>
+                    </TouchableOpacity> 
+                    
                     <Button style={{marginTop:30, backgroundColor:"gray",  marginLeft:120, marginRight:120 }} full rounded primary
                             onPress= {() => {this.props.navigation.navigate('Landing');}}
 
@@ -261,6 +263,9 @@ class LoginScreen extends React.Component {
         )
     }
 
+    forgotPassword = async () => {
+        this.props.navigation.navigate('PasswordReset');
+    }
 
     signInWithGoogleAsync = async (context) => {
         try {

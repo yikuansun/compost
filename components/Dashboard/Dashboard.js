@@ -9,7 +9,7 @@ import topBackground from '../../assets/dashboardBackground.png';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
-import { AppContext } from '../../AppContextProvider'
+import { AppContext } from '../../AppContextProvider';
 
 //Components
 class Dashboard extends Component {
@@ -49,7 +49,7 @@ class Dashboard extends Component {
                     // https://docs.jsonata.org/predicate
                     // aggregate and get all the data
                     // sum of total
-                    console.log('data:' + JSON.stringify(data,null,4));
+                    //console.log('data:' + JSON.stringify(data,null,4));
                     var totalWeightEpression = jsonata("$sum(log.weight)");
                     var totalWeight = totalWeightEpression.evaluate(data);
 
@@ -79,7 +79,7 @@ class Dashboard extends Component {
                     var count=1;
                     for (const [key, value] of Object.entries(groupResult)) {
                         //Do stuff where key would be 0 and value would be the object
-                        console.log(`key:${key} value:${value}`);
+                        //console.log(`key:${key} value:${value}`);
                     
                         var entry = {
                             day: count,
@@ -92,7 +92,7 @@ class Dashboard extends Component {
                     if (dataWeekly.length>7) {
                         dataWeekly=dataWeekly.slice(-7);
                     }
-                    console.log('dataWeekly: ' + JSON.stringify(dataWeekly,null,4));
+                    //console.log('dataWeekly: ' + JSON.stringify(dataWeekly,null,4));
 
                     var compostData = {
                       totalWeight: totalWeight,
@@ -102,12 +102,9 @@ class Dashboard extends Component {
                     this.setState({data: compostData});
               } else { // new user with no data
                 console.log(`log does not exist for ${userId}`);
-
               }
           });
-
     }
-
 
   // set a loop to check the user.timestamp every 30 seconds
   // if flag changed, then reload data
@@ -117,7 +114,7 @@ class Dashboard extends Component {
     setInterval(() => {
       console.log('check if data refreshed');
       let { user, setUser } = this.context;
-      console.log('user data: ' + JSON.stringify(user));
+      // console.log('user data refreshed in dashboard: ');
       if (user.timestamp !== "") {
         let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
         this.getLog(userId);
@@ -129,15 +126,16 @@ class Dashboard extends Component {
   }
 
   componentWillUnmount() {
-    console.log('dashboard component unmounted.')
+    console.log('dashboard component will unmount.')
   }
 
   render() {
 
-    console.log('dashboard data never loaded, load it. context:' + JSON.stringify(this.context,null,4) );
+    //console.log('dashboard data never loaded, load it. context:' + JSON.stringify(this.context,null,4) );
+    console.log('dashboard data never loaded, load it');
     const user = this.context.user;
     let userId = user.loggedIn ? user.userInfo.user_id : 'GuestUser';
-    console.log(`in DashboardScreen, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
+    //console.log(`in DashboardScreen, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
     let loadCount = this.state.loaded;
     if (loadCount<3) {
@@ -186,12 +184,16 @@ class Dashboard extends Component {
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
-      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{parseFloat(totalWeight.toFixed(1))} lbs</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{totalWeight} lbs</Text>
       <Text style={{ textAlign:'center' }}>organic waste from landfills by composting.</Text>
-      {totalWeight===0 ? (
+
+      {userId==='GuestUser' ? ( 
+      <Text style={{color:"red"}} > This is DEMO account showing combined inputs of all guests.</Text>
+      ): totalWeight===0 ? (
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Time to start!</Text>
       ):
         <Text style={{ textAlign:'center', color:"black", fontSize:20, alignContent:"center"}}>Way to go!</Text>
+      
       }
         <Text></Text>
         <Text></Text>
@@ -231,7 +233,7 @@ class Dashboard extends Component {
           <Image resizeMode="contain" source={carbonImg}></Image>        
           </View>
         <View style={{justifyContent: 'center', alignItems:'center', width: DeviceWidth*0.3, height: DeviceWidth*0.10, marginBottom:0, marginLeft:0}} >
-          <Text style={{fontSize:22, fontWeight:'bold'}}> {parseFloat(parseFloat(emission).toFixed(1))} </Text>
+          <Text style={{fontSize:22, fontWeight:'bold'}}> {parseFloat(emission.toFixed(1)} </Text>
           <Text>     lbs CO2e</Text>
         </View>
       </View>

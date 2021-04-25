@@ -12,14 +12,19 @@ import MapScreen from "../../components/Map/Map";
 import CheckerScreen from "../../components/Checker/Checker"
 import FootprintScreen from "../../components/Footprint/Footprint"
 import LearnScreen from "../../components/Footprint/LearnScreen"
+import LogScreen from "../../components/Footprint/LogScreen"
 
 import SignInScreen from "./SignIn"
 import AboutScreen from "./About"
 import LoginScreen from "./LoginScreen"
 import Terms from "./Terms"
+import PasswordResetScreen from "../User/PasswordReset"
+import UserProfileScreen from "../User/UserProfile"
+import UserProfileUpdateScreen from "../User/UserProfileUpdate"
 
 // Use the user context
 import { AppContext } from '../../AppContextProvider'
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Navigator extends React.Component {
 
@@ -42,7 +47,9 @@ class Navigator extends React.Component {
       {MapScreen}, 
       {
             //defaultNavigationOptions: (navigationOptions),
+            headerMode: "none",
             navigationOptions: {
+              headerShown: false,
               tabBarLabel: "Map",
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -53,13 +60,12 @@ class Navigator extends React.Component {
               style: {
                 backgroundColor: iconFocusedColor
               },
-              headerMode: "screen",
             }
     });
 
     const Checker = createStackNavigator (
       {CheckerScreen},
-      {
+      {     headerMode: "none",
             navigationOptions: {
               tabBarLabel: "Check",
               tabBarIcon: ({ focused }) => (
@@ -76,7 +82,9 @@ class Navigator extends React.Component {
 
     const Dashboard = createStackNavigator (
       {DashboardScreen},
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
+        headerShown: false,
         tabBarLabel: "Home",
         tabBarIcon: ({ focused }) => (
           <Ionicons
@@ -92,17 +100,19 @@ class Navigator extends React.Component {
 
     // Use a switch navigator for impact tab
     const ImpactSwitchNavigator = createSwitchNavigator(
-      {Impact: FootprintScreen,
-      Learn: LearnScreen,
+      { Impact: FootprintScreen,
+        Learn: LearnScreen,
+        Log: LogScreen,
       }, {
-        initialRouteName: 'Impact'
-      }  
+        initialRouteName: 'Impact',
+      }
     );
 
 
     const Impact = createStackNavigator (
       {ImpactSwitchNavigator},  // Use a switch navigator for impact tab
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
         tabBarLabel: "Impact",
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons
@@ -118,7 +128,8 @@ class Navigator extends React.Component {
 
     const Community = createStackNavigator (
       {CommunityScreen},
-      {navigationOptions: {
+      { headerMode: "none",
+        navigationOptions: {
         tabBarLabel: "Community",
         tabBarIcon: ({ focused }) => (
           <Ionicons
@@ -168,16 +179,23 @@ class Navigator extends React.Component {
     const AboutStack = createStackNavigator({ About: AboutScreen });
     const LoginStack = createStackNavigator({ Login: LoginScreen });
     const TermsStack = createStackNavigator({ "Terms of Use": Terms });
+    const PasswordResetStack = createStackNavigator({ "Password Reset": PasswordResetScreen});
+    const UserProfileStack = createStackNavigator({ "User Profile": UserProfileScreen});
+    const UserProfileUpdateStack = createStackNavigator({ "User Profile Update": UserProfileUpdateScreen});
 
     this.AppContainer = createAppContainer ( 
       createSwitchNavigator(
-        {Landing: LandingStack,
-        Login: LoginStack,
-        App: AppNavigator,
-        About: AboutStack,
-        Terms: TermsStack,
-        },
         {
+          Landing: LandingStack,
+          Login: LoginStack,
+          App: AppNavigator,
+          About: AboutStack,
+          Terms: TermsStack,
+          PasswordReset: PasswordResetStack,
+          UserProfile: UserProfileStack,
+          UserProfileUpdate: UserProfileUpdateStack
+        },
+        { headerMode: "none",
           initialRouteName: 'Landing'
         }  
       )
@@ -191,7 +209,7 @@ render() {
   if (userId.indexOf('@') != -1) {
     userId = userId.substring(0,user.userInfo.name.indexOf('@')); // strip @ from email
   }
-  console.log(`in Navigator, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
+  //console.log(`in Navigator, userId(${userId}) context data: ` + JSON.stringify(this.context,null,4));
 
 
   //Getting the tab header title
@@ -202,7 +220,14 @@ render() {
     return {
       headerTitle: headerTitle,
       headerRight: (
-        <Text>{userId}</Text>
+        <TouchableOpacity onPress={
+          ()=> {
+            if (userId !== 'GuestUser')
+                navigation.navigate('UserProfile')
+            }
+        } >
+          <Text>{userId}</Text>
+        </TouchableOpacity>
       )
     }};
 
@@ -214,17 +239,3 @@ render() {
 }
 
 export default Navigator;
-/*
-// Create a switch navigator for login->home flow
-export default createAppContainer( 
-  createSwitchNavigator(
-    {Landing: LandingStack,
-     Login: LoginStack,
-     App: AppNavigator,
-     About: AboutStack,
-    },
-    {
-      initialRouteName: 'Landing'
-    }  
-  )
-);*/

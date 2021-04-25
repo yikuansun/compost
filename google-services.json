@@ -8,100 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030026048519:android:2c5785fc115f8e642f66a2",
+        "mobilesdk_app_id": "1:1030026048519:android:60704a01343604982f66a2",
         "android_client_info": {
-          "package_name": "com.google_signin_demo"
+          "package_name": "com.wesense.gocompost"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1030026048519-kctnlgd0872nmdi2urjh6511uspvjli3.apps.googleusercontent.com",
+          "client_id": "1030026048519-ve17b81u1b7uae6bmpgurdr23dpfnuj0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.google_signin_demo",
-            "certificate_hash": "488919d5935a816b367ae5e82641de229bc19e4d"
+            "package_name": "com.wesense.gocompost",
+            "certificate_hash": "312191b18fb0f0980e41110a8db919f01d1391cd"
           }
         },
-        {
-          "client_id": "1030026048519-macouehesa7vdgsb34ifdcfkb5n03amh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAIzSaAcnvJDC50tcUZo-oRO01Oxxq3vO4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1030026048519-macouehesa7vdgsb34ifdcfkb5n03amh.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1030026048519-bl2tagc9dahovoihjvos3nh9gnc21f6k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.wesense.compostable"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1030026048519:android:f81a141e8bf69ff92f66a2",
-        "android_client_info": {
-          "package_name": "com.rngooglesignin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1030026048519-bkcse607oq4hcebaffbo9e3a0gksrrfb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.rngooglesignin",
-            "certificate_hash": "488919d5935a816b367ae5e82641de229bc19e4d"
-          }
-        },
-        {
-          "client_id": "1030026048519-macouehesa7vdgsb34ifdcfkb5n03amh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAIzSaAcnvJDC50tcUZo-oRO01Oxxq3vO4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1030026048519-macouehesa7vdgsb34ifdcfkb5n03amh.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1030026048519-bl2tagc9dahovoihjvos3nh9gnc21f6k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.wesense.compostable"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1030026048519:android:95d798444b97843e2f66a2",
-        "android_client_info": {
-          "package_name": "org.wesense.compostable"
-        }
-      },
-      "oauth_client": [
         {
           "client_id": "1030026048519-macouehesa7vdgsb34ifdcfkb5n03amh.apps.googleusercontent.com",
           "client_type": 3

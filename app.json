@@ -34,6 +34,7 @@
           "apiKey": "AIzaSyA5CcYkZmiNkdhJoCt4G1NwIUgZgpqoarM"
         }
       },
+      "enableDangerousExperimentalLeanBuilds": true,
       "googleServicesFile": "./google-services.json"
     },
     "web": {

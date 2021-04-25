@@ -162,37 +162,37 @@ class LearnScreen extends React.Component {
       var miles = (emission * 1.126).toFixed(1);
       return (
         <View style={{flex: 1}}>
+        <DropDownPicker
+            items={[
+                {label: 'Today', value: '1day' },
+                {label: '7 Days', value: '7day'},
+                {label: '30 Days', value: '30day' },
+                {label: 'All Time', value: 'all'}
+            ]}
+            defaultValue={this.state.timePeriod}
+            containerStyle={{height: 40}}
+            style={{backgroundColor: '#fafafa'}}
+            itemStyle={{
+                justifyContent: 'flex-start'
+            }}
+            dropDownStyle={{backgroundColor: '#fafafa'}}
+            onChangeItem={item => this.setState({timePeriod: item.value})}
+        />
 
-            <View style={{flex: 6}}>
-                <DropDownPicker
-                    items={[
-                        {label: 'Today', value: '1day' },
-                        {label: '7 Days', value: '7day'},
-                        {label: '30 Days', value: '30day' },
-                        {label: 'All Time', value: 'all'}
-                    ]}
-                    defaultValue={this.state.timePeriod}
-                    containerStyle={{height: 40}}
-                    style={{backgroundColor: '#fafafa'}}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                    onChangeItem={item => this.setState({timePeriod: item.value})}
-                />
-                <View style={{flex: 0.5, flexDirection: 'row',margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
+            <ScrollView style={{flex: 6}}>
+                <View style={{flex: 0.5, flexDirection: 'row',margin: 5,  borderRadius: 20, backgroundColor: 'white', padding: 6}}>
                     <View style={{flex: 3}}>
                         <View style={{ marginTop:15, alignItems: 'center', justifyContent: 'center'}}>
                             <Image resizeMode="contain" source={wasteImg}></Image>        
                         </View>
                     </View>
                     <View style={{flex: 4}}>
-                        <Text style={{fontSize:22, fontWeight:'bold'}}>{weight}</Text>
+                        <Text style={{fontSize:22, fontWeight:'bold'}}>{weight.toFixed(1)}</Text>
                         <Text>lbs</Text>
                         <Text>Combined total diverted from landfills by composting</Text>
                     </View>
                 </View>
-                <View style={{flex: 0.5, flexDirection: 'row', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>
+                <View style={{flex: 0.5, flexDirection: 'row', margin: 5, borderRadius: 20, backgroundColor: 'white', padding: 6}}>
                     <View style={{ marginTop:10, flex: 3}}>
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
                             <Image resizeMode="contain" source={moneyImg}></Image>        
@@ -206,13 +206,13 @@ class LearnScreen extends React.Component {
 
                     </View>
                 </View>
-                <View style={{flex: 0.23, backgroundColor: '#cae0ce'}}>
+                <View style={{flex: 0.23, backgroundColor: '#cae0ce', padding: 6}}>
                         <Text style={{textAlign: 'center', fontSize: 16, alignContent: 'center', marginTop:3 }}>FOOD WASTE GREENHOUSE GAS CALCULATOR</Text>
                     <Text style={{textAlign: 'center', fontSize: 13}}>(only food waste logged is included in this calculation)</Text>
                 </View>
                 <View style={{flex: 0.8}}>
 
-                    <View style={{flex: 4, flexDirection: 'column', margin: 5,  borderRadius: 20, backgroundColor: 'white'}}>
+                    <View style={{flex: 4, flexDirection: 'column', margin: 5,  borderRadius: 20, backgroundColor: 'white', padding: 6}}>
                         <View style={{marginTop:8, flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 3}}>
                                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -221,7 +221,7 @@ class LearnScreen extends React.Component {
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:22, fontWeight:'bold'}}> -{emission}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}> -{parseFloat(parseFloat(emission).toFixed(1))}</Text>
                                 <Text>lbs CO2e</Text>
 
                             </View>
@@ -235,7 +235,7 @@ class LearnScreen extends React.Component {
                 </View>
                 <View style={{flex: 0.8}}>
 
-                    <View style={{flex: 1.4, flexDirection: 'column', margin: 5, borderRadius: 20, backgroundColor: 'white'}}>
+                    <View style={{flex: 1.4, flexDirection: 'column', margin: 5, borderRadius: 20, backgroundColor: 'white', padding: 6}}>
                         <View style={{flex: 0.8}}>
                             <Text style={{fontSize: 15, margin: 3}}>For Comparison, it's equivalent to Greenhouse Gas emissions from: </Text>
                         </View>
@@ -246,7 +246,7 @@ class LearnScreen extends React.Component {
                                 </View>
                             </View>
                             <View style={{flex: 4}}>
-                                <Text style={{fontSize:22, fontWeight:'bold'}}>{miles}</Text>
+                                <Text style={{fontSize:22, fontWeight:'bold'}}>{parseFloat(miles).toFixed(0)}</Text>
                                 <Text>miles driven by an average passenger vehicle</Text>
                             </View>
                         </View>
@@ -259,12 +259,12 @@ class LearnScreen extends React.Component {
             <Text style={{backgroundColor: "#cfe1e0",
                         fontSize: 16,
                         textAlign: "center",
-                        padding: 6,  marginLeft:100, marginRight:100,         borderRadius:15,
+                        padding: 6,  marginLeft:100, marginRight:100,         borderRadius:15, marginBottom: 5,
                         borderWidth: 1,        borderColor: 'lightgray', backgroundColor: 'lightgray'
                     }}>  B A C K  </Text>      
         </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
 
 
         </View>

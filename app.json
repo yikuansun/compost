@@ -2,7 +2,7 @@
   "expo": {
     "name": "GoCompost",
     "slug": "GoCompost",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "bundleIdentifier": "org.wesense.compostable",
-      "buildNumber": "1.1.0",
+      "buildNumber": "1.1.2",
       "googleServicesFile": "./GoogleService-Info.plist",
       "config": {
         "googleMapsApiKey": "AIzaSyA5CcYkZmiNkdhJoCt4G1NwIUgZgpqoarM"
@@ -27,14 +27,13 @@
     },
     "android": {
       "package": "com.wesense.gocompost",
-      "versionCode": 8,
+      "versionCode": 10,
       "permissions": [],
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyA5CcYkZmiNkdhJoCt4G1NwIUgZgpqoarM"
         }
       },
-      "enableDangerousExperimentalLeanBuilds": true,
       "googleServicesFile": "./google-services.json"
     },
     "web": {

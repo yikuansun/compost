@@ -51,15 +51,6 @@ const Checker = () => {
       setSearch(text);
     }
   };
-  
-  /*const createMsg = (itemname, home, orange, footer) =>
-    Alert.alert(
-        itemname.replace(/\b(\w)/g, k => k.toUpperCase()),
-        '\nCompostable at home: ' + (parseInt(home)?"✓":"✗") + '\n\nCompostable via Orange County drop off: ' + (parseInt(orange)?"✓":"✗") + (footer.length?("\n\n*" + footer):""),
-        [
-            {text: 'Got it!', onPress: () => console.log('OK Pressed')},
-        ]
-    )*/
 
   const createMsg = (item) => {
     ModalContent.name = item.name.replace(/\b(\w)/g, k => k.toUpperCase());
@@ -67,7 +58,9 @@ const Checker = () => {
       parseInt(item.binstring.split("")[0])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
       parseInt(item.binstring.split("")[1])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
       parseInt(item.binstring.split("")[2])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
-      parseInt(item.binstring.split("")[3])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png"
+      parseInt(item.binstring.split("")[3])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
+      parseInt(item.binstring.split("")[2])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png",
+      parseInt(item.binstring.split("")[2])?"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/check.png":"https://raw.githubusercontent.com/yikuansun/composting-searchbar/master/cross.png" // same as carr farmers market
     ];
     ModalContent.footNote = (item.foot.length?"*":"") + item.foot + (item.foot.length?"\n":"");
     setModalOpen();
@@ -116,13 +109,21 @@ const Checker = () => {
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Compostable at home</Text></View>
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Eubanks/Walnut Grove</Text></View>
             <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carrboro Farmers’ Market</Text></View>
-            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carolina Compost Community Garden</Text></View>
           </View>
           <View style={{flexDirection: 'row'}}>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[0]}} style={styles.checkx} resizeMode={'contain'} /></View>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[1]}} style={styles.checkx} resizeMode={'contain'} /></View>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[2]}} style={styles.checkx} resizeMode={'contain'} /></View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Carolina Compost Community Garden</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Chapel Hill Farmers’ Market</Text></View>
+            <View style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center' }}><Text style={{ textAlign: "center", fontWeight: "bold" }}>Eno River Farmers’ Market</Text></View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
             <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[3]}} style={styles.checkx} resizeMode={'contain'} /></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[4]}} style={styles.checkx} resizeMode={'contain'} /></View>
+            <View style={{ flex: 1, alignSelf: 'stretch' }}><Image source={{uri:ModalContent.tbody[5]}} style={styles.checkx} resizeMode={'contain'} /></View>
           </View>
           <Text style={{color: "red"}}>{ModalContent.footNote}</Text>
           <Button title="Got it!" onPress={setModalOpen} color="#6E8A5D" />
@@ -137,8 +138,8 @@ const styles = StyleSheet.create({
     height: imageWidth,
   },
   checkx: {
-    width: imageWidth * 3/4,
-    height: imageWidth * 3/4,
+    width: imageWidth,
+    height: imageWidth,
   },
 });
 

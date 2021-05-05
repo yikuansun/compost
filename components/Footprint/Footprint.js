@@ -244,7 +244,7 @@ class Footprint extends Component {
 
                       <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10, marginRight:5}}>
                           <Text style={{marginTop:5,marginBottom:5}}>LOG TOTAL</Text>
-        <Text style={{fontSize: 20, fontWeight: "bold", marginBottom:5}}>{this.state.totalWeight} lbs</Text>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginBottom:5}}>{this.state.totalWeight.toFixed(1)} lbs</Text>
                       </View>
                       <View style={{flex: 1, flexDirection: "column", backgroundColor: "white", alignItems: "center", justifyContent: "center", marginTop:10}}>
                           <Text style={{marginTop:5,marginBottom:5}}>ACCOUNT NAME</Text>
@@ -324,15 +324,15 @@ class Footprint extends Component {
                       <View style={{flex: 1, flexDirection: 'row'}}>
                           <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#FEFED4", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Today</Text>
-                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightToday} lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightToday.toFixed(1)} lbs</Text>
                           </View>
                           <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#cfcfcf", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Last 7 Days</Text>
-                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastWeek}  lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastWeek.toFixed(1)}  lbs</Text>
                           </View>
                           <View style={{flex: 1, flexDirection: 'column', borderRadius: 10, backgroundColor: "#C1C19C", margin: 9}}>
                               <Text style={{textAlign: 'center', fontSize: 15}}>Last 30 Days</Text>
-                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastMonth}  lbs</Text>
+                              <Text style={{textAlign: 'center', fontSize: 20, fontWeight:"bold"}}>{this.state.totalWeightLastMonth.toFixed(1)}  lbs</Text>
                           </View>
                       </View>
                       <TouchableOpacity style={{flex: 3, textAlign: 'center', backgroundColor: 'gray', margin: 10}} onPress={ () => this.props.navigation.navigate("Learn") } >

@@ -111,7 +111,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      console.log('check if data refreshed');
+      //console.log('check if data refreshed');
       let { user, setUser } = this.context;
       // console.log('user data refreshed in dashboard: ');
       if (user.timestamp !== "") {

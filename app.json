@@ -27,7 +27,7 @@
     },
     "android": {
       "package": "com.wesense.gocompost",
-      "versionCode": 10,
+      "versionCode": 11,
       "permissions": [],
       "config": {
         "googleMaps": {

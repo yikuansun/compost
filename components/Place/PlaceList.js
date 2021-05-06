@@ -94,7 +94,6 @@ class PlaceList extends Component {
                             ) :  (
                               <Text style={styles.placeDetailFont}>
                                 Address: {item.address}{"\n"}
-                                Type: {item.type}{"\n"}
                                 Hours: {item.hours}{"\n"}
                                 Contact: {item.contact}{"\n"}
                             </Text>

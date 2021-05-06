@@ -111,7 +111,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      console.log('check if data refreshed');
+      //console.log('check if data refreshed');
       let { user, setUser } = this.context;
       // console.log('user data refreshed in dashboard: ');
       if (user.timestamp !== "") {
@@ -183,7 +183,7 @@ class Dashboard extends Component {
       <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:22, alignContent:"center"}}>Hello {nickname}</Text>
       <View styles={styles.container}>
       <Text style={{textAlign:'center', alignContent:"center"}}>You have diverted to date</Text>
-      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{totalWeight.toFixed(1)} lbs</Text>
+      <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:24, alignContent:"center"}}>{parseFloat(totalWeight.toFixed(1))} lbs</Text>
       <Text style={{ textAlign:'center' }}>organic waste from landfills by composting.</Text>
 
       {userId==='GuestUser' ? ( 

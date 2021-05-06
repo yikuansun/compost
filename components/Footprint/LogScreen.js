@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import {
-  FlatList,  // List component
   TouchableOpacity,  // produce the effect while touching a list item
-  SafeAreaView,
   View,
-  ActivityIndicator,
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { ListItem, Text, Avatar } from "react-native-elements";
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
-import { Container, Content, Item, Right } from "native-base";
+import { Text } from "react-native-elements";
+import { Table, Row, Rows} from 'react-native-table-component';
 
 import * as firebase from 'firebase';
 // Use the user context
 import { AppContext } from '../../AppContextProvider';
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 class LogScreen extends Component {
     static contextType = AppContext;
